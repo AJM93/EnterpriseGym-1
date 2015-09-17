@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package com.egym;
+
+import Models.NewsModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
@@ -16,15 +19,16 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 /**
  *
  * @author Dreads
  */
-@WebServlet(urlPatterns = {"/test2"})
-public class test2 extends HttpServlet {
-
+@WebServlet(name = "news", urlPatterns = {"/news"})
+public class news extends HttpServlet {
     Connection con = null;
     Statement st = null;
     ResultSet rs = null;
@@ -45,7 +49,6 @@ public class test2 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             
             con = DriverManager.getConnection(url, user, password);
@@ -55,35 +58,30 @@ public class test2 extends HttpServlet {
             //cs.setInt(2,4);
             ResultSet rs = cs.executeQuery();
             
+            LinkedList<NewsModel> newsList = new LinkedList<NewsModel>();
             while (rs.next()) 
             {
-                out.println("id: " + rs.getInt("idNews"));
-                out.println("Title: " + rs.getString("Title"));
-                out.println("Body: " + rs.getString("Body"));
-                out.println("User: " + rs.getString("Users_Username"));
-                out.println("Date: " + rs.getDate("DatePublished"));
-                out.println("");
+                int id = rs.getInt("idNews");
+                String Title = rs.getString("Title");
+                String Body = rs.getString("Body");
+                String User = rs.getString("Users_Username");
+                NewsModel news_model = new NewsModel(id, Title, Body, User);
+                newsList.add(news_model);
             }
+            request.setAttribute("NewsList", newsList);
             cs.close();
             con.close();
+            RequestDispatcher rd = request.getRequestDispatcher("news.jsp");
+            rd.forward(request,response);
             
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet test2</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet test2 at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
         } catch (SQLException ex) {
-            Logger.getLogger(test2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(news.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(test2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(news.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(test2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(news.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(test2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(news.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
