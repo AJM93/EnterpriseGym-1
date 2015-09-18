@@ -4,6 +4,7 @@
     Author     : Dreads
 --%>
 
+<%@page import="java.sql.Timestamp"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.Iterator"%>
@@ -41,7 +42,7 @@
                 String Title = nm.getNewsTitle();
                 String Body = nm.getNewsBody();
                 String User = nm.getNewsUser();
-                String Date = nm.getNewsDate();
+                Timestamp Date = nm.getNewsDate();
                 news_titles.add(Title + ": " + Date);
                 news_body.add(Body);
                 news_user.add(User);

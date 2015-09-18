@@ -19,6 +19,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,8 +66,7 @@ public class news extends HttpServlet {
                 String Title = rs.getString("Title");
                 String Body = rs.getString("Body");
                 String User = rs.getString("Users_Username");
-                java.util.Date dt = rs.getDate("DatePublished");
-                String Date = dt.toString();
+                Timestamp Date = rs.getTimestamp("DatePublished");
                 NewsModel news_model = new NewsModel(id, Title, Body, User, Date);
                 newsList.add(news_model);
             }

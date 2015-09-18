@@ -5,6 +5,8 @@
  */
 package Models;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author Dreads
@@ -15,9 +17,9 @@ public class NewsModel
     private String Title;
     private String Body;
     private String User;
-    private String Date;
+    private Timestamp Date;
     
-    public NewsModel(final int id, final String Title, final String Body, final String User, final String Date)
+    public NewsModel(final int id, final String Title, final String Body, final String User, final Timestamp Date)
     {
         this.id = id;
         this.Title = Title;
@@ -57,11 +59,11 @@ public class NewsModel
     {
         this.User = User;
     }
-    public String getNewsDate()
+    public Timestamp getNewsDate()
     {
         return this.Date;
     }
-    public void setNewsDate(final String Date)
+    public void setNewsDate(final Timestamp Date)
     {
         this.Date = Date;
     }
