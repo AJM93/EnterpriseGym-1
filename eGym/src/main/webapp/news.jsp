@@ -25,6 +25,7 @@
                 <th>Title</th>
                 <th>Body</th>
                 <th>User</th>
+                <th>Date</th>
             </tr>
         <%
             ArrayList news_titles = new ArrayList();
@@ -40,7 +41,8 @@
                 String Title = nm.getNewsTitle();
                 String Body = nm.getNewsBody();
                 String User = nm.getNewsUser();
-                news_titles.add(id + ": " + Title);
+                String Date = nm.getNewsDate();
+                news_titles.add(Title + ": " + Date);
                 news_body.add(Body);
                 news_user.add(User);
         %>
@@ -49,6 +51,7 @@
                 <td><%=Title%></td>
                 <td><%=Body%></td>
                 <td><%=User%></td>
+                <td><%=Date%></td>
             </tr>
             <%
             }

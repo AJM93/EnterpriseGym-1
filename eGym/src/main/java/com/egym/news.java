@@ -65,7 +65,9 @@ public class news extends HttpServlet {
                 String Title = rs.getString("Title");
                 String Body = rs.getString("Body");
                 String User = rs.getString("Users_Username");
-                NewsModel news_model = new NewsModel(id, Title, Body, User);
+                java.util.Date dt = rs.getDate("DatePublished");
+                String Date = dt.toString();
+                NewsModel news_model = new NewsModel(id, Title, Body, User, Date);
                 newsList.add(news_model);
             }
             request.setAttribute("NewsList", newsList);

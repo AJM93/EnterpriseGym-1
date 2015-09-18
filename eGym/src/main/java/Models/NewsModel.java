@@ -15,13 +15,15 @@ public class NewsModel
     private String Title;
     private String Body;
     private String User;
+    private String Date;
     
-    public NewsModel(final int id, final String Title, final String Body, final String User)
+    public NewsModel(final int id, final String Title, final String Body, final String User, final String Date)
     {
         this.id = id;
         this.Title = Title;
         this.Body = Body;
         this.User = User;
+        this.Date = Date;
     }
     public int getNewsId()
     {
@@ -54,5 +56,13 @@ public class NewsModel
     public void setNewsUser(final String User)
     {
         this.User = User;
+    }
+    public String getNewsDate()
+    {
+        return this.Date;
+    }
+    public void setNewsDate(final String Date)
+    {
+        this.Date = Date;
     }
 }
