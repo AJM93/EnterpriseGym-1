@@ -18,6 +18,8 @@ public class NewsCommentModel {
     private String body;
     private Timestamp datePosted;
     
+ 
+    
     public NewsCommentModel(int newsCommentID, int newsID, String author, String body, Timestamp datePosted)
     {
         this.newsCommentID = newsCommentID;

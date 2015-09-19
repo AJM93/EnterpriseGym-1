@@ -50,6 +50,36 @@ public class newsComments extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    public java.util.LinkedList<NewsCommentModel> GetComments(int id){
+        LinkedList<NewsCommentModel> newsCommentList = new LinkedList<>();
+        try {
+            
+            
+            con = DriverManager.getConnection(url, user, password);
+            CallableStatement cs = this.con.prepareCall("{call news_comments(?)}");   //(?,?)}"
+            cs.setInt(1,id);
+            ResultSet rs = cs.executeQuery();
+            
+            while (rs.next())
+            {                
+                int commentID = rs.getInt("commentID");
+                int newsID = rs.getInt("newsID");
+                String author = rs.getString("author");
+                String body = rs.getString("body");
+                Timestamp datePosted = rs.getTimestamp("datePosted");
+                
+                NewsCommentModel newsComment = new NewsCommentModel(commentID, newsID, author, body, datePosted);
+                newsCommentList.add(newsComment);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(newsComments.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return newsCommentList;
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
