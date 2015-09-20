@@ -33,6 +33,7 @@
                 <th>D.O.B</th>
                 <th>Y.O.S</th>
                 <th>User Status</th>
+                <th>Edit User Details</th>
                 <th>Approve</th>
             </tr>
             <%
@@ -74,7 +75,8 @@
                 <td><%=dob%></td>
                 <td><%=yos%></td>
                 <td><%=UserStatus%></td>
-                <td> <form action="UserApproved"><button type="submit" name="username" value=<%=Username%>></form>Approve</button> </td>
+                <td><form action="getUserDetails"><button type="submit" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
+                <td><form action="UserApproved"><button type="submit" name="username" value=<%=Username%>>Approve</button></form></td>
             </tr>
             <%
             }
