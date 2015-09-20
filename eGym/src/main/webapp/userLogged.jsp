@@ -18,6 +18,7 @@
             if (lg != null && lg.isLoggedIn()) {
         %>
         <h2>Welcome, <%=lg.getUsername()%>!</h2>
+        <h2><a href="/eGym/logout">Click here</a> to sign out</h2>
         <%
             } else {
         %>
