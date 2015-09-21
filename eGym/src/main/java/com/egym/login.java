@@ -10,6 +10,7 @@ import Stores.LoggedIn;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -81,17 +82,6 @@ public class login extends HttpServlet {
             String username = request.getParameter("username");
             String passwordAttempt = request.getParameter("password");
             
-            String encodedPasswordAttempt = null;
-            try
-            {
-                encodedPasswordAttempt = AeSimpleSHA256.SHA256(passwordAttempt);
-            }
-            catch (UnsupportedEncodingException | NoSuchAlgorithmException et)
-            {
-                System.out.println("Can't check the password");
-                response.sendRedirect("loginFailed.jsp");
-            }
-
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             
@@ -99,10 +89,26 @@ public class login extends HttpServlet {
             cs.setString(1, username);
             ResultSet rs = cs.executeQuery();
             rs.next();
+            
             String storedPassword = rs.getString("password");
+            String hexSalt = rs.getString("salt");
+            byte[] salt = AeSimpleSHA256.fromHex(hexSalt);
             
             cs.close();
             con.close();
+            
+            String encodedPasswordAttempt = null;
+            try
+            {
+                encodedPasswordAttempt = AeSimpleSHA256.getHash(passwordAttempt, salt);
+            }
+            catch (UnsupportedEncodingException | NoSuchAlgorithmException et)
+            {
+                System.out.println("Can't check the password");
+                response.sendRedirect("loginFailed.jsp");
+            } catch (InvalidKeySpecException ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             if (encodedPasswordAttempt != null && encodedPasswordAttempt.equals(storedPassword)) {
                 // login success

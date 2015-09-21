@@ -9,6 +9,9 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest; 
 import java.security.NoSuchAlgorithmException; 
+import java.security.spec.InvalidKeySpecException;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 /**
  *
@@ -22,7 +25,7 @@ public class AeSimpleSHA256 {
      * @param   array       the byte array to convert
      * @return              a length*2 character string encoding the byte array
      */
-    private static String toHex(byte[] array)
+    public static String toHex(byte[] array)
     {
         BigInteger bi = new BigInteger(1, array);
         String hex = bi.toString(16);
@@ -33,11 +36,42 @@ public class AeSimpleSHA256 {
             return hex;
     }
     
-    public static String SHA256 (String text)
-        throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(text.getBytes("iso-8859-1"), 0, text.length());
-        byte[] sha256Hash = md.digest();
-        return toHex(sha256Hash);
+    /**
+     * Converts a string of hexadecimal characters into a byte array.
+     *
+     * @param   hex         the hex string
+     * @return              the hex string decoded into a byte array
+     */
+    public static byte[] fromHex(String hex)
+    {
+        byte[] binary = new byte[hex.length() / 2];
+        for(int i = 0; i < binary.length; i++)
+        {
+            binary[i] = (byte)Integer.parseInt(hex.substring(2*i, 2*i+2), 16);
+        }
+        return binary;
+    }
+    
+    public static String getHash(String password, byte[] salt)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeySpecException{
+        byte[] hash = pbkdf2(password.toCharArray(), salt, 1000, 32);
+        return toHex(hash);
+    }    
+    
+    /**
+     *  Computes the PBKDF2 hash of a password.
+     *
+     * @param   password    the password to hash.
+     * @param   salt        the salt
+     * @param   iterations  the iteration count (slowness factor)
+     * @param   bytes       the length of the hash to compute in bytes
+     * @return              the PBDKF2 hash of the password
+     */
+    public static byte[] pbkdf2(char[] password, byte[] salt, int iterations, int bytes)
+        throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, bytes * 8);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        return skf.generateSecret(spec).getEncoded();
     }
 }

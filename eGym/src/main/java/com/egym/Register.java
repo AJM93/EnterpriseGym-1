@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -84,14 +86,27 @@ public class Register extends HttpServlet {
             String username = request.getParameter("username");
             
             String userpassword = request.getParameter("password");
-            String encodedPassword = null;
+            
+            //*************************************************************
+            
+            SecureRandom random = new SecureRandom();
+            byte[] salt = new byte[32];
+            random.nextBytes(salt);
+            
+            String encodedPassword = null;            
+            String hexSalt = null;
             try {
-                encodedPassword = AeSimpleSHA256.SHA256(userpassword);
+                encodedPassword = AeSimpleSHA256.getHash(userpassword, salt);
+                hexSalt = AeSimpleSHA256.toHex(salt);
             }
-            catch (UnsupportedEncodingException | NoSuchAlgorithmException et) {
+            catch (NoSuchAlgorithmException et) {
                 System.out.println("Can't hash the password");
                 response.sendRedirect("index.html");
+            } catch (InvalidKeySpecException ex) {
+                Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            //*************************************************************
             
             String firstname = request.getParameter("firstname");
             String lastname = request.getParameter("lastname");
@@ -113,22 +128,23 @@ public class Register extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             
-            CallableStatement cs = this.con.prepareCall("{call register_user(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            CallableStatement cs = this.con.prepareCall("{call register_user(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             cs.setString(1, username);
             cs.setString(2, encodedPassword);
-            cs.setString(3, firstname);
-            cs.setString(4, lastname);
-            cs.setString(5, matriculation);
-            cs.setString(6, email);
-            cs.setString(7, phoneNo);
-            cs.setString(8, String.valueOf(gender));
-            cs.setString(9, country);
-            cs.setString(10, institution);
-            cs.setString(11, subInstitution);
-            cs.setString(12, degree);
-            cs.setTimestamp(13, datePosted);
-            cs.setInt(14, yos);
-            cs.setInt(15,1);
+            cs.setString(3, hexSalt);
+            cs.setString(4, firstname);
+            cs.setString(5, lastname);
+            cs.setString(6, matriculation);
+            cs.setString(7, email);
+            cs.setString(8, phoneNo);
+            cs.setString(9, String.valueOf(gender));
+            cs.setString(10, country);
+            cs.setString(11, institution);
+            cs.setString(12, subInstitution);
+            cs.setString(13, degree);
+            cs.setTimestamp(14, datePosted);
+            cs.setInt(15, yos);
+            cs.setInt(16,1);
             cs.executeQuery();
             cs.close();
             
