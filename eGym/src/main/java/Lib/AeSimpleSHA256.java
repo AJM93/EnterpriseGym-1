@@ -6,6 +6,7 @@
 package Lib;
 
 import java.io.UnsupportedEncodingException; 
+import java.math.BigInteger;
 import java.security.MessageDigest; 
 import java.security.NoSuchAlgorithmException; 
 
@@ -15,20 +16,21 @@ import java.security.NoSuchAlgorithmException;
  */
 public class AeSimpleSHA256 {
     
-     private static String convertToHex(byte[] data) { 
-        StringBuffer buf = new StringBuffer();
-        for (int i = 0; i < data.length; i++) { 
-            int halfbyte = (data[i] >>> 4) & 0x0F;
-            int two_halfs = 0;
-            do { 
-                if ((0 <= halfbyte) && (halfbyte <= 9)) 
-                    buf.append((char) ('0' + halfbyte));
-                else 
-                    buf.append((char) ('a' + (halfbyte - 10)));
-                halfbyte = data[i] & 0x0F;
-            } while(two_halfs++ < 1);
-        } 
-        return buf.toString();
+     /**
+     * Converts a byte array into a hexadecimal string.
+     *
+     * @param   array       the byte array to convert
+     * @return              a length*2 character string encoding the byte array
+     */
+    private static String toHex(byte[] array)
+    {
+        BigInteger bi = new BigInteger(1, array);
+        String hex = bi.toString(16);
+        int paddingLength = (array.length * 2) - hex.length();
+        if(paddingLength > 0)
+            return String.format("%0" + paddingLength + "d", 0) + hex;
+        else
+            return hex;
     }
     
     public static String SHA256 (String text)
@@ -36,6 +38,6 @@ public class AeSimpleSHA256 {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(text.getBytes("iso-8859-1"), 0, text.length());
         byte[] sha256Hash = md.digest();
-        return convertToHex(sha256Hash);
+        return toHex(sha256Hash);
     }
 }

@@ -81,10 +81,10 @@ public class login extends HttpServlet {
             String username = request.getParameter("username");
             String passwordAttempt = request.getParameter("password");
             
-            String encodedPassword = null;
-            try 
+            String encodedPasswordAttempt = null;
+            try
             {
-                encodedPassword = AeSimpleSHA256.SHA256(passwordAttempt);
+                encodedPasswordAttempt = AeSimpleSHA256.SHA256(passwordAttempt);
             }
             catch (UnsupportedEncodingException | NoSuchAlgorithmException et)
             {
@@ -95,8 +95,7 @@ public class login extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             
-            CallableStatement cs = null;
-            cs = this.con.prepareCall("{call get_user_details(?)}");
+            CallableStatement cs = this.con.prepareCall("{call login_users(?)}");
             cs.setString(1, username);
             ResultSet rs = cs.executeQuery();
             rs.next();
@@ -105,7 +104,7 @@ public class login extends HttpServlet {
             cs.close();
             con.close();
             
-            if (encodedPassword.equals(storedPassword)) {
+            if (encodedPasswordAttempt != null && encodedPasswordAttempt.equals(storedPassword)) {
                 // login success
                 LoggedIn lg = new LoggedIn(true, username);
 
