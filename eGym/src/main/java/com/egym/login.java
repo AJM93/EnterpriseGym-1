@@ -5,18 +5,18 @@
  */
 package com.egym;
 
+import Lib.AeSimpleSHA256;
 import Stores.LoggedIn;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -77,11 +77,20 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
         try {
             String username = request.getParameter("username");
             String passwordAttempt = request.getParameter("password");
+            
+            String encodedPassword = null;
+            try 
+            {
+                encodedPassword = AeSimpleSHA256.SHA256(passwordAttempt);
+            }
+            catch (UnsupportedEncodingException | NoSuchAlgorithmException et)
+            {
+                System.out.println("Can't check the password");
+                response.sendRedirect("loginFailed.jsp");
+            }
 
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
@@ -96,7 +105,7 @@ public class login extends HttpServlet {
             cs.close();
             con.close();
             
-            if (passwordAttempt.equals(storedPassword)) {
+            if (encodedPassword.equals(storedPassword)) {
                 // login success
                 LoggedIn lg = new LoggedIn(true, username);
 
@@ -110,13 +119,7 @@ public class login extends HttpServlet {
                 response.sendRedirect("loginFailed.jsp");
             }
             
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

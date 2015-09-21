@@ -33,11 +33,9 @@ public class AeSimpleSHA256 {
     
     public static String SHA256 (String text)
         throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        
         MessageDigest md = MessageDigest.getInstance("SHA-256");
-        byte[] sha256Hash = md.digest();
         md.update(text.getBytes("iso-8859-1"), 0, text.length());
+        byte[] sha256Hash = md.digest();
         return convertToHex(sha256Hash);
-
     }
 }
