@@ -37,7 +37,7 @@
             <form method="POST"  action="editUserDetails">
                 <div class="form-group">
                     <label for="inputUsername">Username</label>
-                    <input type="text" class="form-control" id="inputUsername" name="username" value="<%=Username%>" placeholder="Enter Username">
+                    <input type="text" class="form-control" id="inputUsername" name="username" readonly value="<%=Username%>" placeholder="Enter Username">
                 </div>
                 <div class="form-group">
                     <label for="inputFirstname">First Name</label>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="form-group">
                     <label for="inputCountry">Country</label>
-                    <input type="text" class="form-control" id="inputCountry2" name="country2" value="<%=Country%>" placeholder="COuntry of Origin">
+                    <input type="text" class="form-control" id="inputCountry" name="country" value="<%=Country%>" placeholder="Country of Origin">
                 </div>
                 <div class="form-group">
                     <label for="inputInstitution">Institution</label>
