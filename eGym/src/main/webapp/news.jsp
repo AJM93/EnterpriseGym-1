@@ -11,23 +11,7 @@
 <%@page import="Models.NewsModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-        <table width='700px' border='1px'>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Body</th>
-                <th>User</th>
-                <th>Date</th>
-            </tr>
+  
         <%
             ArrayList news_titles = new ArrayList();
             ArrayList news_body = new ArrayList();
@@ -46,15 +30,6 @@
                 news_titles.add(Title + ": " + Date);
                 news_body.add(Body);
                 news_user.add(User);
-        %>
-            <tr>
-                <td><%=id%></td>
-                <td><%=Title%></td>
-                <td><%=Body%></td>
-                <td><%=User%></td>
-                <td><%=Date%></td>
-            </tr>
-            <%
             }
         %>
         </table>
@@ -142,5 +117,3 @@
                     </div>            
             </div>
         
-    </body>
-</html>
