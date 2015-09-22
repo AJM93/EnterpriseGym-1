@@ -74,4 +74,12 @@ public class AeSimpleSHA256 {
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         return skf.generateSecret(spec).getEncoded();
     }
+    
+    public static String SHA256 (String text)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException{
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(text.getBytes("iso-8859-1"), 0, text.length());
+        byte[] sha256Hash = md.digest();
+        return toHex(sha256Hash);
+    }
 }
