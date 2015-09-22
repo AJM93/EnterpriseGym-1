@@ -39,5 +39,13 @@
         %>
         
         </table>
+
+        <form method="POST" action="eventsComments">
+        <br>
+        <textarea rows="4" cols="50" name="commentBox" id="inputComment">
+        Enter text here...</textarea>
+        <input type="submit">
+      </form>
+
     </body>
 </html>

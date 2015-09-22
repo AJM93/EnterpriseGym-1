@@ -5,10 +5,12 @@
  */
 package com.egym;
 
+import Models.EventsCommentModel;
 import Models.EventsModel;
 import Models.NewsModel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.sql.CallableStatement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,6 +57,7 @@ public class EventItem extends HttpServlet {
         String path = request.getPathInfo();
         int urlActivityID = Integer.parseInt(path.substring(1));
         response.setContentType("text/html;charset=UTF-8");
+        int urlEventsCommentsID = Integer.parseInt(path.substring(1));
         try (PrintWriter out = response.getWriter()) {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
@@ -75,6 +78,28 @@ public class EventItem extends HttpServlet {
                 int Points = rs.getInt("Points");
                 Event = new EventsModel(id, Title, Body, Trainer, Points);
                 request.setAttribute("Event", Event);
+                
+                
+                
+                CallableStatement eComments = this.con.prepareCall("{call events_comments(?)}");   //(?,?)}"
+                eComments.setInt(1,urlEventsCommentsID);
+                ResultSet rs2 = eComments.executeQuery();
+            
+            LinkedList<EventsCommentModel> eventsCommentList = new LinkedList<>();
+            while (rs2.next()) 
+            {                
+                int commentID = rs2.getInt("commentID");
+                int eventID = rs2.getInt("eventID");
+                String author = rs2.getString("Author");
+                String body = rs2.getString("Body");
+                Timestamp datePosted = rs2.getTimestamp("DatePosted");
+                
+                EventsCommentModel eventsComment = new EventsCommentModel(commentID, eventID, author, body, datePosted);
+                eventsCommentList.add(eventsComment);
+            }
+            
+            request.setAttribute("EventsCommentList", eventsCommentList);
+                
                 cs.close();
                 con.close();
                 RequestDispatcher rd = request.getRequestDispatcher("/Event.jsp");
@@ -85,6 +110,14 @@ public class EventItem extends HttpServlet {
              Logger.getLogger(EventItem.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
+    
+    private static java.sql.Timestamp getCurrentTimeStamp() {
+
+	java.util.Date today = new java.util.Date();
+	return new java.sql.Timestamp(today.getTime());
+
+}
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -120,15 +153,28 @@ public class EventItem extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         try {
-             processRequest(request, response);
-         } catch (SQLException ex) {
-             Logger.getLogger(EventItem.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(EventItem.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (InstantiationException ex) {
+         
+            String commentBox = request.getParameter("commentBox");
+            try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            con = DriverManager.getConnection(url, user, password);
+            
+            CallableStatement cs = this.con.prepareCall("{call add_activity_comment(?,?,?,?)}");
+            cs.setInt(1, 3);
+            cs.setString(2, "Paris");
+            cs.setString(3, commentBox);
+            cs.setTimestamp(4, getCurrentTimeStamp());
+            cs.executeQuery();
+            cs.close();
+            
+             con.close();
+             
+            RequestDispatcher rd = request.getRequestDispatcher(URLDecoder.decode(request.getRequestURI(), "UTF-8"));
+            rd.forward(request,response);
+         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
              Logger.getLogger(EventItem.class.getName()).log(Level.SEVERE, null, ex);
          }
+           
     }
 
     /**
