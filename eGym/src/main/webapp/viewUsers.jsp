@@ -33,6 +33,7 @@
                 <th>Y.O.S</th>
                 <th>User Status</th>
                 <th>Edit User Details</th>
+                <th>Reset User's Password</th>
             </tr>
             <%
             
@@ -74,6 +75,7 @@
                 <td><%=yos%></td>
                 <td><%=UserStatus%></td>
                 <td><form action="getUserDetails"><button type="submit" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
+                <td><form action="resetUserPassword" method="POST"><button type="submit" name="getPasswordUsername" value=<%=Username%>>Reset Password</button></form></td>
             </tr>
             <%
             }

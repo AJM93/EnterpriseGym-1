@@ -17,6 +17,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -30,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Tom
  */
-@WebServlet(name = "ResetPassword", urlPatterns = {"/ResetPassword"})
+@WebServlet(name = "ResetPassword", urlPatterns = {"/ResetPassword/*"})
 public class ResetPassword extends HttpServlet {
     
     Connection con = null;
@@ -67,7 +69,60 @@ public class ResetPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("resetPassword.jsp");
+        String path = request.getPathInfo();
+        String[] pathParts = path.split("/");
+        String inputUsername = pathParts[1];
+        String urlToken = pathParts[2];
+        
+         try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            //String encodedToken = AeSimpleSHA256.SHA256(urlToken);
+            String encodedToken = urlToken;
+            con = DriverManager.getConnection(url, user, password);
+            CallableStatement cs = null;
+            cs = this.con.prepareCall("{call get_password_reset_record(?)}"); 
+            cs.setString(1, inputUsername);
+            ResultSet rs = cs.executeQuery();
+            String token = "";
+            Timestamp tdRequest = null;
+            String Username = "";
+            while(rs.next())
+            {
+                token = rs.getString("Token");
+                tdRequest = rs.getTimestamp("DateTimeRequested");
+                Username = rs.getString("Users_Username");
+            }
+            cs.close();
+            con.close();
+            if(token.equals(encodedToken))
+            {
+                Timestamp timeOut = tdRequest;
+                long getTime = tdRequest.getTime();
+                getTime = getTime + (60 * 60 * 1000);
+                timeOut.setTime(getTime);
+                java.util.Date date = new java.util.Date();
+                Timestamp now = new Timestamp(date.getTime());
+                if(timeOut.after(now))
+                {
+                    // if request is before timeout
+                    request.setAttribute("PasswordUsername", Username);
+                    RequestDispatcher rd = request.getRequestDispatcher("/resetPassword.jsp");
+                    rd.forward(request,response);
+
+                }else
+                {
+                    // if request is after timeout
+                    RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+                    rd.forward(request,response);
+                }
+            }else{
+                RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+                rd.forward(request,response);
+            }
+            
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedEncodingException ex) {
+            Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
