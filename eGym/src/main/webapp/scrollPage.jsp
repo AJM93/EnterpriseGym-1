@@ -12,6 +12,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <%
+        
+        NewsModel nm = new NewsModel()
         ArrayList news_titles = new ArrayList();
         ArrayList news_body = new ArrayList();
         ArrayList news_user = new ArrayList();
