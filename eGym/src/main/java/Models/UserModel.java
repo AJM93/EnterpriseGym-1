@@ -5,8 +5,15 @@
  */
 package Models;
 
+import Stores.UserStore;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
-
+import stores.*;
 /**
  *
  * @author Yogi
@@ -32,6 +39,14 @@ public class UserModel {
     private int Total = 0;
     private int UserStatus;
     
+     Connection con = null;
+    Statement st = null;
+    ResultSet rs = null;
+    static final String JDBC_DRIVER ="com.mysql.jdbc.Driver";  
+    String url = "jdbc:mysql://46.101.32.81:3306/EGAlexander";
+    String user = "root";
+    String password = "teameight";
+    
     public UserModel(final String Username, final String Firstname, final String Lastname, final String MatriculationNo, final String Email, final String PhoneNo, final char Gender, final String Country, final String Institution, final String SubInstitution, final String Degree, final Timestamp dob, final String yos, final int UserStatus)
     {
          this.Username = Username;
@@ -48,6 +63,43 @@ public class UserModel {
          this.dob = dob;
          this.yos = yos;
          this.UserStatus = UserStatus;
+    }
+    
+    public UserModel(){}
+    
+    
+    public UserStore getUserDetails(String pUsername) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException{
+        UserStore rt = null;
+        
+         Class.forName("com.mysql.jdbc.Driver").newInstance();
+            con = DriverManager.getConnection(url, user, password);
+            CallableStatement cs = null;
+            cs = this.con.prepareCall("{call get_user_details(?)}");   //(?,?)}"
+            cs.setString(1,pUsername);
+            ResultSet rs = cs.executeQuery();
+            rs.next();
+            String Username = rs.getString("Username");
+            String Firstname = rs.getString("FirstName");
+            String Lastname = rs.getString("LastName");
+            String Matric = rs.getString("MatriculationNumber");
+            String Email = rs.getString("Email");
+            String PhoneNo = rs.getString("PhoneNumber");
+            String Country = rs.getString("Country");
+            String Gender = rs.getString("Gender");
+            String Inst = rs.getString("Institution");
+            String sInst = rs.getString("Sub_Institution");
+            String degree = rs.getString("Degree");
+            Timestamp dob = rs.getTimestamp("DOB");
+            String yos = rs.getString("YearOfStudy");
+            int Userstatus = rs.getInt("UserStatus_idUserStatus");
+            int ot = rs.getInt("Online_Theory");
+            int ch = rs.getInt("Challenge");
+            int ac = rs.getInt("Action");
+            int pr = rs.getInt("Project");
+            int tt = rs.getInt("Total");
+            rt = new UserStore(Username, Firstname, Lastname, Matric, Email, PhoneNo, Gender.charAt(0), Country, Inst, sInst, degree, dob, yos, Userstatus, ot, ch, ac, pr, tt);
+            
+        return rt;
     }
 
     /**

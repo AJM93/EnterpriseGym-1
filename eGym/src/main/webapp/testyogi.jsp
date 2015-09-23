@@ -9,6 +9,7 @@
  <%@page import="java.util.LinkedList"%>
  <%@page import="java.util.Iterator"%>
  <%@page import="Models.*"%>
+ <%@page import="Stores.*"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,6 +23,9 @@
     
     LinkedList<EventsModel> o = em.getUserEvents("Tom");
     
+    UserModel um = new UserModel();
+    UserStore us = um.getUserDetails("Tom");
+    
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,5 +35,6 @@
         <h1><%=n.get(3).getNewsTitle()%></h1>
         <h1><%=m.get(1).getEventTitle()%><h1>
                 <h1><%=o.get(1).getEventTitle()%><h1>
+                        <h1><%=us.getFirstname()%><h1>
     </body>
 </html>
