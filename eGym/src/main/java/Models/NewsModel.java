@@ -71,6 +71,29 @@ public class NewsModel
        
        return tr;
     }
+     
+     public NewsModel getOneNewsStory (int id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+         NewsModel rt = null;
+         Class.forName("com.mysql.jdbc.Driver").newInstance();
+             
+            con = DriverManager.getConnection(url, user, password);
+            CallableStatement cs = null;
+            cs = this.con.prepareCall("{call get_news_story(?)}");   //(?,?)}"
+            //cs.setString(1, "Tom");
+            cs.setInt(1,id);
+            ResultSet rs = cs.executeQuery();
+            NewsModel Story = null;
+           rs.next();
+                int idd = rs.getInt("idNews");
+                String Title = rs.getString("Title");
+                String Body = rs.getString("Body");
+                String User = rs.getString("Users_Username");
+                Timestamp Date = rs.getTimestamp("DatePublished");
+                rt = new NewsModel(idd, Title, Body, User, Date);
+            cs.close();
+            con.close();
+         return rt;
+     }
     
      
     public int getNewsId()

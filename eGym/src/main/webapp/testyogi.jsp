@@ -14,6 +14,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <script src="//cdn.ckeditor.com/4.5.3/full-all/ckeditor.js"></script>
     <%
     NewsModel nm = new NewsModel();
     LinkedList<NewsModel> n = nm.getHomeNews();
@@ -32,9 +33,14 @@
         <title></title>
     </head>
     <body>
-        <h1><%=n.get(3).getNewsTitle()%></h1>
+        <h1><%=n.get(1).getNewsTitle()%></h1>
         <h1><%=m.get(1).getEventTitle()%><h1>
                 <h1><%=o.get(1).getEventTitle()%><h1>
                         <h1><%=us.getFirstname()%><h1>
+                                
+        <textarea name="body" required autofocus><%=n.get(1).getNewsBody()%></textarea>
+        <script>
+            CKEDITOR.replace( 'body' );
+        </script>
     </body>
 </html>

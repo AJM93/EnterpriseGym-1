@@ -26,6 +26,8 @@
         
         
         <h2> <%=nm.getNewsTitle()%> </h2>
+        
+        <div><%=nm.getNewsBody()%></div>
       
         
     </body>
