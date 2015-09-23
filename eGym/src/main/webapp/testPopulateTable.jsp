@@ -42,7 +42,26 @@ $(".comment_button").click(function() {
 	alert("Please Enter Some Text");
 	
 	}
-    });
+        else
+{
+$("#flash").show();
+$("#flash").fadeIn(400).html('<img src="ajax-loader.gif" align="absmiddle"> <span class="loading">Loading Comment...</span>');
+
+$.ajax({
+type: "POST",
+url: "/eGym/PostEventComment",
+data: dataString,
+cache: false,
+success: function(html){
+$("ol#update").prepend(html);
+$("ol#update li:first").slideDown("slow");
+document.getElementById('commentBox').value='';
+document.getElementById('commentBox').focus();
+$("#flash").hide();
+}
+});
+} return false;
+});
 });
    </script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -94,6 +113,8 @@ $(document).ready(function() {
 
 <textarea rows="4" cols="50" name="commentBox" id="commentBox" maxlength="145" ></textarea><br />
 <input type="button" value="Submit Comment" name="submit" class="comment_button"/>
-    
+    <div id="flash"></div>
+<ol id="update" class="timeline">
+</ol>
 </body>
 </html>
