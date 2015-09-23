@@ -12,10 +12,13 @@
         <title>Reset password</title>
     </head>
     <body>
+         <%
+            String Username = (String)request.getAttribute("PasswordUsername");
+            %>
         <form class="form-signin" role="form" method="POST" action="ResetPassword">
             <h2 class="form-signin-heading">Please enter new password</h2>
             <label for="username" class="sr-only">Username</label>
-            <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+            <input type="text" name="username" class="form-control" placeholder="Username" readonly value="<%=Username%>">
             <label for="password" class="sr-only">Password</label>
             <input type="password" name="password" class="form-control" placeholder="Password" required>
             <br>
