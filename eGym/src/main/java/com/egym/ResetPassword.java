@@ -76,8 +76,8 @@ public class ResetPassword extends HttpServlet {
         
          try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            //String encodedToken = AeSimpleSHA256.SHA256(urlToken);
-            String encodedToken = urlToken;
+            String encodedToken = AeSimpleSHA256.SHA256(urlToken);
+            //String encodedToken = urlToken;
             con = DriverManager.getConnection(url, user, password);
             CallableStatement cs = null;
             cs = this.con.prepareCall("{call get_password_reset_record(?)}"); 
@@ -121,7 +121,7 @@ public class ResetPassword extends HttpServlet {
                 rd.forward(request,response);
             }
             
-        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedEncodingException ex) {
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedEncodingException | NoSuchAlgorithmException ex) {
             Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
