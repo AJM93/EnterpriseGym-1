@@ -27,6 +27,8 @@ private int eventsCommentID;
         this.body = body;
         this.datePosted = datePosted;
     }
+    
+    public EventsCommentModel(){}
 
     /**
      * @return the eventsCommentID
