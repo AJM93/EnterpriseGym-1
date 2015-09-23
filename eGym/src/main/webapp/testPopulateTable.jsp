@@ -53,13 +53,26 @@ url: "/eGym/PostEventComment",
 data: dataString,
 cache: false,
 success: function(html){
-$("ol#update").prepend(html);
+}
+});
+alert("Comment Posted");
 $("ol#update li:first").slideDown("slow");
 document.getElementById('commentBox').value='';
 document.getElementById('commentBox').focus();
 $("#flash").hide();
-}
-});
+ $.get('PopulateTable',function(responseJson) {
+            if(responseJson!=null){
+                $("#commentsTable").find("tr:gt(0)").remove();
+                var table1 = $("#commentsTable");
+                $.each(responseJson, function(key,value) { 
+                     var rowNew = $("<tr><td></td><td></td><td></td></tr>");
+                        rowNew.children().eq(0).text(value['author']); 
+                        rowNew.children().eq(1).text(value['body']); 
+                        rowNew.children().eq(2).text(value['datePosted']); 
+                        rowNew.appendTo(table1);
+                });
+            }
+        });
 } return false;
 });
 });
@@ -68,7 +81,6 @@ $("#flash").hide();
 <script type="text/javascript">
 $(document).ready(function() {
  $("#tablediv").hide();
-     $("#showTable").click(function(event){
            $.get('PopulateTable',function(responseJson) {
             if(responseJson!=null){
                 $("#commentsTable").find("tr:gt(0)").remove();
@@ -82,8 +94,7 @@ $(document).ready(function() {
                 });
                 }
             });
-            $("#tablediv").show();          
-  });      
+            $("#tablediv").show();      
 });
 </script>
 
