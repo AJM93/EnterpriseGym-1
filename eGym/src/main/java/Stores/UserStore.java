@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package Stores;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 import java.sql.Timestamp;
 
@@ -11,7 +16,7 @@ import java.sql.Timestamp;
  *
  * @author Yogi
  */
-public class UserModel {
+public class UserStore {
     private String Username = null;
     private String Firstname = null;
     private String Lastname = null;
@@ -32,7 +37,8 @@ public class UserModel {
     private int Total = 0;
     private int UserStatus;
     
-    public UserModel(final String Username, final String Firstname, final String Lastname, final String MatriculationNo, final String Email, final String PhoneNo, final char Gender, final String Country, final String Institution, final String SubInstitution, final String Degree, final Timestamp dob, final String yos, final int UserStatus)
+    public UserStore(final String Username, final String Firstname, final String Lastname, final String MatriculationNo, final String Email, final String PhoneNo, final char Gender, final String Country, final String Institution, final String SubInstitution, 
+            final String Degree, final Timestamp dob, final String yos, final int UserStatus, final int OnlineTheory, final int Challenge, final int Action, final int Project, final int Total)
     {
          this.Username = Username;
          this.Firstname = Firstname;
@@ -48,6 +54,11 @@ public class UserModel {
          this.dob = dob;
          this.yos = yos;
          this.UserStatus = UserStatus;
+         this.OnlineTheory = OnlineTheory;
+         this.Action = Action;
+         this.Project = Project;
+         this.Challenge = Challenge;
+         this.Total = Total;
     }
 
     /**
