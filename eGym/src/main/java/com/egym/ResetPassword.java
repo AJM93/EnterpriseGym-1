@@ -105,6 +105,7 @@ public class ResetPassword extends HttpServlet {
                 if(timeOut.after(now))
                 {
                     // if request is before timeout
+                    // Send Username and redirect to the reset password form.
                     request.setAttribute("PasswordUsername", Username);
                     RequestDispatcher rd = request.getRequestDispatcher("/resetPassword.jsp");
                     rd.forward(request,response);
@@ -160,13 +161,17 @@ public class ResetPassword extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             CallableStatement cs = null;
+            CallableStatement cs2 = null;
             cs = this.con.prepareCall("{call update_user_password(?, ?, ?)}"); 
+            cs2 = this.con.prepareCall("{call delete_password_reset_record(?)}");
             cs.setString(1, username);
             cs.setString(2, encodedPassword);
             cs.setString(3, hexSalt);
+            cs2.setString(1, username);
             cs.executeQuery();
-            
+            cs2.executeQuery();
             cs.close();
+            cs2.close();
             con.close();
             
             RequestDispatcher rd = request.getRequestDispatcher("/index.html");
