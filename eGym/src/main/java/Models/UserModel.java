@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import stores.*;
+import Stores.*;
 /**
  *
  * @author Yogi
