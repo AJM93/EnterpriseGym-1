@@ -42,7 +42,7 @@ public class EventsModel {
     this.trainer=trainer;
     }
     
-    public EventsModel(){}
+    public EventsModel(){} // empty constructer added for ease - yogi
     
      public java.util.LinkedList<EventsModel> getHomeEvents() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
        java.util.LinkedList<EventsModel> tr = new java.util.LinkedList<>();
@@ -102,7 +102,28 @@ public class EventsModel {
             
        
        return tr;
-    }   
+    }  
+  
+  public EventsModel getSingleEvent (int id)  throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+      EventsModel rt = null;
+      Class.forName("com.mysql.jdbc.Driver").newInstance();
+             
+            con = DriverManager.getConnection(url, user, password);
+            CallableStatement cs = null;
+            cs = this.con.prepareCall("{call get_single_activity(?)}");   //(?,?)}"
+            cs.setInt(1, id);
+            ResultSet rs = cs.executeQuery();
+            rs.next();
+                int idd = rs.getInt("idActivities");
+                String Title = rs.getString("Title");
+                String Body = rs.getString("Body");
+                String Trainer = rs.getString("Users_Username");
+                //java.util.Date dt = rs.getDate("DatePublished");
+                //String Date = dt.toString();
+                int Points = rs.getInt("Points");
+                rt = new EventsModel(idd, Title, Body, Trainer, Points);
+      return rt;
+  }
      
      
     public int getEventID()
