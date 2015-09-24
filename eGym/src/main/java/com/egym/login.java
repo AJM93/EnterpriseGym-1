@@ -90,6 +90,8 @@ public class login extends HttpServlet {
             ResultSet rs = cs.executeQuery();
             rs.next();
             
+            int userType = rs.getInt("UserTypes_idUserTypes");
+            
             String storedPassword = rs.getString("password");
             String hexSalt = rs.getString("salt");
             byte[] salt = AeSimpleSHA256.fromHex(hexSalt);
@@ -112,7 +114,7 @@ public class login extends HttpServlet {
             
             if (encodedPasswordAttempt != null && encodedPasswordAttempt.equals(storedPassword)) {
                 // login success
-                LoggedIn lg = new LoggedIn(true, username);
+                LoggedIn lg = new LoggedIn(true, username, userType);
 
                 HttpSession session = request.getSession();
                 session.setAttribute("LoggedIn", lg);

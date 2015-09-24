@@ -11,11 +11,13 @@ package Stores;
  */
 public class LoggedIn {
     private boolean loggedIn = false;
-    private String username = null;
+    private String username;
+    private int role;
     
-    public LoggedIn (boolean newLoggedIn, String newUsername) {
+    public LoggedIn (boolean newLoggedIn, String newUsername, int role) {
         this.loggedIn = newLoggedIn;
         this.username = newUsername;
+        this.role = role;
     }
 
     /**
@@ -26,13 +28,6 @@ public class LoggedIn {
     }
 
     /**
-     * @param loggedIn the loggedIn to set
-     */
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
-    }
-
-    /**
      * @return the username
      */
     public String getUsername() {
@@ -40,11 +35,9 @@ public class LoggedIn {
     }
 
     /**
-     * @param username the username to set
+     * @return the role
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public int getRole() {
+        return role;
     }
-    
-    
 }
