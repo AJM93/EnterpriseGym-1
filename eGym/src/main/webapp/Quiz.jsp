@@ -43,6 +43,7 @@
             var answer2 = [];
             var answer3 = [];
             var answer4 = [];
+            var stopped = false;
             var correctAnswer = [];
             <%  
                 for(int i=0; i<Questions.size(); i++)
@@ -62,19 +63,47 @@
             function startQuiz()
             {
                     quiz = _("quiz");
+                    document.getElementById("timer").innerHTML = "10:00";
                     quiz.innerHTML = "<h2>Click to Start!</h2>";
-                    quiz.innerHTML += "<button onclick='startQuizAgain()'>Start Quiz</button>";
+                    quiz.innerHTML += "<button onclick='initQuiz()'>Start Quiz</button>";
+            }
+            function startTimer()
+            {
+                stopped = false;
+                var mins = 9;
+                var sec = 60;
+                setInterval(function()
+                {
+                    if(stopped === false)
+                    {
+                        sec--;
+                        document.getElementById("timer").innerHTML = mins +":" + sec ;
+                        if(sec === 00)
+                        {
+                            if (mins === 0)
+                            {
+                                document.getElementById("timer").innerHTML = mins +" : " + sec ;
+                                stopped = true;
+                                pos = (questions.length) + 1;
+                                renderQuestion();
+                            }else{
+                                mins--;
+                                sec = 60;
+                            }
+                        }
+                    }
+                 },1000);
             }
             function renderQuestion()
             {
                     if(pos >= questions.length)
                     {
-                            quiz.innerHTML = "<h2>You got " + correct + " of " + questions.length + " questions correct</h2>";
-                            quiz.innerHTML += "<button onclick='startQuizAgain()'>Start Again</button>";
-                            _("quiz_status").innerHTML = "Quiz Completed";
-                            pos = 0;
-                            correct = 0;
-                            return false;
+                        stopped = true;
+                        quiz.innerHTML = "<h2>You got " + correct + " of " + questions.length + " questions correct</h2>";
+                        _("quiz_status").innerHTML = "Quiz Completed";
+                        pos = 0;
+                        correct = 0;
+                        return false;
                     }
                     _("quiz_status").innerHTML = "Question " + (pos+1) + " of "+questions.length;
                     question = questions[pos];
@@ -94,30 +123,32 @@
                     posAnswers = document.getElementsByName("posAnswers");
                     for(var i=0; i<posAnswers.length; i++)
                     {
-                            if(posAnswers[i].checked)
-                            {
-                                    userAnswer = posAnswers[i].value;
-                            }
+                        if(posAnswers[i].checked)
+                        {
+                            userAnswer = posAnswers[i].value;
+                        }
                     }
                     if(userAnswer === correctAnswer[pos])
                     {
-                            correct++;
+                        correct++;
                     }
                     pos++;
                     renderQuestion();
             }
-            function startQuizAgain()
+            function initQuiz()
             {
-                    pos = 0;
-                    renderQuestion();
+                pos = 0;
+                startTimer();
+                renderQuestion();
             }
             window.addEventListener("load", startQuiz, false);
 	</script>
     </head>
     <body>
-        <h1>Hello World!</h1>
         <div>
-            <h1>Prototyping Quiz</h1>
+            <h3>Time Left: <span id="timer"><span></h3>
+        </div>
+        <div>
             <h2 id="quiz_status"></h2>
             <div id="quiz"></div>
         </div>
