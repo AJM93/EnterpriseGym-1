@@ -110,6 +110,9 @@ public class EditNews extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(EditNews.class.getName()).log(Level.SEVERE, null, ex);
         }
+        RequestDispatcher rd = request.getRequestDispatcher("/NewsItem/"+urlNewsID);
+            rd.forward(request,response);
+        
     }
 
     /**

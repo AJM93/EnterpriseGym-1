@@ -28,6 +28,8 @@
         <h2> <%=nm.getNewsTitle()%> </h2>
         
         <div><%=nm.getNewsBody()%></div>
+        
+        <a href="/eGym/EditNews/<%=nm.getNewsId()%>">Edit this</a>
       
         
     </body>
