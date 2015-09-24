@@ -6,6 +6,7 @@
 package com.egym;
 
 import Models.UserModel;
+import Stores.UserStore;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
@@ -48,42 +49,18 @@ public class getUserDetails extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
             String username = request.getParameter("getUsername");
-            con = DriverManager.getConnection(url, user, password);
-            CallableStatement cs = null;
-            cs = this.con.prepareCall("{call get_user_details(?)}"); 
-            cs.setString(1, username);
-            ResultSet rs = cs.executeQuery(); 
-            UserModel usermodel = null;
-            while (rs.next()) 
-            {
-                String Username = rs.getString("Username");
-                String Firstname = rs.getString("Firstname");
-                String Lastname = rs.getString("Lastname");
-                String MatriculationNo = rs.getString("MatriculationNumber");
-                String Email = rs.getString("Email");
-                String PhoneNo = rs.getString("PhoneNumber");
-                String genderS = rs.getString("Gender");
-                char Gender = genderS.charAt(0);
-                String Country = rs.getString("Country");
-                String Institution = rs.getString("Institution");
-                String SubInstitution = rs.getString("Sub_Institution");
-                String Degree = rs.getString("Degree");
-                Timestamp dob = rs.getTimestamp("DOB");
-                String yos = rs.getString("YearOfStudy");
-                int UserStatus = rs.getInt("UserStatus_idUserStatus");
-                usermodel = new UserModel(Username, Firstname, Lastname, MatriculationNo, Email, PhoneNo, Gender, Country, Institution, SubInstitution, Degree, dob, yos, UserStatus);
-            }
-            request.setAttribute("UserModel", usermodel);
-            cs.close();
-            con.close();
+            
+            UserModel um = new UserModel();
+            UserStore userStore = um.getUserDetails(username);
+            
+            request.setAttribute("UserStore", userStore);
+            
             RequestDispatcher rd = request.getRequestDispatcher("editUser.jsp");
             rd.forward(request,response);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(editUserDetails.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(getUserDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

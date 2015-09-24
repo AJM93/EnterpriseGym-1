@@ -61,7 +61,8 @@ public class UserStore {
          this.Total = Total;
     }
     
-    public UserStore(String username, String firstName, String lastName, int onlineTheory, int challenge, int action, int project, int total, String institution, String subInstitution) {
+    public UserStore(String username, String firstName, String lastName, int onlineTheory, int challenge, int action, int project, int total, String institution,
+            String subInstitution) {
         this.Username = username;
         this.Firstname = firstName;
         this.Lastname = lastName;
@@ -72,6 +73,24 @@ public class UserStore {
         this.Total = total;
         this.Institution = institution;
         this.SubInstitution = subInstitution;
+    }
+    
+    public UserStore(String Username, String Firstname, String Lastname, String MatriculationNo, String Email, String PhoneNo, char Gender, String Country,
+            String Institution, String SubInstitution, String Degree, Timestamp dob, String yos, int UserStatus){
+        this.Username = Username;
+        this.Firstname = Firstname;
+        this.Lastname = Lastname;
+        this.MatriculationNo = MatriculationNo;
+        this.Email = Email;
+        this.PhoneNo = PhoneNo;
+        this.Gender = Gender;
+        this.Country = Country;
+        this.Institution = Institution;
+        this.SubInstitution = SubInstitution;
+        this.Degree = Degree;
+        this.dob = dob;
+        this.yos = yos;
+        this.UserStatus = UserStatus;
     }
 
     /**
