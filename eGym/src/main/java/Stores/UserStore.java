@@ -60,6 +60,19 @@ public class UserStore {
          this.Challenge = Challenge;
          this.Total = Total;
     }
+    
+    public UserStore(String username, String firstName, String lastName, int onlineTheory, int challenge, int action, int project, int total, String institution, String subInstitution) {
+        this.Username = username;
+        this.Firstname = firstName;
+        this.Lastname = lastName;
+        this.OnlineTheory = onlineTheory;
+        this.Challenge = challenge;
+        this.Action = action;
+        this.Project = project;
+        this.Total = total;
+        this.Institution = institution;
+        this.SubInstitution = subInstitution;
+    }
 
     /**
      * @return the Username
