@@ -94,7 +94,22 @@ public class EditNews extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String path = request.getPathInfo();
+        int urlNewsID = Integer.parseInt(path.substring(1));
+        String title = request.getParameter("title");
+        String body = request.getParameter("body");
+        NewsModel nm = new NewsModel();
+        try {
+            nm.editNews(urlNewsID, title, body, "Tom");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditNews.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(EditNews.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(EditNews.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditNews.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
