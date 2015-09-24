@@ -3,6 +3,7 @@
     Created on : 23-Sep-2015, 14:29:55
     Author     : Dreads
 --%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
@@ -25,13 +26,16 @@
                 <th>Start Quiz</th>
             </tr>
             <%
+                int listCounter = 0;
+                int iterCounter = 0;
                 LinkedList<QuizStore> quizList = (LinkedList<QuizStore>) request.getAttribute("QuizList");
+                ArrayList<Integer> userAttempts = (ArrayList<Integer>) request.getAttribute("UserAttempts");
                 Iterator<QuizStore> iterator;
                 iterator = quizList.iterator();
                 while(iterator.hasNext())
                 {
-                    QuizStore ql = (QuizStore) iterator.next();
-                    
+                    iterCounter++;
+                    QuizStore ql = (QuizStore) iterator.next();    
                     int idQuiz = ql.getQuizId();
                     String Name = ql.getName();
                     int Points = ql.getPoints();

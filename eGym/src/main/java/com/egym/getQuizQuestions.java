@@ -71,32 +71,60 @@ public class getQuizQuestions extends HttpServlet {
     {
         try
         {
+            boolean runTest = true;
             String QuizNameString = request.getParameter("QuizName");
             int QuizName = Integer.parseInt(QuizNameString);
+            //Get the logged in users username
+            String username = "test1";
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             CallableStatement cs = null;
-            cs = this.con.prepareCall("{call get_quiz_information(?)}"); 
-            cs.setInt(1, QuizName);
+            //check if user has done the test
+            cs = this.con.prepareCall("{call get_user_quiz_attempts(?)}");
+            cs.setString(1, username);
             ResultSet rs = cs.executeQuery();
-            LinkedList<QuestionStore> questionList = new LinkedList<QuestionStore>();
             while(rs.next())
             {
-                int QuestionId = rs.getInt("idQuestion");
-                String QuestionBody = rs.getString("QuestionBody");
-                String Answer1 = rs.getString("Answer1");
-                String Answer2 = rs.getString("Answer2");
-                String Answer3 = rs.getString("Answer3");
-                String Answer4 = rs.getString("Answer4");
-                int CorrectAnswer = rs.getInt("CorrectAnswer");
-                QuestionStore qStore = new QuestionStore(QuestionId, QuizName, QuestionBody, Answer1, Answer2, Answer3, Answer4, CorrectAnswer);
-                questionList.add(qStore);
+                int completedQuizId = rs.getInt("Quiz_idQuiz");
+                if(QuizName == completedQuizId)
+                {
+                    runTest = false;
+                }
             }
             cs.close();
-            con.close();
-            request.setAttribute("QuestionList", questionList);
-            RequestDispatcher rd = request.getRequestDispatcher("Quiz.jsp");
-            rd.forward(request,response);
+            if(runTest == true)
+            {
+                CallableStatement cs2 = null;
+                cs2 = this.con.prepareCall("{call get_quiz_information(?)}"); 
+                cs2.setInt(1, QuizName);
+                ResultSet rs2 = cs2.executeQuery();
+                LinkedList<QuestionStore> questionList = new LinkedList<QuestionStore>();
+                while(rs2.next())
+                {
+                    int QuestionId = rs2.getInt("idQuestion");
+                    String QuestionBody = rs2.getString("QuestionBody");
+                    String Answer1 = rs2.getString("Answer1");
+                    String Answer2 = rs2.getString("Answer2");
+                    String Answer3 = rs2.getString("Answer3");
+                    String Answer4 = rs2.getString("Answer4");
+                    int CorrectAnswer = rs2.getInt("CorrectAnswer");
+                    QuestionStore qStore = new QuestionStore(QuestionId, QuizName, QuestionBody, Answer1, Answer2, Answer3, Answer4, CorrectAnswer);
+                    questionList.add(qStore);
+                }
+                cs2.close();
+                con.close();
+
+                request.setAttribute("QuestionList", questionList);
+                request.setAttribute("quizId", QuizNameString);
+                // Adds Username for testing.
+                request.setAttribute("userID", "test1");
+                RequestDispatcher rd = request.getRequestDispatcher("Quiz.jsp");
+                rd.forward(request,response);
+            }else{
+                con.close();
+                RequestDispatcher rd = request.getRequestDispatcher("GetQuizzes");
+                rd.forward(request,response);
+            }
         }catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {
             Logger.getLogger(getQuizQuestions.class.getName()).log(Level.SEVERE, null, ex);
         }

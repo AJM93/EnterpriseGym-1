@@ -19,7 +19,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -94,6 +94,27 @@ public class GetQuizzes extends HttpServlet {
             }
             request.setAttribute("QuizList", quizList);
             cs.close();
+            /*
+            // Get Logged in username and get their completed tests 
+            String Username = "test1";
+            CallableStatement cs2 = this.con.prepareCall("{call get_user_quiz_attempts(?)}");
+            cs2.setString(1, Username);
+            ResultSet rs2 = cs2.executeQuery();
+            
+            ArrayList<Integer> userAttempts = null;
+            if(rs2.next())
+            {
+                userAttempts = new ArrayList<Integer>();
+            
+                while(rs2.next())
+                {
+                    int getUA = rs2.getInt("Quiz_idQuiz");
+                    userAttempts.add(getUA);
+                }
+            }
+            request.setAttribute("UserAttempts", userAttempts);
+            
+            cs2.close();*/
             con.close();
             RequestDispatcher rd = request.getRequestDispatcher("/Quizzes.jsp");
             rd.forward(request,response);

@@ -9,10 +9,16 @@
 <%@page import="Stores.QuestionStore"%>
 <%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
 <%
     LinkedList<QuestionStore> questionList = (LinkedList<QuestionStore>) request.getAttribute("QuestionList");
     Iterator<QuestionStore> iterator;
     iterator = questionList.iterator();
+    
+    int quizId = 0;
+    String userId = request.getParameter("userID");
+            
     ArrayList<String> Questions = new ArrayList<String>();
     ArrayList<String> Answer1 = new ArrayList<String>();
     ArrayList<String> Answer2 = new ArrayList<String>();
@@ -22,6 +28,7 @@
     while(iterator.hasNext())
     {
         QuestionStore qm = (QuestionStore) iterator.next();
+        quizId = qm.getQuizId();
         Questions.add(qm.getQuestionBody());
         Answer1.add(qm.getAnswer1());
         Answer2.add(qm.getAnswer2());
@@ -31,13 +38,13 @@
     }
 
 %>
-<!DOCTYPE html>
-<html>
+
     <head>
         <title>Quiz</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript">
             var pos = 0, quiz, quiz_status, question, userAnswer, posAnswers, ans1, ans2, ans3, ans4, correct = 0;
+            var percentPass = 80;
             var questions = [];
             var answer1 = [];
             var answer2 = [];
@@ -96,27 +103,43 @@
             }
             function renderQuestion()
             {
-                    if(pos >= questions.length)
+                if(pos >= questions.length)
+                {
+                    stopped = true;
+                    var noCorrect = "You got " + correct + " of " + questions.length + " questions correct!";
+                    var percent = ((correct / questions.length) * 100);
+                    var perCorr = "You got " + percent + "% correct!";
+                    
+                    if(percent >= percentPass)
                     {
-                        stopped = true;
-                        quiz.innerHTML = "<h2>You got " + correct + " of " + questions.length + " questions correct</h2>";
-                        _("quiz_status").innerHTML = "Quiz Completed";
-                        pos = 0;
-                        correct = 0;
-                        return false;
+                        document.getElementById('UserScore').value = percent;
+                        alert("Congradulations! YOU PASSED!" + "\n" + noCorrect + "\n" + perCorr);
+                        alert("Click on the return button to finish the test.");
                     }
-                    _("quiz_status").innerHTML = "Question " + (pos+1) + " of "+questions.length;
-                    question = questions[pos];
-                    ans1 = answer1[pos];
-                    ans2 = answer2[pos];
-                    ans3 = answer3[pos];
-                    ans4 = answer4[pos];
-                    quiz.innerHTML = "<h4>" + question + "</h4>";
-                    quiz.innerHTML += "<input type='radio' name='posAnswers' value='1'> " + ans1 + "<br>";
-                    quiz.innerHTML += "<input type='radio' name='posAnswers' value='2'> " + ans2 + "<br>";
-                    quiz.innerHTML += "<input type='radio' name='posAnswers' value='3'> " + ans3 + "<br>";
-                    quiz.innerHTML += "<input type='radio' name='posAnswers' value='4'> " + ans4 + "<br><br>";
-                    quiz.innerHTML += "<button onclick='checkAnswer()'>Submit</button>";
+                    else
+                    {
+                        document.getElementById('UserScore').value = percent;
+                        alert("Unfortuently, you need 75% to pass! \n" + noCorrect + "\n" + perCorr);
+                        alert("Click on the return button to finish the test.");
+                    }
+                    _("quiz_status").innerHTML = "Quiz Completed";
+
+                    pos = 0;
+                    correct = 0;
+                    return false;
+                }
+                _("quiz_status").innerHTML = "Question " + (pos+1) + " of "+questions.length;
+                question = questions[pos];
+                ans1 = answer1[pos];
+                ans2 = answer2[pos];
+                ans3 = answer3[pos];
+                ans4 = answer4[pos];
+                quiz.innerHTML = "<h4>" + question + "</h4>";
+                quiz.innerHTML += "<input type='radio' name='posAnswers' value='1'> " + ans1 + "<br>";
+                quiz.innerHTML += "<input type='radio' name='posAnswers' value='2'> " + ans2 + "<br>";
+                quiz.innerHTML += "<input type='radio' name='posAnswers' value='3'> " + ans3 + "<br>";
+                quiz.innerHTML += "<input type='radio' name='posAnswers' value='4'> " + ans4 + "<br><br>";
+                quiz.innerHTML += "<button onclick='checkAnswer()'>Submit</button>";
             }
             function checkAnswer()
             {
@@ -151,6 +174,14 @@
         <div>
             <h2 id="quiz_status"></h2>
             <div id="quiz"></div>
+        </div>
+        <div>
+            <form action="updateQuizAttempts" method="POST">
+                <input id="QuizId" name="QuizId" type="hidden" value="<%=quizId%>" />
+                <input id="UserId" name="UserId" type="hidden" value="Cpt.Dreads" />
+                <input id="UserScore" name="UserScore" type="hidden" value="" />
+                <button type="submit" value="updateQuizAttempts">Finish Test</button>
+            </form>
         </div>
     </body>
 </html>
