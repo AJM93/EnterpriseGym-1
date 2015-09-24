@@ -22,10 +22,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <textarea name="title" required autofocus><%=nm.getNewsTitle()%></textarea>
-        <textarea name="body" required autofocus><%=nm.getNewsBody()%></textarea>
-        <script>
-            CKEDITOR.replace( 'body' );
-        </script>
+        <form role="form" method="POST" action=<%=""+nm.getNewsId()%>>
+            <textarea name="title" required autofocus><%=nm.getNewsTitle()%></textarea>
+            <textarea name="body" required autofocus><%=nm.getNewsBody()%></textarea>
+            <script>
+                CKEDITOR.replace( 'body' );
+            </script>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
+        </form>
     </body>
 </html>

@@ -5,26 +5,26 @@
  */
 package com.egym;
 
+import Lib.Convertors;
 import Models.UserModel;
 import Stores.UserStore;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 
 /**
  *
- * @author Dreads
+ * @author Tom
  */
-@WebServlet(name = "GetAllUsers", urlPatterns = {"/GetAllUsers"})
-public class GetAllUsers extends HttpServlet {
+@WebServlet(name = "profile", urlPatterns = {"/profile/*"})
+public class profile extends HttpServlet {
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,16 +38,6 @@ public class GetAllUsers extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        try {
-            UserModel um = new UserModel();
-            LinkedList<UserStore> userList = um.getAllUsers();
-            
-            request.setAttribute("UserList", userList);
-            RequestDispatcher rd = request.getRequestDispatcher("/viewUsers.jsp");
-            rd.forward(request,response);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            Logger.getLogger(GetAllUsers.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,7 +52,19 @@ public class GetAllUsers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String args[] = Convertors.SplitRequestPath(request);
+        String username = args[2];
+        
+        try {
+            UserModel um = new UserModel();
+            UserStore profile = um.getUserDetails(username);
+            
+            request.setAttribute("Profile", profile);
+            RequestDispatcher rd = request.getRequestDispatcher("/profile.jsp");
+            rd.forward(request, response);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(profile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

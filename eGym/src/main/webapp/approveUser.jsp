@@ -4,16 +4,16 @@
     Author     : Dreads
 --%>
 
+<%@page import="Stores.UserStore"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="Models.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Approve users</title>
     </head>
     <body>
         <h1>Approve Users!</h1>
@@ -38,12 +38,11 @@
             </tr>
             <%
             
-            LinkedList<UserModel> usersList = (LinkedList<UserModel>) request.getAttribute("UserList");
-            Iterator<UserModel> iterator;
-            iterator = usersList.iterator();
+            LinkedList<UserStore> usersList = (LinkedList<UserStore>) request.getAttribute("UserList");
+            Iterator<UserStore> iterator = usersList.iterator();
             while (iterator.hasNext()) 
             {
-                UserModel um = (UserModel) iterator.next();
+                UserStore um = (UserStore) iterator.next();
                 
                 String Username = um.getUsername();
                 String Firstname = um.getFirstname();

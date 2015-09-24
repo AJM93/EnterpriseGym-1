@@ -3,10 +3,10 @@
     Created on : 21-Sep-2015, 20:01:33
     Author     : Dreads
 --%>
+<%@page import="Stores.UserStore"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="Models.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,27 +37,26 @@
             </tr>
             <%
             
-            LinkedList<UserModel> usersList = (LinkedList<UserModel>) request.getAttribute("UserList");
-            Iterator<UserModel> iterator;
-            iterator = usersList.iterator();
+            LinkedList<UserStore> usersList = (LinkedList<UserStore>) request.getAttribute("UserList");
+            Iterator<UserStore> iterator = usersList.iterator();
             while (iterator.hasNext()) 
             {
-                UserModel um = (UserModel) iterator.next();
+                UserStore us = (UserStore) iterator.next();
                 
-                String Username = um.getUsername();
-                String Firstname = um.getFirstname();
-                String Lastname = um.getLastname();
-                String MatriculationNo = um.getMatriculationNo();
-                String Email = um.getEmail();
-                String PhoneNo = um.getPhoneNo();
-                char Gender = um.getGender();
-                String Country = um.getCountry();
-                String Institution = um.getInstitution();
-                String SubInstitution = um.getSubInstitution();
-                String Degree = um.getDegree();
-                Timestamp dob = um.getDob();
-                String yos = um.getYos();
-                int UserStatus = um.getUserStatus();
+                String Username = us.getUsername();
+                String Firstname = us.getFirstname();
+                String Lastname = us.getLastname();
+                String MatriculationNo = us.getMatriculationNo();
+                String Email = us.getEmail();
+                String PhoneNo = us.getPhoneNo();
+                char Gender = us.getGender();
+                String Country = us.getCountry();
+                String Institution = us.getInstitution();
+                String SubInstitution = us.getSubInstitution();
+                String Degree = us.getDegree();
+                Timestamp dob = us.getDob();
+                String yos = us.getYos();
+                int UserStatus = us.getUserStatus();
         %>
             <tr>
                 <td><%=Username%></td>

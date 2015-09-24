@@ -94,6 +94,21 @@ public class NewsModel
             con.close();
          return rt;
      }
+     
+     public void editNews(int id, String Title, String Body, String Author)throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+         Class.forName("com.mysql.jdbc.Driver").newInstance();
+             
+            con = DriverManager.getConnection(url, user, password);
+            CallableStatement cs = null;
+            cs = this.con.prepareCall("{call edit_news(?,?,?,?)}");
+            cs.setInt(1, id);
+            cs.setString(2, Title);
+            cs.setString(3, Body);
+            cs.setString(4, Author);
+            ResultSet rs = cs.executeQuery();
+            cs.close();
+            con.close();
+     }
     
      
     public int getNewsId()

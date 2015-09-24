@@ -3,8 +3,8 @@
     Created on : 20-Sep-2015, 17:08:02
     Author     : Dreads
 --%>
+<%@page import="Stores.UserStore"%>
 <%@page import="java.sql.Timestamp"%>
-<%@page import="Models.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,22 +14,22 @@
     </head>
     <body>
         <%
-            UserModel um = (UserModel)request.getAttribute("UserModel");
-            String Username = um.getUsername();
+            UserStore us = (UserStore)request.getAttribute("UserStore");
+            String Username = us.getUsername();
             request.setAttribute("OriginalUsername", Username);
-            String Firstname = um.getFirstname();
-            String Lastname = um.getLastname();
-            String MatriculationNo = um.getMatriculationNo();
-            String Email = um.getEmail();
-            String PhoneNo = um.getPhoneNo();
-            char Gender = um.getGender();
-            String Country = um.getCountry();
-            String Institution = um.getInstitution();
-            String SubInstitution = um.getSubInstitution();
-            String Degree = um.getDegree();
-            Timestamp dob = um.getDob();
-            String yos = um.getYos();
-            int UserStatus = um.getUserStatus();
+            String Firstname = us.getFirstname();
+            String Lastname = us.getLastname();
+            String MatriculationNo = us.getMatriculationNo();
+            String Email = us.getEmail();
+            String PhoneNo = us.getPhoneNo();
+            char Gender = us.getGender();
+            String Country = us.getCountry();
+            String Institution = us.getInstitution();
+            String SubInstitution = us.getSubInstitution();
+            String Degree = us.getDegree();
+            Timestamp dob = us.getDob();
+            String yos = us.getYos();
+            int UserStatus = us.getUserStatus();
         %>
         <h1>Edit User</h1>
         
