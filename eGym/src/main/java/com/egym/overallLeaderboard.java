@@ -5,14 +5,10 @@
  */
 package com.egym;
 
+import Models.UserModel;
 import Stores.UserStore;
 import java.io.IOException;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,14 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "overallLeaderboard", urlPatterns = {"/overallLeaderboard"})
 public class overallLeaderboard extends HttpServlet {
     
-    Connection con = null;
-    Statement st = null;
-    ResultSet rs = null;
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-    String url = "jdbc:mysql://46.101.32.81:3306/EGAlexander";
-    String user = "root";
-    String password = "teameight";
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -64,40 +52,12 @@ public class overallLeaderboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection(url, user, password);
-            CallableStatement cs = this.con.prepareCall("{call points_leaderboard}");
-            ResultSet rs = cs.executeQuery();
-            
-            LinkedList<UserStore> leaderboard = new LinkedList<>();
-            while (rs.next()) {
-                String username, firstName, lastName;
-                
-                if (rs.getString("IncludeInLeaderboard").equals("N")){
-                    username = "Anonymous";
-                    firstName = "Anonymous";
-                    lastName = "";
-                } else {
-                    username = rs.getString("Users_Username");
-                    firstName = rs.getString("FirstName");
-                    lastName = rs.getString("LastName");
-                }
-                
-                int onlineTheory = rs.getInt("Online_Theory");
-                int challenge = rs.getInt("Challenge");
-                int action = rs.getInt("Action");
-                int project = rs.getInt("Project");
-                int total = rs.getInt("Total");
-                String institution = rs.getString("Institution");
-                String subInstitution = rs.getString("Sub_Institution");
-                UserStore lbUser = new UserStore(username, firstName, lastName, onlineTheory, challenge, action, project, total, institution, subInstitution);
-                leaderboard.add(lbUser);
-            }
+            UserModel um = new UserModel();
+            LinkedList<UserStore> leaderboard = um.getLeaderboard(10);
             
             request.setAttribute("leaderboard", leaderboard);
-            cs.close();
-            con.close();
             
             RequestDispatcher rd = request.getRequestDispatcher("/overallLeaderboard.jsp");
             rd.forward(request,response);

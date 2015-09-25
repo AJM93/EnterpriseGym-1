@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Yogi
@@ -134,5 +136,47 @@ public class UserModel {
         
         con.close();
         return userList;
+    }
+    
+    public LinkedList<UserStore> getLeaderboard(int numRecords) throws SQLException {
+        LinkedList<UserStore> leaderboard = null;
+        
+        try {
+            CallableStatement cs = this.con.prepareCall("{call points_leaderboard(?)}");
+            cs.setInt(1, numRecords);
+            ResultSet rs = cs.executeQuery();
+            leaderboard = new LinkedList<>();
+            
+            while (rs.next()) {
+                String username, firstName, lastName;
+                
+                if (rs.getString("IncludeInLeaderboard").equals("N")){
+                    username = "Anonymous";
+                    firstName = "Anonymous";
+                    lastName = "";
+                } else {
+                    username = rs.getString("Users_Username");
+                    firstName = rs.getString("FirstName");
+                    lastName = rs.getString("LastName");
+                }
+                
+                int onlineTheory = rs.getInt("Online_Theory");
+                int challenge = rs.getInt("Challenge");
+                int action = rs.getInt("Action");
+                int project = rs.getInt("Project");
+                int total = rs.getInt("Total");
+                String institution = rs.getString("Institution");
+                String subInstitution = rs.getString("Sub_Institution");
+                UserStore lbUser = new UserStore(username, firstName, lastName, onlineTheory, challenge, action, project, total, institution, subInstitution);
+                leaderboard.add(lbUser);
+            }
+            
+            cs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        con.close();
+        return leaderboard;
     }
 }
