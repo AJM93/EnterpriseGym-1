@@ -5,6 +5,7 @@
  */
 package Models;
 
+import Stores.EventStore;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -104,8 +105,8 @@ public class EventsModel {
        return tr;
     }  
   
-  public EventsModel getSingleEvent (int id)  throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-      EventsModel rt = null;
+  public EventStore getSingleEvent (int id)  throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+      EventStore rt = null;
       Class.forName("com.mysql.jdbc.Driver").newInstance();
              
             con = DriverManager.getConnection(url, user, password);
@@ -118,10 +119,22 @@ public class EventsModel {
                 String Title = rs.getString("Title");
                 String Body = rs.getString("Body");
                 String Trainer = rs.getString("Users_Username");
+                String Type = rs.getString("Type");
+                Timestamp start = rs.getTimestamp("StartTime");
+                Timestamp end = rs.getTimestamp("EndTime");
                 //java.util.Date dt = rs.getDate("DatePublished");
                 //String Date = dt.toString();
                 int Points = rs.getInt("Points");
-                rt = new EventsModel(idd, Title, Body, Trainer, Points);
+                rt = new EventStore(); //(idd, Title, Body, Trainer, Points);
+                rt.setBody(Body);
+                rt.setTitle(Title);
+                rt.setTrainer(Trainer);
+                rt.setId(idd);
+                rt.setPoints(Points);
+                rt.setStart(start);
+                rt.setStop(end);
+                rt.setType(Type);
+                
       return rt;
   }
      

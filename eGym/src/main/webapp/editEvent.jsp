@@ -3,6 +3,7 @@
     Created on : Sep 24, 2015, 1:47:50 PM
     Author     : Yogi
 --%>
+<%@page import="Stores.EventStore"%>
 <%@page import="Models.EventsModel"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="Stores.BasicUser"%>
@@ -17,17 +18,17 @@
         <script src="//cdn.ckeditor.com/4.5.3/full-all/ckeditor.js"></script>
         
         <%
-                        EventsModel em = (EventsModel) request.getAttribute("Event");
+                        EventStore em = (EventStore) request.getAttribute("Event");
                        
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-       <form role="form" method="POST" action=<%=""+em.getEventID()%>>
-            <textarea name="title" required autofocus><%=em.getEventTitle()%></textarea>
-            <textarea name="body" required autofocus><%=em.getEventBody()%></textarea>
-            <textarea name="points" required autofocus><%=em.getEventPoints()%></textarea>
+       <form role="form" method="POST" action=<%=""+em.getId()%>>
+            <textarea name="title" required autofocus><%=em.getTitle()%></textarea>
+            <textarea name="body" required autofocus><%=em.getBody()%></textarea>
+           <input type="number" name="points" value="<%=em.getPoints()%>">
             <label for="type">Type</label>
             <select name="type" required>
             <%
@@ -36,7 +37,7 @@
 
                 while (activityTypeIterator.hasNext()){
                     ActivityType at = activityTypeIterator.next();%>
-                    <option value="<%=at.getID()%>"><%=at.getType()%></option>
+                    <option value="<%=at.getID()%>" <%if(at.getType().equals(em.getType())){%>selected="selected"<%}%>><%=at.getType()%></option>
             <%
                 }
             %>
@@ -49,7 +50,7 @@
 
                 while (trainersIterator.hasNext()){
                     BasicUser trainer = trainersIterator.next();%>
-                    <option value="<%=trainer.getUsername()%>"><%=trainer.getFirstName()%> <%=trainer.getLastName()%></option>
+                    <option value="<%=trainer.getUsername()%>" <% if(trainer.getUsername().equals(em.getTrainer())){ %> selected="selected" <%}%>><%=trainer.getFirstName()%> <%=trainer.getLastName()%></option>
             <%
                 }
             %>
@@ -59,14 +60,14 @@
             </script>
             <fieldset>
                 <legend>Starts</legend>
-                <input type="date" name="startDate">
-                <input type="time" name="startTime">
+                <input type="date" name="startDate" value = "<%=em.getStart().toString().substring(0,10)%>">
+                <input type="time" name="startTime" value = "<%=em.getStart().toString().substring(11,16)%>">
             </fieldset>
             
             <fieldset>
                 <legend>Ends</legend>
-                <input type="date" name="endDate">
-                <input type="time" name="endTime">
+                <input type="date" name="endDate" value = "<%=em.getStop().toString().substring(0,10)%>">
+                <input type="time" name="endTime" value = "<%=em.getStop().toString().substring(11,16)%>">
             </fieldset>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
         </form>
