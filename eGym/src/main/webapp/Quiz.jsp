@@ -17,7 +17,7 @@
     iterator = questionList.iterator();
     
     int quizId = 0;
-    String userId = request.getParameter("userID");
+    String Username = (String) request.getAttribute("userName");
             
     ArrayList<String> Questions = new ArrayList<String>();
     ArrayList<String> Answer1 = new ArrayList<String>();
@@ -178,7 +178,7 @@
         <div>
             <form action="updateQuizAttempts" method="POST">
                 <input id="QuizId" name="QuizId" type="hidden" value="<%=quizId%>" />
-                <input id="UserId" name="UserId" type="hidden" value="Cpt.Dreads" />
+                <input id="Username" name="Username" type="hidden" value="<%=Username%>" />
                 <input id="UserScore" name="UserScore" type="hidden" value="" />
                 <button type="submit" value="updateQuizAttempts">Finish Test</button>
             </form>

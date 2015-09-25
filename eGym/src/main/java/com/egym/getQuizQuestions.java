@@ -117,7 +117,7 @@ public class getQuizQuestions extends HttpServlet {
                 request.setAttribute("QuestionList", questionList);
                 request.setAttribute("quizId", QuizNameString);
                 // Adds Username for testing.
-                request.setAttribute("userID", "test1");
+                request.setAttribute("userName", username);
                 RequestDispatcher rd = request.getRequestDispatcher("Quiz.jsp");
                 rd.forward(request,response);
             }else{

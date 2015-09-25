@@ -82,7 +82,7 @@ public class updateQuizAttempts extends HttpServlet {
         try
         {
             String quizId = request.getParameter("QuizId");
-            String userName = request.getParameter("UserId");
+            String userName = request.getParameter("Username");
             String userScore = request.getParameter("UserScore");
             int quizid = Integer.parseInt(quizId);
             int userscore = Integer.parseInt(userScore);
