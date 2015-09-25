@@ -179,4 +179,17 @@ public class UserModel {
         con.close();
         return leaderboard;
     }
+    public void deleteUsersAccount(final String Username)
+    {
+        try
+        {
+            CallableStatement cs = this.con.prepareCall("{call delete_users_account(?)}");
+            cs.setString(1, Username);
+            cs.executeQuery();
+            cs.close();
+            con.close();
+        }catch (SQLException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

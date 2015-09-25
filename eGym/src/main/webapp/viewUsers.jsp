@@ -34,6 +34,7 @@
                 <th>User Status</th>
                 <th>Edit User Details</th>
                 <th>Reset User's Password</th>
+                <th>Delete User's Account</th>
             </tr>
             <%
             
@@ -75,6 +76,7 @@
                 <td><%=UserStatus%></td>
                 <td><form action="getUserDetails"><button type="submit" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
                 <td><form action="resetUserPassword" method="POST"><button type="submit" name="getPasswordUsername" value=<%=Username%>>Reset Password</button></form></td>
+                <td><form action="DeleteUserAccount" method="POST"><button type="submit" name="getDeletedUser" value=<%=Username%>>Delete Account</button></form></td>
             </tr>
             <%
             }
