@@ -26,7 +26,7 @@
                 <div class="form-group" id="Q1">
                     <h1>Question 1:</h1>
                     <label for="QuizName1">Quiz Name</label>
-                    <input type="text" class="form-control" id="QuizName1" name="QuizName" value="<%=quizName%>">
+                    <input type="text" class="form-control" id="QuizName1" name="QuizName" readonly value="<%=quizName%>">
                     <label for="inputQuestionBody1">Question</label>
                     <input type="text" class="form-control" id="inputQuestionBody1" name="QuestionBody1" placeholder="Please enter a question">
                     <label for="inputAnswer1Q1">Answer 1</label>
@@ -44,7 +44,7 @@
                 <div class="form-group" id="Q2">
                     <h1>Question 2:</h1>
                     <label for="QuizName2">Quiz Name</label>
-                    <input type="text" class="form-control" id="QuizName2" name="QuizName" value="<%=quizName%>">
+                    <input type="text" class="form-control" id="QuizName2" name="QuizName" readonly value="<%=quizName%>">
                     <label for="inputQuestionBody2">Question</label>
                     <input type="text" class="form-control" id="inputQuestionBody2" name="QuestionBody2" placeholder="Please enter a question">
                     <label for="inputAnswer1Q2">Answer 1</label>
@@ -62,7 +62,7 @@
                 <div class="form-group"  id="Q3">
                     <h1>Question 3:</h1>
                     <label for="QuizName3">Quiz Name</label>
-                    <input type="text" class="form-control" id="QuizName3" name="QuizName" value="<%=quizName%>">
+                    <input type="text" class="form-control" id="QuizName3" name="QuizName" readonly value="<%=quizName%>">
                     <label for="inputQuestionBody3">Question</label>
                     <input type="text" class="form-control" id="inputQuestionBody3" name="QuestionBody3" placeholder="Please enter a question">
                     <label for="inputAnswer1Q3">Answer 1</label>
@@ -80,7 +80,7 @@
                 <div class="form-group" id="Q4">
                     <h1>Question 4:</h1>
                     <label for="QuizName4">Quiz Name</label>
-                    <input type="text" class="form-control" id="QuizName4" name="QuizName" value="<%=quizName%>">
+                    <input type="text" class="form-control" id="QuizName4" name="QuizName" readonly value="<%=quizName%>">
                     <label for="inputQuestionBody4">Question</label>
                     <input type="text" class="form-control" id="inputQuestionBody4" name="QuestionBody4" placeholder="Please enter a question">
                     <label for="inputAnswer1Q4">Answer 1</label>
@@ -98,7 +98,7 @@
                 <div class="form-group" id="Q5">
                     <h1>Question 5:</h1>
                     <label for="QuizName5">Quiz Name</label>
-                    <input type="text" class="form-control" id="QuizName5" name="QuizName" value="<%=quizName%>">
+                    <input type="text" class="form-control" id="QuizName5" name="QuizName" readonly value="<%=quizName%>">
                     <label for="inputQuestionBody5">Question</label>
                     <input type="text" class="form-control" id="inputQuestionBody5" name="QuestionBody5" placeholder="Please enter a question">
                     <label for="inputAnswer1Q5">Answer 1</label>
@@ -116,7 +116,7 @@
                 <div class="form-group" id="Q6">
                     <h1>Question 6:</h1>
                     <label for="QuizName6">Quiz Name</label>
-                    <input type="text" class="form-control" id="QuizName6" name="QuizName" value="<%=quizName%>">
+                    <input type="text" class="form-control" id="QuizName6" name="QuizName" readonly value="<%=quizName%>">
                     <label for="inputQuestionBody6">Question</label>
                     <input type="text" class="form-control" id="inputQuestionBody6" name="QuestionBody6" placeholder="Please enter a question">
                     <label for="inputAnswer1Q6">Answer 1</label>
@@ -134,7 +134,7 @@
                 <div class="form-group" id="Q7">
                     <h1>Question 7:</h1>
                     <label for="QuizName7">Quiz Name</label>
-                    <input type="text" class="form-control" id="QuizName7" name="QuizName" value="<%=quizName%>">
+                    <input type="text" class="form-control" id="QuizName7" name="QuizName" readonly value="<%=quizName%>">
                     <label for="inputQuestionBody7">Question</label>
                     <input type="text" class="form-control" id="inputQuestionBody7" name="QuestionBody7" placeholder="Please enter a question">
                     <label for="inputAnswer1Q7">Answer 1</label>
@@ -152,7 +152,7 @@
                 <div class="form-group" id="Q8">
                     <h1>Question 8:</h1>
                     <label for="QuizName8">Quiz Name</label>
-                    <input type="text" class="form-control" id="QuizName8" name="QuizName" value="<%=quizName%>">
+                    <input type="text" class="form-control" id="QuizName8" name="QuizName" readonly value="<%=quizName%>">
                     <label for="inputQuestionBody8">Question</label>
                     <input type="text" class="form-control" id="inputQuestionBody8" name="QuestionBody8" placeholder="Please enter a question">
                     <label for="inputAnswer1Q8">Answer 1</label>
@@ -170,7 +170,7 @@
                 <div class="form-group" id="Q9">
                     <h1>Question 9:</h1>
                     <label for="QuizName9">Quiz Name</label>
-                    <input type="text" class="form-control" id="QuizName9" name="QuizName" value="<%=quizName%>">
+                    <input type="text" class="form-control" id="QuizName9" name="QuizName" readonly value="<%=quizName%>">
                     <label for="inputQuestionBody9">Question</label>
                     <input type="text" class="form-control" id="inputQuestionBody9" name="QuestionBody9" placeholder="Please enter a question">
                     <label for="inputAnswer1Q9">Answer 1</label>
@@ -188,7 +188,7 @@
                 <div class="form-group" id="Q10">
                     <h1>Question 10:</h1>
                     <label for="QuizName10">Quiz Name</label>
-                    <input type="text" class="form-control" id="QuizName10" name="QuizName" value="<%=quizName%>">
+                    <input type="text" class="form-control" id="QuizName10" name="QuizName" readonly value="<%=quizName%>">
                     <label for="inputQuestionBody10">Question</label>
                     <input type="text" class="form-control" id="inputQuestionBody10" name="QuestionBody10" placeholder="Please enter a question">
                     <label for="inputAnswer1Q10">Answer 1</label>
