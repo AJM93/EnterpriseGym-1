@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Paris
  */
-@WebServlet(name = "PostEventComment", urlPatterns = {"/PostEventComment"})
-public class PostComments extends HttpServlet{
+@WebServlet(name = "PostNewsComment", urlPatterns = {"/PostNewsComment"})
+public class PostNewsComments extends HttpServlet{
     
     Connection con = null;
     Statement st = null;
@@ -50,12 +50,13 @@ public class PostComments extends HttpServlet{
             throws ServletException, IOException {
          
             String commentBox = request.getParameter("commentBox");
+            //String userName = request.getParameter("userName");
             try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             
-            CallableStatement cs = this.con.prepareCall("{call add_activity_comment(?,?,?,?)}");
-            cs.setInt(1, 3);
+            CallableStatement cs = this.con.prepareCall("{call create_news_comment(?,?,?,?)}");
+            cs.setInt(1, 1);
             cs.setString(2, "Paris");
             cs.setString(3, commentBox);
             cs.setTimestamp(4, getCurrentTimeStamp());
