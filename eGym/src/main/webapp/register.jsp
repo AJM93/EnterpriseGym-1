@@ -33,39 +33,39 @@
             <form method="POST"  action="Register">
                 <div class="form-group">
                     <label for="inputUsername">Username</label>
-                    <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Enter Username">
+                    <input type="text" class="form-control" id="inputUsername" name="username" required placeholder="Enter Username">
                 </div>
                 <div class="form-group">
                     <label for="inputPassword1">Password</label>
-                    <input type="text" class="form-control" id="inputPassword" name="password" placeholder="Enter Password">
+                    <input type="password" class="form-control" id="inputPassword" name="password" required placeholder="Enter Password">
                 </div>
                 <div class="form-group">
                     <label for="inputFirstname">First Name</label>
-                    <input type="text" class="form-control" id="inputFirstname" name="firstname" placeholder="Enter First Name">
+                    <input type="text" class="form-control" id="inputFirstname" name="firstname" required placeholder="Enter First Name">
                 </div>
                 <div class="form-group">
                     <label for="inputLastname">Last Name</label>
-                    <input type="text" class="form-control" id="inputLastname"  name="lastname" placeholder="Enter Last Name">
+                    <input type="text" class="form-control" id="inputLastname"  name="lastname" required placeholder="Enter Last Name">
                 </div>
                 <div class="form-group">
                     <label for="inputMatriculationNumber">Matriculation Number</label>
-                    <input type="text" class="form-control" id="inputMatriculationNumber" name="matricNO" placeholder="Enter Matric No">
+                    <input type="text" class="form-control" id="inputMatriculationNumber" name="matricNO" required placeholder="Enter Matric No">
                 </div>
                 <div class="form-group">
                     <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+                    <input type="email" class="form-control" id="inputEmail" name="email" required placeholder="Email">
                 </div>
                 <div class="form-group">
                     <label for="inputPhoneNumber">Phone Number</label>
-                    <input type="text" class="form-control" id="inputPhoneNumber" name="phoneNO" placeholder="Phone number">
+                    <input type="text" class="form-control" id="inputPhoneNumber" name="phoneNO" required placeholder="Phone number">
                 </div>
                 <div class="form-group">
                     <label for="inputGender">Gender</label>
-                    <input type="text" class="form-control" id="inputGender" name="gender" placeholder="Gender">
+                    <input type="text" class="form-control" id="inputGender" name="gender" required placeholder="Gender">
                 </div>
                 <div class="form-group">
                         <label for="inputCountry">Country</label>
-                        <div id="inputCountry" data-input-name="country" class="bfh-selectbox bfh-countries" data-country="United Kingdom" data-flags="true">
+                        <div id="inputCountry" data-input-name="country" class="bfh-selectbox bfh-countries" placeholder="Doesnt work" data-country="United Kingdom" data-flags="true">
                             <input form='form1' type="hidden" value="" required>
                                 <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
                                         <span class="bfh-selectbox-option input-medium" data-option=""></span>
@@ -78,27 +78,28 @@
                                        </div>
                                 </div>
                         </div>
-                        <input type="text" class="form-control" id="inputCountry2" name="country2">
+                        <input type="text" class="form-control" id="inputCountry2" name="country2" placeholder="Please enter your Country of Origin" >
                 </div>
                 <div class="form-group">
                     <label for="inputInstitution">Institution</label>
-                    <input type="text" class="form-control" id="inputInstitution" name="institution" placeholder="Institution">
+                    <input type="text" class="form-control" id="inputInstitution" name="institution" required placeholder="Institution">
                 </div>
                 <div class="form-group">
                     <label for="inputSubInstitution">Sub Institution</label>
-                    <input type="text" class="form-control" id="inputSubInstitution" name="subInstitution" placeholder="Sub Institution">
+                    <input type="text" class="form-control" id="inputSubInstitution" name="subInstitution" required placeholder="Sub Institution">
                 </div>
                 <div class="form-group">
                     <label for="inputDegree">Degree</label>
-                    <input type="text" class="form-control" id="inputDegree" name="degree" placeholder="Degree">
-                </div>
+                    <input type="text" class="form-control" id="inputDegree" name="degree" required placeholder="Degree">
+                </div> 
                 <div class="form-group">
-                    <label for="inputDOB">Date Of Birth</label>
-                    <input type="text" class="form-control" id="inputDOB" name="dob" placeholder="YYYY-MM-DD" >
+                    <label for="DOBdate">Date Of Birth</label>
+                    <input type="date" required name="DOBdate">
+                    <input type="time" required name="DOBtime">
                 </div>
                 <div class="form-group">
                     <label for="inputYOS">Year Of Study</label>
-                    <input type="text" class="form-control" id="inputYOS" name="yos" placeholder="Year of Study">
+                    <input type="text" class="form-control" id="inputYOS" name="yos" required placeholder="Year of Study">
                 </div>
                 <button type="submit" value="Register" class="btn btn-default">Register</button>
             </form>

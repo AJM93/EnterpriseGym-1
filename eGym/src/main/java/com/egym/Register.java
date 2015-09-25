@@ -119,11 +119,16 @@ public class Register extends HttpServlet {
             String subInstitution = request.getParameter("subInstitution");
             String degree = request.getParameter("degree");
             String DoB = request.getParameter("dob");
+           
+            String startDate = request.getParameter("DOBdate");
+            String startTime = request.getParameter("DOBtime");
+            String startString = startDate + " " + startTime + ":00";
+            Timestamp datePosted = Timestamp.valueOf(startString);
+            
             String YoS = request.getParameter("yos");
             char gender = Gender.charAt(0);
             int yos = Integer.parseInt(YoS);
             
-            Timestamp datePosted = Timestamp.valueOf(DoB);
             
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);

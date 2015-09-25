@@ -22,11 +22,11 @@
             <form method="POST"  action="CreateNewQuiz">
                 <div class="form-group">
                     <label for="inputQuizName">Quiz Name</label>
-                    <input type="text" class="form-control" id="inputQuizName" name="QuizName" placeholder="Enter Quiz Name">
+                    <input type="text" class="form-control" id="inputQuizName" name="QuizName" required autofocus placeholder="Enter Quiz Name">
                 </div>
                 <div class="form-group">
                     <label for="inputLearningMaterials">Learning Materials</label>
-                    <input type="text" class="form-control" id="inputLearningMaterials" name="LearningMaterials" placeholder="Enter Learning Materials">
+                    <input type="text" class="form-control" id="inputLearningMaterials" name="LearningMaterials" required placeholder="Enter Learning Materials">
                 </div>
                 <button type="submit" value="CreateNewQuiz" class="btn btn-default">Create Quiz</button>
             </form>
