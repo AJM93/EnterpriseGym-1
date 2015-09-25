@@ -28,8 +28,13 @@
             <%
                 int listCounter = 0;
                 int iterCounter = 0;
+                boolean tc = false;
                 LinkedList<QuizStore> quizList = (LinkedList<QuizStore>) request.getAttribute("QuizList");
-                ArrayList<Integer> userAttempts = (ArrayList<Integer>) request.getAttribute("UserAttempts");
+                Object testComplete = request.getAttribute("TestCompleted");
+                if(testComplete != null)
+                {
+                    tc = true;
+                }
                 Iterator<QuizStore> iterator;
                 iterator = quizList.iterator();
                 while(iterator.hasNext())
@@ -50,6 +55,12 @@
             </tr>
             <%
                 }
+                if(tc == true)
+                {%>
+                    <script type="text/javascript">
+                        alert('Sorry, you have already completed that test!');
+                    </script>
+              <%}
             %>
         </table>
     </body>

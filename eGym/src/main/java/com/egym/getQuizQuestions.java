@@ -122,6 +122,7 @@ public class getQuizQuestions extends HttpServlet {
                 rd.forward(request,response);
             }else{
                 con.close();
+                request.setAttribute("TestCompleted", QuizName);
                 RequestDispatcher rd = request.getRequestDispatcher("GetQuizzes");
                 rd.forward(request,response);
             }

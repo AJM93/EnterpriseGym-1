@@ -76,6 +76,12 @@ public class GetQuizzes extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
+            Object testComplete = request.getAttribute("TestCompleted");
+            int tstComplete = 0;
+            if(testComplete != null)
+            {
+                tstComplete = (int) request.getAttribute("TestCompleted");
+            }
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             /* TODO output your page here. You may use following sample code. */
             con = DriverManager.getConnection(url, user, password);
@@ -93,28 +99,12 @@ public class GetQuizzes extends HttpServlet {
                 quizList.add(quizStore);
             }
             request.setAttribute("QuizList", quizList);
-            cs.close();
-            /*
-            // Get Logged in username and get their completed tests 
-            String Username = "test1";
-            CallableStatement cs2 = this.con.prepareCall("{call get_user_quiz_attempts(?)}");
-            cs2.setString(1, Username);
-            ResultSet rs2 = cs2.executeQuery();
-            
-            ArrayList<Integer> userAttempts = null;
-            if(rs2.next())
+            if(testComplete != null)
             {
-                userAttempts = new ArrayList<Integer>();
-            
-                while(rs2.next())
-                {
-                    int getUA = rs2.getInt("Quiz_idQuiz");
-                    userAttempts.add(getUA);
-                }
+                request.setAttribute("TestCompleted", tstComplete);
             }
-            request.setAttribute("UserAttempts", userAttempts);
+            cs.close();
             
-            cs2.close();*/
             con.close();
             RequestDispatcher rd = request.getRequestDispatcher("/Quizzes.jsp");
             rd.forward(request,response);

@@ -19,12 +19,12 @@
     int quizId = 0;
     String Username = (String) request.getAttribute("userName");
             
-    ArrayList<String> Questions = new ArrayList<String>();
-    ArrayList<String> Answer1 = new ArrayList<String>();
-    ArrayList<String> Answer2 = new ArrayList<String>();
-    ArrayList<String> Answer3 = new ArrayList<String>();
-    ArrayList<String> Answer4 = new ArrayList<String>();
-    ArrayList<Integer> CorrectAnswer = new ArrayList<Integer>();
+    ArrayList<String> Questions = new ArrayList<>();
+    ArrayList<String> Answer1 = new ArrayList<>();
+    ArrayList<String> Answer2 = new ArrayList<>();
+    ArrayList<String> Answer3 = new ArrayList<>();
+    ArrayList<String> Answer4 = new ArrayList<>();
+    ArrayList<Integer> CorrectAnswer = new ArrayList<>();
     while(iterator.hasNext())
     {
         QuestionStore qm = (QuestionStore) iterator.next();
