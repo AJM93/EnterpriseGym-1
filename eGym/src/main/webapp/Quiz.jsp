@@ -11,7 +11,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<%
+    
+    <head>
+    <%
     LinkedList<QuestionStore> questionList = (LinkedList<QuestionStore>) request.getAttribute("QuestionList");
     Iterator<QuestionStore> iterator;
     iterator = questionList.iterator();
@@ -19,12 +21,12 @@
     int quizId = 0;
     String Username = (String) request.getAttribute("userName");
             
-    ArrayList<String> Questions = new ArrayList<>();
-    ArrayList<String> Answer1 = new ArrayList<>();
-    ArrayList<String> Answer2 = new ArrayList<>();
-    ArrayList<String> Answer3 = new ArrayList<>();
-    ArrayList<String> Answer4 = new ArrayList<>();
-    ArrayList<Integer> CorrectAnswer = new ArrayList<>();
+    ArrayList<String> Questions = new ArrayList<String>();
+    ArrayList<String> Answer1 = new ArrayList<String>();
+    ArrayList<String> Answer2 = new ArrayList<String>();
+    ArrayList<String> Answer3 = new ArrayList<String>();
+    ArrayList<String> Answer4 = new ArrayList<String>();
+    ArrayList<Integer> CorrectAnswer = new ArrayList<Integer>();
     while(iterator.hasNext())
     {
         QuestionStore qm = (QuestionStore) iterator.next();
@@ -39,7 +41,6 @@
 
 %>
 
-    <head>
         <title>Quiz</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript">
