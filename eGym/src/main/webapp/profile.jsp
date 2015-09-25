@@ -58,11 +58,13 @@
         <title><%=firstName%> <%=lastName%>'s Profile</title>
     </head>
     <body>
-        <h1><%=firstName%> <%=lastName%></h1>
-        <h4><%=username%></h4>
-        
         <div class="container">
-            <h2>Progress to Gold (2 Silver Medals)</h2>
+            <h1><%=firstName%> <%=lastName%></h1>
+            <h4><%=username%></h4>
+            
+            <br>
+            
+            <h2>Progress to Gold Medal (2 Silver Medals)</h2>
             <div class="progress">
                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%=highestPercent%>" aria-valuemin="0" aria-valuemax="<%=goldMedalPoints%>" style="width:<%=highestPercent%>%; min-width: 2em">
                   <%=highestPercent%>%
@@ -74,7 +76,7 @@
             
             <br>
             
-            <h2>Progress to Silver (70 pts)</h2>
+            <h2>Progress to Silver Medal (70 pts)</h2>
             <h3>Online Theory - <%=onlineTheory%> pts</h3>
             <div class="progress">
                 <div class="progress-bar" role="progressbar" aria-valuenow="<%=onlineTheory%>" aria-valuemin="0" aria-valuemax="<%=silverMedalPoints%>" style="width:<%=onlinePercent%>%; min-width: 2em">
