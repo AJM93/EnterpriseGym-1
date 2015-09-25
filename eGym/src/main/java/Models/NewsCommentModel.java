@@ -28,6 +28,8 @@ public class NewsCommentModel {
         this.body = body;
         this.datePosted = datePosted;
     }
+    
+    public NewsCommentModel(){}
 
     /**
      * @return the newsCommentID

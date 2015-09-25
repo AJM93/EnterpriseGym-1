@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Events Comments</title>
+<title>News Comments</title>
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 <style type="text/css">
 table, td, th
@@ -49,7 +49,7 @@ $("#flash").fadeIn(400).html('<img src="ajax-loader.gif" align="absmiddle"> <spa
 
 $.ajax({
 type: "POST",
-url: "/eGym/PostEventComment",
+url: "/eGym/PostNewsComment",
 data: dataString,
 cache: false,
 success: function(html){
@@ -60,7 +60,7 @@ $("ol#update li:first").slideDown("slow");
 document.getElementById('commentBox').value='';
 document.getElementById('commentBox').focus();
 $("#flash").hide();
- $.get('PopulateEventsComments',function(responseJson) {
+ $.get('PopulateNewsComments',function(responseJson) {
             if(responseJson!=null){
                 $("#commentsTable").find("tr:gt(0)").remove();
                 var table1 = $("#commentsTable");
@@ -81,7 +81,7 @@ $("#flash").hide();
 <script type="text/javascript">
 $(document).ready(function() {
  $("#tablediv").hide();
-           $.get('PopulateEventsComments',function(responseJson) {
+           $.get('PopulateNewsComments',function(responseJson) {
             if(responseJson!=null){
                 $("#commentsTable").find("tr:gt(0)").remove();
                 var table1 = $("#commentsTable");

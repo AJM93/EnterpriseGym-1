@@ -18,11 +18,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 
 
-@WebServlet("/PopulateTable")
-public class PopulateTable extends HttpServlet {
+@WebServlet("/PopulateEventsComments")
+public class PopulateEventsComments extends HttpServlet {
  private static final long serialVersionUID = 1L;
 
-    public PopulateTable() {
+    public PopulateEventsComments() {
         
     }
  
@@ -36,11 +36,6 @@ public class PopulateTable extends HttpServlet {
   JsonArray jsonArray = element.getAsJsonArray();
   response.setContentType("application/json");
   response.getWriter().print(jsonArray);
-  
- }
-
- 
- protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
   
  }
 
