@@ -29,7 +29,7 @@
             char gender = profile.getGender();
             String country = profile.getCountry();
             String inst = profile.getInstitution();
-            String subInst = profile.getInstitution();
+            String subInst = profile.getSubInstitution();
             String degree = profile.getDegree();
             Timestamp dob = profile.getDob();
             String yos = profile.getYos();
@@ -41,12 +41,12 @@
             int challenge = profile.getChallenge();
             int total = profile.getTotal();
             
-            float[] points = {onlineTheory, action, project, challenge};
-            java.util.Arrays.sort(points);
-
             float silverMedalPoints = 70;
             float goldMedalPoints = silverMedalPoints * 2f;
             
+            float[] points = {onlineTheory, action, project, challenge};
+            java.util.Arrays.sort(points);
+
             int highestPercent = Math.round((points[3] / goldMedalPoints) * 100);
             int nextHighestPercent = Math.round((points[2] / goldMedalPoints) * 100);
             
@@ -61,6 +61,18 @@
         <div class="container">
             <h1><%=firstName%> <%=lastName%></h1>
             <h4><%=username%></h4>
+            <% if (gender == 'M') {
+                %>Male<%
+            } else if (gender == 'F') {
+                    %>Female
+            <% } %>
+            
+            <h3><%=inst%></h3>
+            <h4><%=subInst%></h4>
+            
+            <%
+                if (lg != null && lg.getUsername().equals(username)) {
+            %>
             
             <br>
             
@@ -107,6 +119,7 @@
             
             <h2>Total: <%=total%> pts</h2>
         </div>
+        <% } %>
     </body>
     <%
         } else {
