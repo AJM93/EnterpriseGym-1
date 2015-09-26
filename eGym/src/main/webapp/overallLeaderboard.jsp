@@ -30,10 +30,12 @@
         <%
             LinkedList<UserStore> leaderboard = (LinkedList<UserStore>) request.getAttribute("leaderboard");
             Iterator<UserStore> iterator = leaderboard.iterator();
-            int rankCounter = 0;
-            while (iterator.hasNext()) 
+            int rankCounter = 1;
+            int lastRank = 1;
+            int lastPoints = 0;
+            
+            while (iterator.hasNext())
             {
-                rankCounter++;
                 UserStore user = (UserStore) iterator.next();
                 String username = user.getUsername();
                 String firstName = user.getFirstname();
@@ -46,10 +48,25 @@
                 String institution = user.getInstitution();
                 String subInstitution = user.getSubInstitution();
                 
+                
         %>
             <tr>
-                <td><%=rankCounter%></td>
-                <td><%=firstName%> <%=lastName%></td>
+        <%
+                if (total != lastPoints) {
+                    %><td><%=rankCounter%></td><%
+                    lastPoints = total;
+                    lastRank = rankCounter;
+                } else {
+                    %><td><%=lastRank%>=</td><% // print the same rank as the last person
+                }
+                rankCounter++;
+                
+                if (username.equals("Anonymous")){
+                    %><td>Anonymous</td><%
+                } else {
+                    %><td><a href="/eGym/profile/<%=username%>"><%=firstName%> <%=lastName%></a></td><%
+                }
+        %>
                 <td><%=total%></td>
                 <td><%=onlineTheory%></td>
                 <td><%=challenge%></td>
