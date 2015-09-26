@@ -138,7 +138,7 @@ public class UserModel {
         return userList;
     }
     
-    public LinkedList<UserStore> getLeaderboard(int numRecords) throws SQLException {
+    public LinkedList<UserStore> getLeaderboard(int numRecords, boolean anonymise) throws SQLException {
         LinkedList<UserStore> leaderboard = null;
         
         try {
@@ -150,7 +150,7 @@ public class UserModel {
             while (rs.next()) {
                 String username, firstName, lastName;
                 
-                if (rs.getString("IncludeInLeaderboard").equals("N")){
+                if (anonymise && rs.getString("IncludeInLeaderboard").equals("N")){
                     username = "Anonymous";
                     firstName = "Anonymous";
                     lastName = "";

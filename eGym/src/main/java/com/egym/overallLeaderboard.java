@@ -55,7 +55,7 @@ public class overallLeaderboard extends HttpServlet {
         
         try {
             UserModel um = new UserModel();
-            LinkedList<UserStore> leaderboard = um.getLeaderboard(10);
+            LinkedList<UserStore> leaderboard = um.getLeaderboard(10, true);
             
             request.setAttribute("leaderboard", leaderboard);
             
