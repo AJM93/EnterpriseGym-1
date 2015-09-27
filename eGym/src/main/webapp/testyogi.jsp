@@ -14,7 +14,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <script src="//cdn.ckeditor.com/4.5.3/full-all/ckeditor.js"></script>
+    <head>
+        <script src="//cdn.ckeditor.com/4.5.3/full-all/ckeditor.js"></script>
+        <title>
+            
+        </title>
+    </head>
     <%
     NewsModel nm = new NewsModel();
     LinkedList<NewsModel> n = nm.getHomeNews();
@@ -28,15 +33,12 @@
     UserStore us = um.getUserDetails("Tom");
     
     %>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
+    
     <body>
         <h1><%=n.get(1).getNewsTitle()%></h1>
-        <h1><%=m.get(1).getEventTitle()%><h1>
-                <h1><%=o.get(1).getEventTitle()%><h1>
-                        <h1><%=us.getFirstname()%><h1>
+        <h1><%=m.get(0).getEventTitle()%></h1>
+        <h1><%=o.get(0).getEventTitle()%></h1>
+        <h1><%=us.getFirstname()%></h1>
                                 
         <textarea name="body" required autofocus><%=n.get(1).getNewsBody()%></textarea>
         <script>

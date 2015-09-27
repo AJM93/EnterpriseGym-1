@@ -73,7 +73,7 @@ public class news extends HttpServlet {
             request.setAttribute("NewsList", newsList);
             cs.close();
             con.close();
-            RequestDispatcher rd = request.getRequestDispatcher("news.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("scrollPage.jsp");
             rd.forward(request,response);
             
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {

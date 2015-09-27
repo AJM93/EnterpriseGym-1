@@ -11,27 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-    <%
-        
-        NewsModel nm = new NewsModel()
-        ArrayList news_titles = new ArrayList();
-        ArrayList news_body = new ArrayList();
-        ArrayList news_user = new ArrayList();
-        LinkedList<NewsModel> llsr = (LinkedList<NewsModel>) request.getAttribute("NewsList");
-        Iterator<NewsModel> iterator;
-        iterator = llsr.iterator();
-        while (iterator.hasNext()) {
-            NewsModel nm = (NewsModel) iterator.next();
-            int id = nm.getNewsId();
-            String Title = nm.getNewsTitle();
-            String Body = nm.getNewsBody();
-            String User = nm.getNewsUser();
-            Timestamp Date = nm.getNewsDate();
-            news_titles.add(Title + ": " + Date);
-            news_body.add(Body);
-            news_user.add(User);
-        }
-    %>
+
     <head>
 
         <meta charset="utf-8">
@@ -67,6 +47,26 @@
 
     <body id="page-top">
 
+        <%
+            ArrayList news_titles = new ArrayList();
+            ArrayList news_body = new ArrayList();
+            ArrayList news_user = new ArrayList();
+            LinkedList<NewsModel> llsr = (LinkedList<NewsModel>) request.getAttribute("NewsList");
+            Iterator<NewsModel> iterator;
+            iterator = llsr.iterator();
+            while (iterator.hasNext()) {
+                NewsModel nm = (NewsModel) iterator.next();
+                int id = nm.getNewsId();
+                String Title = nm.getNewsTitle();
+                String Body = nm.getNewsBody();
+                String User = nm.getNewsUser();
+                Timestamp Date = nm.getNewsDate();
+                news_titles.add(Title + ": " + Date);
+                news_body.add(Body);
+                news_user.add(User);
+            }
+        %>
+
         <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -84,7 +84,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a class="page-scroll" href="#about">About</a>
+                            <a class="page-scroll" href="#news">News</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="#services">Services</a>
@@ -113,138 +113,89 @@
             </div>
         </header>
 
-        <section class="bg-primary" id="about">
+        <section class="bg-primary" id="News">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 text-center">
-                        <h2 class="section-heading">We've got what you need!</h2>                                 
-                        <hr class="light">
-                        <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
-                        <a href="#" class="btn btn-default btn-xl">Get Started!</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+                <h2 id="newsFeed">News Feed</h2>
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div id="divOne"class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><%=news_titles.get(0)%></a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <p>User: <%=news_user.get(0)%></p>    
+                            <div class="panel-body">
+                                <%=news_body.get(0)%>
+                            </div>
 
-
-
-        <section id="services">
-            <div class="container">
-                <div class="row">                
-                    <h2 id="newsFeed">News Feed</h2>
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div id="divOne"class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><%=news_titles.get(0)%></a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                <p>User: <%=news_user.get(0)%></p>    
-                                <div class="panel-body">
-                                    <%=news_body.get(0)%>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div id="divTwo" class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingTwo">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><%=news_titles.get(1)%></a>
-                                </h4>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <p>User: <%=news_user.get(1)%></p>    
-                                <div class="panel-body">
-                                    <%=news_body.get(1)%>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="divThree" class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><%=news_titles.get(2)%></a>
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <p>User: <%=news_user.get(2)%></p>    
-                                <div class="panel-body">
-                                    <%=news_body.get(2)%>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="divFour" class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingFour">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><%=news_titles.get(3)%></a>
-                                </h4>
-                            </div>
-                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                <p>User: <%=news_user.get(3)%></p>    
-                                <div class="panel-body">
-                                    <%=news_body.get(3)%>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="divFive" class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingFive">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive"><%=news_titles.get(4)%></a>
-                                </h4>
-                            </div>
-                            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                                <p>User: <%=news_user.get(4)%></p>    
-                                <div class="panel-body">
-                                    <%=news_body.get(4)%>
-                                </div>
-                            </div>
-                        </div>       
-                        <div id="divSix" class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingSix">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix"><%=news_titles.get(5)%></a>
-                                </h4>
-                            </div>
-                            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
-                                <p>User: <%=news_user.get(5)%></p>    
-                                <div class="panel-body">
-                                    <%=news_body.get(5)%>
-                                </div>
-                            </div>
-                        </div>            
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="service-box">
-                            <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
-                            <h3>Sturdy Templates</h3>
-                            <p class="text-muted">Our templates are updated regularly so they don't break.</p>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="service-box">
-                            <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                            <h3>Ready to Ship</h3>
-                            <p class="text-muted">You can use this theme as is, or you can make changes!</p>
+                    <div id="divTwo" class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><%=news_titles.get(1)%></a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <p>User: <%=news_user.get(1)%></p>    
+                            <div class="panel-body">
+                                <%=news_body.get(1)%>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="service-box">
-                            <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                            <h3>Up to Date</h3>
-                            <p class="text-muted">We update dependencies to keep things fresh.</p>
+                    <div id="divThree" class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><%=news_titles.get(2)%></a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <p>User: <%=news_user.get(2)%></p>    
+                            <div class="panel-body">
+                                <%=news_body.get(2)%>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="service-box">
-                            <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
-                            <h3>Made with Love</h3>
-                            <p class="text-muted">You have to make your websites with love these days!</p>
+                    <div id="divFour" class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><%=news_titles.get(3)%></a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                            <p>User: <%=news_user.get(3)%></p>    
+                            <div class="panel-body">
+                                <%=news_body.get(3)%>
+                            </div>
                         </div>
                     </div>
+                    <div id="divFive" class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFive">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive"><%=news_titles.get(4)%></a>
+                            </h4>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                            <p>User: <%=news_user.get(4)%></p>    
+                            <div class="panel-body">
+                                <%=news_body.get(4)%>
+                            </div>
+                        </div>
+                    </div>       
+                    <div id="divSix" class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingSix">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix"><%=news_titles.get(5)%></a>
+                            </h4>
+                        </div>
+                        <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                            <p>User: <%=news_user.get(5)%></p>    
+                            <div class="panel-body">
+                                <%=news_body.get(5)%>
+                            </div>
+                        </div>
+                    </div>            
                 </div>
             </div>
         </section>
