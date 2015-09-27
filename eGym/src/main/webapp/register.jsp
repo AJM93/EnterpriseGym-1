@@ -10,21 +10,27 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script>
+            function check() {
+                document.getElementById("inputCountry2").value = document.getElementById("inputCountry").value;
+            } 
+        </script>
+        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-		<!-- Bootstrap Form Helpers -->
-		<link href="http://bootstrapformhelpers.com/assets/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
-		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-		<script src="assets/js/jquery.validate.js"></script> 
-                <!-- jQuery -->
-		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-		<!-- Bootstrap -->
-		<script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
-		<!-- Bootstrap Form Helpers -->
-		<script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <!-- Bootstrap Form Helpers -->
+        <link href="http://bootstrapformhelpers.com/assets/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script src="assets/js/jquery.validate.js"></script> 
+        <!-- jQuery -->
+        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
+        <!-- Bootstrap Form Helpers -->
+        <script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
     </head>
     <body>
         <h1>Hello World!</h1>
@@ -65,20 +71,20 @@
                 </div>
                 <div class="form-group">
                         <label for="inputCountry">Country</label>
-                        <div id="inputCountry" data-input-name="country" class="bfh-selectbox bfh-countries" placeholder="Doesnt work" data-country="United Kingdom" data-flags="true">
-                            <input form='form1' type="hidden" value="" required>
+                        <div id="inputCountry" data-input-name="country" class="bfh-selectbox bfh-countries" data-flags="true" onChange="check();">
+                            <input form='form1' type="hidden" >
                                 <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
                                         <span class="bfh-selectbox-option input-medium" data-option=""></span>
                                         <b class="caret"></b>
                                 </a>
-                                <div class="bfh-selectbox-options countries" >
+                                <div class="bfh-selectbox-options countries" required>
                                        <div role="listbox">
                                               <ul role="option">
                                               </ul>
                                        </div>
                                 </div>
                         </div>
-                        <input type="text" class="form-control" id="inputCountry2" name="country2" placeholder="Please enter your Country of Origin" >
+                        <input type="hidden" class="form-control" id="inputCountry2" required name="country2">
                 </div>
                 <div class="form-group">
                     <label for="inputInstitution">Institution</label>
@@ -101,7 +107,7 @@
                     <label for="inputYOS">Year Of Study</label>
                     <input type="text" class="form-control" id="inputYOS" name="yos" required placeholder="Year of Study">
                 </div>
-                <button type="submit" value="Register" class="btn btn-default">Register</button>
+                <button type="submit" value="Register" class="btn btn-default" onload="check();" >Register</button>
             </form>
         </div>
     </body>
