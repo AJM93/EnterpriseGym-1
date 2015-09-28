@@ -68,8 +68,8 @@ success: function(html){
 
 //alert(commentBox);
 //alert(userName);
-alert(eventidval);
 alert("Comment Posted");
+$('#commentTable').load(document.URL +  ' #commentTable');
 $("ol#update li:first").slideDown("slow");
 document.getElementById('commentBox').value='';
 document.getElementById('commentBox').focus();
@@ -136,7 +136,8 @@ $("#flash").hide();
         <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a>
         <%}%>
                 <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
-                <table width='700px' border='1px'>
+                <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
+                <table width='700px' border='1px' name="commentTable" id="commentTable">
                     <tr>
                         <th>Author</th>
                         <th>Body</th>
@@ -162,15 +163,18 @@ $("#flash").hide();
                 </table>
 
              
-        <%
-            }
-                    
-        %>
-        <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
+        
+        
 <textarea rows="4" cols="50" name="commentBox" id="commentBox" maxlength="145" ></textarea><br />
 <input type="button" value="Submit Comment" name="submit" class="comment_button"/>
     <div id="flash"></div>
 <ol id="update" class="timeline">
 </ol>
+    
+    <%
+            }
+                    
+        %>
+        
 </body>
 </html>
