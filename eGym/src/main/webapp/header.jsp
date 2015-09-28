@@ -5,7 +5,7 @@
 --%>
 
 <<!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="author" content="Script Tutorials" />
@@ -28,8 +28,7 @@
   <link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-  <!-- Respomsive slider -->
-  <link href="../css/responsive-calendar.css" rel="stylesheet">
+  <!-- Responsive slider -->
 </head>
 <body>
 
@@ -51,10 +50,10 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li>
-            <a href="#">About</a>
+            <a href="#">News</a>
           </li>
           <li>
-            <a href="#">Services</a>
+            <a href="#">Events</a>
           </li>
           <li>
             <a href="#">Contact</a>

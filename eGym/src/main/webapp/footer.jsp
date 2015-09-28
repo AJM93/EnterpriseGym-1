@@ -3,7 +3,7 @@
     Created on : Sep 27, 2015, 11:33:50 PM
     Author     : Yogi
 --%>
-
+<jsp:include page="contact.jsp"></jsp:include>
 <!-- footer -->
 <footer>
   <hr />
