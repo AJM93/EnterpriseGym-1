@@ -82,15 +82,19 @@ $("#flash").hide();
                 <%=nm.getNewsBody()%>
             </div>
         </div>
+    </div>
+</div>
 
-    <%
+            
+        <%
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         if (lg != null && lg.isLoggedIn()) {
         if (lg.getRole() == 2 || lg.getRole() == 3) {%>
-    <a href="/eGym/EditNews/<%=nm.getNewsId()%>">Edit this</a>
-    <%}
-    }%>
+    <a href="/eGym/EditNews/<%=nm.getNewsId()%>">Edit this</a><%}%>
     <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
+    
+    
+    
                 <table width='700px' border='1px' name="commentTable" id="commentTable">
                     <tr>
                         <th>Author</th>
@@ -122,7 +126,5 @@ $("#flash").hide();
 <ol id="update" class="timeline">
 </ol>
     
-    </div>
-    
-</div>
+    <%}%>
     <jsp:include page="footer.jsp"></jsp:include>
