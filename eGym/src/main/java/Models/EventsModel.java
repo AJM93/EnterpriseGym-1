@@ -68,10 +68,6 @@ public class EventsModel {
                 EventsModel events_model = new EventsModel(id, Title, Body, Trainer, Points);
                 tr.add(events_model);
             }
-       
-            
-            
-       
        return tr;
     }
     
@@ -98,10 +94,6 @@ public class EventsModel {
                 EventsModel events_model = new EventsModel(id, Title, Body, Trainer, Points);
                 tr.add(events_model);
             }
-       
-            
-            
-       
        return tr;
     }  
   
@@ -180,5 +172,4 @@ public class EventsModel {
     {
         this.trainer=trainer;
     }
-    
 }
