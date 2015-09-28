@@ -33,7 +33,7 @@ import javax.servlet.RequestDispatcher;
  *
  * @author Yogi
  */
-@WebServlet(name = "EventItem", urlPatterns = {"/EventItem/*"})
+@WebServlet(name = "EventItem", urlPatterns = {"/EventItem"})
 public class EventItem extends HttpServlet {
 
     
@@ -55,10 +55,10 @@ public class EventItem extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException, InstantiationException {
-        String path = request.getPathInfo();
-        int urlActivityID = Integer.parseInt(path.substring(1));
+        //String path = request.getPathInfo();
+        //int urlActivityID = Integer.parseInt(path.substring(1));
+        int urlActivityID=3;
         response.setContentType("text/html;charset=UTF-8");
-        int urlEventsCommentsID = Integer.parseInt(path.substring(1));
         try (PrintWriter out = response.getWriter()) 
         {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -86,7 +86,7 @@ public class EventItem extends HttpServlet {
 
                 
                 
-            CallableStatement eComments = this.con.prepareCall("{call events_comments(?)}");   //(?,?)}"
+            /*CallableStatement eComments = this.con.prepareCall("{call events_comments(?)}");   //(?,?)}"
             eComments.setInt(1,urlEventsCommentsID);
             ResultSet rs2 = eComments.executeQuery();
             
@@ -103,7 +103,7 @@ public class EventItem extends HttpServlet {
                 eventsCommentList.add(eventsComment);
             }
             
-            request.setAttribute("EventsCommentList", eventsCommentList);
+            request.setAttribute("EventsCommentList", eventsCommentList);*/
                 
                 cs.close();
                 con.close();
