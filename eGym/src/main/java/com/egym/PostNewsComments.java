@@ -50,14 +50,15 @@ public class PostNewsComments extends HttpServlet{
             throws ServletException, IOException {
          
             String commentBox = request.getParameter("commentBox");
-            //String userName = request.getParameter("userName");
+            String userName = request.getParameter("userName");
+            int newsID = Integer.parseInt(request.getParameter("newsID"));
             try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             
             CallableStatement cs = this.con.prepareCall("{call create_news_comment(?,?,?,?)}");
-            cs.setInt(1, 1);
-            cs.setString(2, "Paris");
+            cs.setInt(1, newsID);
+            cs.setString(2, userName);
             cs.setString(3, commentBox);
             cs.setTimestamp(4, getCurrentTimeStamp());
             cs.executeQuery();

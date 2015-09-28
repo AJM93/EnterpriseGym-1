@@ -54,39 +54,12 @@ success: function(html){
 }
 });
             
-            
-            
-/*jQuery.post( "/eGym/PostEventComment",
-{
-data: dataString,
-usernameDate: userName,
-}
-cache: false,
-success: function(html){
-}
-});*/
-
-//alert(commentBox);
-//alert(userName);
 alert("Comment Posted");
 $('#commentTable').load(document.URL +  ' #commentTable');
 $("ol#update li:first").slideDown("slow");
 document.getElementById('commentBox').value='';
 document.getElementById('commentBox').focus();
 $("#flash").hide();
- /*$.get('PopulateEventsComments',function(responseJson) {
-            if(responseJson!==null){
-                $("#commentsTable").find("tr:gt(0)").remove();
-                var table1 = $("#commentsTable");
-                $.each(responseJson, function(key,value) { 
-                     var rowNew = $("<tr><td></td><td></td><td></td></tr>");
-                        rowNew.children().eq(0).text(value['author']); 
-                        rowNew.children().eq(1).text(value['body']); 
-                        rowNew.children().eq(2).text(value['datePosted']); 
-                        rowNew.appendTo(table1);
-                });
-            }
-        });*/
 } return false;
 });
 });
