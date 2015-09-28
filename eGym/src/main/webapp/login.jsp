@@ -28,12 +28,12 @@
             <label for="username" class="sr-only">Username</label>
             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username">                                        
+                                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username" required autofocus>                                        
                                     </div>
             <label for="password" class="sr-only">Password</label>
             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required>
                                     </div>
            <div style="margin-top:10px" class="form-group">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>

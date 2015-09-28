@@ -36,9 +36,10 @@ public class UserStore {
     private int Project = 0;
     private int Total = 0;
     private int UserStatus;
+    private String Anonymous;
     
     public UserStore(final String Username, final String Firstname, final String Lastname, final String MatriculationNo, final String Email, final String PhoneNo, final char Gender, final String Country, final String Institution, final String SubInstitution, 
-            final String Degree, final Timestamp dob, final String yos, final int UserStatus, final int OnlineTheory, final int Challenge, final int Action, final int Project, final int Total)
+            final String Degree, final Timestamp dob, final String yos, final int UserStatus, final int OnlineTheory, final int Challenge, final int Action, final int Project, final int Total, String anon)
     {
          this.Username = Username;
          this.Firstname = Firstname;
@@ -59,6 +60,7 @@ public class UserStore {
          this.Project = Project;
          this.Challenge = Challenge;
          this.Total = Total;
+         this.Anonymous = anon;
     }
     
     public UserStore(String username, String firstName, String lastName, int onlineTheory, int challenge, int action, int project, int total, String institution,
@@ -374,5 +376,19 @@ public class UserStore {
      */
     public void setTotal(int Total) {
         this.Total = Total;
+    }
+
+    /**
+     * @return the Anonymous
+     */
+    public String getAnonymous() {
+        return Anonymous;
+    }
+
+    /**
+     * @param Anonymous the Anonymous to set
+     */
+    public void setAnonymous(String Anonymous) {
+        this.Anonymous = Anonymous;
     }
 }

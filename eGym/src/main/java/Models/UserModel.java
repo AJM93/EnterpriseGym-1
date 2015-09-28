@@ -61,7 +61,8 @@ public class UserModel {
                 int ac = rs.getInt("Action");
                 int pr = rs.getInt("Project");
                 int tt = rs.getInt("Total");
-                userDetails = new UserStore(Username, Firstname, Lastname, Matric, Email, PhoneNo, Gender.charAt(0), Country, Inst, sInst, degree, dob, yos, Userstatus, ot, ch, ac, pr, tt);
+                String anon = rs.getString("IncludeInLeaderboard");
+                userDetails = new UserStore(Username, Firstname, Lastname, Matric, Email, PhoneNo, Gender.charAt(0), Country, Inst, sInst, degree, dob, yos, Userstatus, ot, ch, ac, pr, tt, anon);
             }
             
             cs.close();
@@ -189,6 +190,20 @@ public class UserModel {
             cs.close();
             con.close();
         }catch (SQLException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void setIncludeInLeaderboard (String username, String newInclude) {
+        try {
+            CallableStatement cs = this.con.prepareCall("{call set_include_in_leaderboard(?,?)}");
+            cs.setString(1, username);
+            cs.setString(2, newInclude);
+            cs.executeQuery();
+            
+            cs.close();
+            con.close();
+        } catch (SQLException ex) {
             Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

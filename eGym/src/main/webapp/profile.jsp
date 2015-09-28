@@ -34,6 +34,7 @@
             Timestamp dob = profile.getDob();
             String yos = profile.getYos();
             int status = profile.getUserStatus();
+            String anon = profile.getAnonymous();
             
             int onlineTheory = profile.getOnlineTheory();
             int action = profile.getAction();
@@ -118,6 +119,19 @@
             </div>
             
             <h2>Total: <%=total%> pts</h2>
+            
+            <form method="POST" action="/eGym/userAnonymous">
+            Show points in leaderboard?
+            <%
+                if(anon.equals("Y")){
+                    %><input type="checkbox" name="anonymous" checked><%
+                } else {
+                    %><input type="checkbox" name="anonymous"><%
+                }
+            %>
+            <input type="text" name="username" value="<%=username%>" hidden>
+            <br><button type="submit">Update</button>
+        </form>
         </div>
         <% } %>
     </body>
