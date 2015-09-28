@@ -1,3 +1,4 @@
+<%@page import="Stores.LoggedIn"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -35,7 +36,11 @@ $(".comment_button").click(function() {
    
     var boxval = $("#commentBox").val();
 	
-    var dataString = 'commentBox='+ boxval;
+    //var commentBox = 'commentBox='+ boxval;
+    
+    var usernameval = $("#userNameBox").val();
+    
+    //var userName = 'userName='+ usernameval;
 	
 	if(boxval=='')
 	{
@@ -50,18 +55,34 @@ $("#flash").fadeIn(400).html('<img src="ajax-loader.gif" align="absmiddle"> <spa
 $.ajax({
 type: "POST",
 url: "/eGym/PostEventComment",
-data: dataString,
+data: {commentBox: boxval, userName: usernameval},
 cache: false,
 success: function(html){
 }
 });
+            
+            
+            
+/*jQuery.post( "/eGym/PostEventComment",
+{
+data: dataString,
+usernameDate: userName,
+}
+cache: false,
+success: function(html){
+}
+});*/
+
+//alert(commentBox);
+//alert(userName);
+
 alert("Comment Posted");
 $("ol#update li:first").slideDown("slow");
 document.getElementById('commentBox').value='';
 document.getElementById('commentBox').focus();
 $("#flash").hide();
  $.get('PopulateEventsComments',function(responseJson) {
-            if(responseJson!=null){
+            if(responseJson!==null){
                 $("#commentsTable").find("tr:gt(0)").remove();
                 var table1 = $("#commentsTable");
                 $.each(responseJson, function(key,value) { 
@@ -82,7 +103,7 @@ $("#flash").hide();
 $(document).ready(function() {
  $("#tablediv").hide();
            $.get('PopulateEventsComments',function(responseJson) {
-            if(responseJson!=null){
+            if(responseJson!==null){
                 $("#commentsTable").find("tr:gt(0)").remove();
                 var table1 = $("#commentsTable");
                 $.each(responseJson, function(key,value) { 
@@ -110,6 +131,12 @@ $(document).ready(function() {
 </head>
 <body class="container">
 <h1>Comment System in AJAX</h1>
+<%
+            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+            if (lg != null && lg.isLoggedIn()) {
+        %>
+        <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
+        <% } %>
 <input type="button" value="Show Table" id="showTable"/>
 <input type="button" value="Hide Table" id="showTable2"/>
 <div id="tablediv">

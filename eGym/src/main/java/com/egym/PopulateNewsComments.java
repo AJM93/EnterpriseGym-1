@@ -38,7 +38,7 @@ public class PopulateNewsComments extends HttpServlet{
  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
   ArrayList<NewsCommentModel> newsComments=new ArrayList<NewsCommentModel>();
-  newsComments= NewsCommentsFetch.getAllNewsComments();
+  newsComments= NewsCommentsFetch.getAllNewsComments(1);
   Gson gson = new Gson();
   JsonElement element = gson.toJsonTree(newsComments, new TypeToken<List<NewsCommentModel>>() {}.getType());
 

@@ -6,6 +6,7 @@
 package Stores;
 
 import Models.NewsCommentModel;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -45,18 +46,20 @@ public class NewsCommentsFetch {
 
     }
     
-    public static ArrayList<NewsCommentModel> getAllNewsComments() {
+    public static ArrayList<NewsCommentModel> getAllNewsComments(int urlNewsID) {
      connection = NewsCommentsFetch.getConnection();
         ArrayList<NewsCommentModel> commentList = new ArrayList<NewsCommentModel>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select * from NewsComments");
+            CallableStatement cs = connection.prepareCall("{call news_comments(?)}");   //(?,?)}"
+            cs.setInt(1,urlNewsID);
+            ResultSet rs = cs.executeQuery();
         
             while(rs.next()) { 
              NewsCommentModel newsComments=new NewsCommentModel();
-                newsComments.setNewsCommentID(rs.getInt("idNewsComments"));
-                newsComments.setNewsID(rs.getInt("News_idNews"));
-                newsComments.setAuthor(rs.getString("Users_Username"));
+                newsComments.setNewsCommentID(rs.getInt("commentID"));
+                newsComments.setNewsID(rs.getInt("newsID"));
+                newsComments.setAuthor(rs.getString("author"));
                 newsComments.setBody(rs.getString("Body"));
                 newsComments.setDatePosted(rs.getTimestamp("DatePosted"));
              

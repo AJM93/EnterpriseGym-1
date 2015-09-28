@@ -22,14 +22,17 @@ import com.google.gson.reflect.TypeToken;
 public class PopulateEventsComments extends HttpServlet {
  private static final long serialVersionUID = 1L;
 
-    public PopulateEventsComments() {
-        
-    }
+    
  
  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
+  
+    // get the news ID from the URL that triggered the servlet
+    /*String path = request.getPathInfo();
+    int urlEventsID = Integer.parseInt(path.substring(1));*/
+     
   ArrayList<EventsCommentModel> eventsComments=new ArrayList<EventsCommentModel>();
-  eventsComments=EventsCommentsFetch.getAllEventsComments();
+  //eventsComments=EventsCommentsFetch.getAllEventsComments(3);
+  eventsComments=EventsCommentsFetch.getAllEventsComments(3);
   Gson gson = new Gson();
   JsonElement element = gson.toJsonTree(eventsComments, new TypeToken<List<EventsCommentModel>>() {}.getType());
 

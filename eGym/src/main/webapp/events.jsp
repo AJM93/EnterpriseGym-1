@@ -21,7 +21,6 @@
     <body>
         <table width='700px' border='1px'>
             <tr>
-                <th>ID</th>
                 <th>Title</th>
                 <th>Body</th>
                 <th>Trainer</th>
@@ -47,8 +46,7 @@
                 events_trainer.add(Trainer);
         %>
             <tr>
-                <td><%=id%></td>
-                <td><%=Title%></td>
+                <td><a href="/eGym/EventItem/<%=id%>"><%=Title%></a> </td>
                 <td><%=Body%></td>
                 <td><%=Trainer%></td>
                 <td><%=Points%></td>

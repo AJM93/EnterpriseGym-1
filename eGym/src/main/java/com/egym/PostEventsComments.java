@@ -50,14 +50,14 @@ public class PostEventsComments extends HttpServlet{
             throws ServletException, IOException {
          
             String commentBox = request.getParameter("commentBox");
-            //String userName = request.getParameter("userName");
+            String userName = request.getParameter("userName");
             try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             
             CallableStatement cs = this.con.prepareCall("{call add_activity_comment(?,?,?,?)}");
             cs.setInt(1, 3);
-            cs.setString(2, "Paris");
+            cs.setString(2, userName);
             cs.setString(3, commentBox);
             cs.setTimestamp(4, getCurrentTimeStamp());
             cs.executeQuery();

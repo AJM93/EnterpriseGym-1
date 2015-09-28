@@ -13,6 +13,7 @@ import Models.EventsCommentModel;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -51,18 +52,21 @@ public class EventsCommentsFetch {
 
     }
     
-    public static ArrayList<EventsCommentModel> getAllEventsComments() {
+    public static ArrayList<EventsCommentModel> getAllEventsComments(int urlEventID) {
      connection = EventsCommentsFetch.getConnection();
         ArrayList<EventsCommentModel> commentList = new ArrayList<EventsCommentModel>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select * from ActivityComments");
+            //ResultSet rs = statement.executeQuery("select * from ActivityComments");
+            CallableStatement cs = connection.prepareCall("{call events_comments(?)}");   //(?,?)}"
+            cs.setInt(1,urlEventID);
+            ResultSet rs = cs.executeQuery();
         
             while(rs.next()) { 
              EventsCommentModel eventComments=new EventsCommentModel();
-                eventComments.setEventsCommentID(rs.getInt("idActivityComments"));
-                eventComments.setEventsID(rs.getInt("Activities_idActivities"));
-                eventComments.setAuthor(rs.getString("Users_Username"));
+                eventComments.setEventsCommentID(rs.getInt("commentID"));
+                eventComments.setEventsID(rs.getInt("eventID"));
+                eventComments.setAuthor(rs.getString("Author"));
                 eventComments.setBody(rs.getString("Body"));
                 eventComments.setDatePosted(rs.getTimestamp("DatePosted"));
              
