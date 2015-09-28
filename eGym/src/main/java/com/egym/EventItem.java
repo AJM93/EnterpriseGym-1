@@ -8,6 +8,7 @@ package com.egym;
 import Models.EventsCommentModel;
 import Models.EventsModel;
 import Models.NewsModel;
+import Stores.EventStore;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
@@ -58,32 +59,36 @@ public class EventItem extends HttpServlet {
         int urlActivityID = Integer.parseInt(path.substring(1));
         response.setContentType("text/html;charset=UTF-8");
         int urlEventsCommentsID = Integer.parseInt(path.substring(1));
-        try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) 
+        {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             CallableStatement cs = null;
-            cs = this.con.prepareCall("{call get_single_activity(?)}");   //(?,?)}"
-            //cs.setString(1, "Tom");
+            cs = this.con.prepareCall("{call get_single_activity(?)}");   
             cs.setInt(1,urlActivityID);
             ResultSet rs = cs.executeQuery();
             
-            EventsModel Event = null;
+            EventStore Event = null;
             rs.next();
             int id = rs.getInt("idActivities");
-                String Title = rs.getString("Title");
-                String Body = rs.getString("Body");
-                String Trainer = rs.getString("Users_Username");
-                //java.util.Date dt = rs.getDate("DatePublished");
-                //String Date = dt.toString();
-                int Points = rs.getInt("Points");
-                Event = new EventsModel(id, Title, Body, Trainer, Points);
-                request.setAttribute("Event", Event);
+            String Title = rs.getString("Title");
+            int Points = rs.getInt("Points");
+            String Body = rs.getString("Body");
+            String Trainer = rs.getString("Users_Username");
+            String Type = rs.getString("Type");
+            Timestamp Start = rs.getTimestamp("StartTime");
+            Timestamp Stop = rs.getTimestamp("EndTime");
+            //java.util.Date dt = rs.getDate("DatePublished");
+            //String Date = dt.toString();
+            
+            Event = new EventStore(id, Title, Points, Body, Trainer, Type, Start, Stop);
+            request.setAttribute("Event", Event);
+
                 
                 
-                
-                CallableStatement eComments = this.con.prepareCall("{call events_comments(?)}");   //(?,?)}"
-                eComments.setInt(1,urlEventsCommentsID);
-                ResultSet rs2 = eComments.executeQuery();
+            CallableStatement eComments = this.con.prepareCall("{call events_comments(?)}");   //(?,?)}"
+            eComments.setInt(1,urlEventsCommentsID);
+            ResultSet rs2 = eComments.executeQuery();
             
             LinkedList<EventsCommentModel> eventsCommentList = new LinkedList<>();
             while (rs2.next()) 

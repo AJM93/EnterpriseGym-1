@@ -5,7 +5,7 @@
 --%>
 
 <<!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="author" content="Script Tutorials" />
@@ -28,11 +28,33 @@
   <link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-  <!-- Respomsive slider -->
-  <link href="../css/responsive-calendar.css" rel="stylesheet">
+  <!-- Responsive slider -->
 </head>
 <body>
-
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=684175961620254";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+ 
+  return t;
+}(document, "script", "twitter-wjs"));</script>
 
   <!-- Navigation -->
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -51,10 +73,10 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li>
-            <a href="#">About</a>
+            <a href="#">News</a>
           </li>
           <li>
-            <a href="#">Services</a>
+            <a href="#">Events</a>
           </li>
           <li>
             <a href="#">Contact</a>
