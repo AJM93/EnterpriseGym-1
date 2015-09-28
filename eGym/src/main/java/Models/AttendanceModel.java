@@ -59,6 +59,20 @@ public class AttendanceModel {
     }
 
     /**
+     * @return the firstName
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    /**
      * @return the surname
      */
     public String getSurName() {
