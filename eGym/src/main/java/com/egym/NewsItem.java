@@ -5,6 +5,8 @@
  */
 package com.egym;
 
+import Models.EventsCommentModel;
+import Models.NewsCommentModel;
 import Models.NewsModel;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -75,6 +77,30 @@ public class NewsItem extends HttpServlet {
             
             request.setAttribute("NewsStory", Story);
             cs.close();
+            
+            
+            CallableStatement nComments = this.con.prepareCall("{call news_comments(?)}");   //(?,?)}"
+            nComments.setInt(1,urlNewsID);
+            ResultSet rs2 = nComments.executeQuery();
+            
+            LinkedList<NewsCommentModel> newsCommentList = new LinkedList<>();
+            while (rs2.next()) 
+            {                
+                int commentID = rs2.getInt("commentID");
+                int newsID = rs2.getInt("newsID");
+                String author = rs2.getString("author");
+                String body = rs2.getString("Body");
+                Timestamp datePosted = rs2.getTimestamp("DatePosted");
+                
+                NewsCommentModel newsComment = new NewsCommentModel (commentID, newsID, author, body, datePosted);
+                newsCommentList.add(newsComment);
+            }
+            
+            request.setAttribute("NewsCommentList", newsCommentList);
+                
+                cs.close();
+            
+            
             con.close();
             RequestDispatcher rd = request.getRequestDispatcher("/NewsStory.jsp");
             rd.forward(request,response);
