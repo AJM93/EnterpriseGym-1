@@ -14,7 +14,7 @@
 <%@page import="Models.EventsModel"%>
 
 <jsp:include page="header.jsp"></jsp:include>
-    <link href="css/style.css" rel="stylesheet" />
+
 <%
     java.util.LinkedList<NewsModel> nm = (java.util.LinkedList<NewsModel>) request.getAttribute("HomeNews");
     java.util.LinkedList<EventsModel> em = (java.util.LinkedList<EventsModel>) request.getAttribute("HomeEvents");
@@ -231,6 +231,4 @@
 </div>
 <!-- /fourth section -->
 <!-- attach JavaScripts -->
-<script src="js/jquery-1.10.2.js"></script>
-<script src="js/bootstrap.min.js"></script>
 <jsp:include page="footer.jsp"></jsp:include>

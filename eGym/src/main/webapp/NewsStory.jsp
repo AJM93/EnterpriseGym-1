@@ -13,9 +13,6 @@
 <jsp:include page="header.jsp"></jsp:include>
  
     
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/
-libs/jquery/1.3.0/jquery.min.js">
-</script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
  <script type="text/javascript">
 $(function() {
