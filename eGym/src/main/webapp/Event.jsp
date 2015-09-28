@@ -97,16 +97,7 @@ $("#flash").hide();
         <%
             EventStore es = (EventStore) request.getAttribute("Event");
         %>
-        
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-		<!-- Bootstrap Form Helpers -->
-		<link href="http://bootstrapformhelpers.com/assets/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
-		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
 		<script src="assets/js/jquery.validate.js"></script> 
                 <!-- jQuery -->
 		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -115,8 +106,7 @@ $("#flash").hide();
 		<script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
 		<!-- Bootstrap Form Helpers -->
 		<script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
-    </head>
-    <body>
+                <jsp:include page="header.jsp"></jsp:include>
         <h1>Event <%=es.getId()%> : <%=es.getTitle()%></h1>
         <p><%=es.getBody()%></p>
         <p>Total Points: <%=es.getPoints()%> </p>
@@ -176,5 +166,4 @@ $("#flash").hide();
                     
         %>
         
-</body>
-</html>
+        <jsp:include page="footer.jsp"></jsp:include>
