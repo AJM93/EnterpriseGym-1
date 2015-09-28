@@ -4,37 +4,35 @@
     Author     : Dreads
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <script>
-            function check() {
-                document.getElementById("inputCountry2").value = document.getElementById("inputCountry").value;
-            } 
-        </script>
-        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <!-- Bootstrap Form Helpers -->
-        <link href="http://bootstrapformhelpers.com/assets/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <script src="assets/js/jquery.validate.js"></script> 
-        <!-- jQuery -->
-        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <!-- Bootstrap -->
-        <script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
-        <!-- Bootstrap Form Helpers -->
-        <script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-        
+<jsp:include page="header.jsp"></jsp:include>
+<script>
+    function check() {
+        document.getElementById("inputCountry2").value = document.getElementById("inputCountry").value;
+    }
+</script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!-- Bootstrap Form Helpers -->
+<link href="http://bootstrapformhelpers.com/assets/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="assets/js/jquery.validate.js"></script> 
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- Bootstrap -->
+<script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
+<!-- Bootstrap Form Helpers -->
+<script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
+
+
+<div id="services" class="pad-section">
+    <div class="container">    
+        <h1>Register</h1>
+
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
         <div class="bs-example">
             <form method="POST"  action="Register">
                 <div class="form-group">
@@ -70,21 +68,21 @@
                     <input type="text" class="form-control" id="inputGender" name="gender" required placeholder="Gender">
                 </div>
                 <div class="form-group">
-                        <label for="inputCountry">Country</label>
-                        <div id="inputCountry" data-input-name="country" class="bfh-selectbox bfh-countries" data-flags="true" onChange="check();">
-                            <input form='form1' type="hidden" >
-                                <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-                                        <span class="bfh-selectbox-option input-medium" data-option=""></span>
-                                        <b class="caret"></b>
-                                </a>
-                                <div class="bfh-selectbox-options countries" required>
-                                       <div role="listbox">
-                                              <ul role="option">
-                                              </ul>
-                                       </div>
-                                </div>
+                    <label for="inputCountry">Country</label>
+                    <div id="inputCountry" data-input-name="country" class="bfh-selectbox bfh-countries" data-flags="true" onChange="check();">
+                        <input form='form1' type="hidden" >
+                        <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
+                            <span class="bfh-selectbox-option input-medium" data-option=""></span>
+                            <b class="caret"></b>
+                        </a>
+                        <div class="bfh-selectbox-options countries" required>
+                            <div role="listbox">
+                                <ul role="option">
+                                </ul>
+                            </div>
                         </div>
-                        <input type="hidden" class="form-control" id="inputCountry2" required name="country2">
+                    </div>
+                    <input type="hidden" class="form-control" id="inputCountry2" required name="country2">
                 </div>
                 <div class="form-group">
                     <label for="inputInstitution">Institution</label>
@@ -110,5 +108,8 @@
                 <button type="submit" value="Register" class="btn btn-default" onload="check();" >Register</button>
             </form>
         </div>
-    </body>
+        </div>
+    </div>
+</div>
+</body>
 </html>
