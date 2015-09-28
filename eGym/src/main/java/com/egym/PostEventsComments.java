@@ -51,12 +51,13 @@ public class PostEventsComments extends HttpServlet{
          
             String commentBox = request.getParameter("commentBox");
             String userName = request.getParameter("userName");
+            int eventID = Integer.parseInt(request.getParameter("eventID"));
             try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             
             CallableStatement cs = this.con.prepareCall("{call add_activity_comment(?,?,?,?)}");
-            cs.setInt(1, 3);
+            cs.setInt(1, eventID);
             cs.setString(2, userName);
             cs.setString(3, commentBox);
             cs.setTimestamp(4, getCurrentTimeStamp());

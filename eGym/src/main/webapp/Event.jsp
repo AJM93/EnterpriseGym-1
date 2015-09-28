@@ -14,29 +14,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-<style type="text/css">
-table, td, th
-{
-border:1px solid green;
-font-family: 'Oxygen', sans-serif;
-}
-th
-{
-background-color:green;
-color:white;
-}
-body
-{
- text-align: center;
-}
-.container
-{
- margin-left: auto;
- margin-right: auto;
- width: 40em;
-}
-</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/
+libs/jquery/1.3.0/jquery.min.js">
+</script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
  <script type="text/javascript">
 $(function() {
@@ -52,6 +32,8 @@ $(".comment_button").click(function() {
     var usernameval = $("#userNameBox").val();
     
     //var userName = 'userName='+ usernameval;
+    
+    var eventidval = $("#eventIDBox").val();
 	
 	if(boxval=='')
 	{
@@ -66,7 +48,7 @@ $("#flash").fadeIn(400).html('<img src="ajax-loader.gif" align="absmiddle"> <spa
 $.ajax({
 type: "POST",
 url: "/eGym/PostEventComment",
-data: {commentBox: boxval, userName: usernameval},
+data: {commentBox: boxval, userName: usernameval, eventID: eventidval},
 cache: false,
 success: function(html){
 }
@@ -86,13 +68,13 @@ success: function(html){
 
 //alert(commentBox);
 //alert(userName);
-
+alert(eventidval);
 alert("Comment Posted");
 $("ol#update li:first").slideDown("slow");
 document.getElementById('commentBox').value='';
 document.getElementById('commentBox').focus();
 $("#flash").hide();
- $.get('PopulateEventsComments',function(responseJson) {
+ /*$.get('PopulateEventsComments',function(responseJson) {
             if(responseJson!==null){
                 $("#commentsTable").find("tr:gt(0)").remove();
                 var table1 = $("#commentsTable");
@@ -104,40 +86,11 @@ $("#flash").hide();
                         rowNew.appendTo(table1);
                 });
             }
-        });
+        });*/
 } return false;
 });
 });
    </script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
- $("#tablediv").hide();
-           $.get('PopulateEventsComments',function(responseJson) {
-            if(responseJson!==null){
-                $("#commentsTable").find("tr:gt(0)").remove();
-                var table1 = $("#commentsTable");
-                $.each(responseJson, function(key,value) { 
-                     var rowNew = $("<tr><td></td><td></td><td></td></tr>");
-                        rowNew.children().eq(0).text(value['author']); 
-                        rowNew.children().eq(1).text(value['body']); 
-                        rowNew.children().eq(2).text(value['datePosted']); 
-                        rowNew.appendTo(table1);
-                });
-                }
-            });
-            $("#tablediv").show();      
-});
-</script>
-
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $("#showTable2").click(function(event){
-        $("#tablediv").hide();        
-  });      
-});
-</script>
 <html>
     <head>
         
@@ -171,7 +124,7 @@ $(document).ready(function() {
         <p>Event Trainer: <%=es.getTrainer()%></p>
         <p>Start time: <%=es.getStart()%> </p>
         <p>End time: <%=es.getStop()%> </p>
-        
+        <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=es.getId()%>">
         <%
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
             if (lg != null && lg.isLoggedIn()) 
@@ -183,29 +136,41 @@ $(document).ready(function() {
         <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a>
         <%}%>
                 <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
+                <table width='700px' border='1px'>
+                    <tr>
+                        <th>Author</th>
+                        <th>Body</th>
+                        <th>Date Posted</th>
+                    </tr>
                 <%
-            if (lg != null && lg.isLoggedIn()) {
+                    LinkedList<EventsCommentModel> eventComments = (LinkedList<EventsCommentModel>) request.getAttribute("EventsCommentList");
+                    Iterator<EventsCommentModel> iterator = eventComments.iterator();
+
+                    while (iterator.hasNext()) 
+                    {
+                        EventsCommentModel comment = (EventsCommentModel) iterator.next();
+                %>
+                        <tr>
+                            <td><%=comment.getAuthor()%></td>
+                            <td><%=comment.getBody()%></td>
+                            <td><%=comment.getDatePosted()%></td>
+                        </tr>
+                <%
+                    }
+                %>
+
+                </table>
+
+             
+        <%
+            }
+                    
         %>
         <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
-        <% } %>
-<div id="tablediv">
-<table cellspacing="0" id="commentsTable"> 
-    <tr> 
-        <th scope="col">Author</th> 
-        <th scope="col">Body</th> 
-        <th scope="col">Date</th>       
-    </tr> 
-</table>
-    </div>
-
 <textarea rows="4" cols="50" name="commentBox" id="commentBox" maxlength="145" ></textarea><br />
 <input type="button" value="Submit Comment" name="submit" class="comment_button"/>
     <div id="flash"></div>
 <ol id="update" class="timeline">
 </ol>
-        <%
-            }
-                    
-        %>
-    </body>
+</body>
 </html>
