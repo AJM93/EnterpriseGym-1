@@ -4,6 +4,7 @@
     Author     : Dreads
 --%>
 
+<%@page import="Stores.LoggedIn"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="Stores.QuestionStore"%>
@@ -169,20 +170,32 @@
 	</script>
     </head>
     <body>
-        <div>
-            <h3>Time Left: <span id="timer"><span></h3>
-        </div>
-        <div>
-            <h2 id="quiz_status"></h2>
-            <div id="quiz"></div>
-        </div>
-        <div>
-            <form action="updateQuizAttempts" method="POST">
-                <input id="QuizId" name="QuizId" type="hidden" value="<%=quizId%>" />
-                <input id="Username" name="Username" type="hidden" value="<%=Username%>" />
-                <input id="UserScore" name="UserScore" type="hidden" value="" />
-                <button type="submit" value="updateQuizAttempts">Finish Test</button>
-            </form>
-        </div>
+    <%
+        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+        if (lg != null && lg.isLoggedIn()) {      
+    %>
+            <div>
+                <h3>Time Left: <span id="timer"><span></h3>
+            </div>
+            <div>
+                <h2 id="quiz_status"></h2>
+                <div id="quiz"></div>
+            </div>
+            <div>
+                <form action="/eGym/updateQuizAttempts" method="POST">
+                    <input id="QuizId" name="QuizId" type="hidden" value="<%=quizId%>" />
+                    <input id="Username" name="Username" type="hidden" value="<%=Username%>" />
+                    <input id="UserScore" name="UserScore" type="hidden" value="" />
+                    <button type="submit" value="updateQuizAttempts">Finish Test</button>
+                </form>
+            </div>
+    <%
+        }else{
+    %>
+            <h2>Please <a href="<%=response.encodeURL("login.jsp")%>">sign in</a></h2>
+    <%
+        }     
+    %>
+    
     </body>
 </html>

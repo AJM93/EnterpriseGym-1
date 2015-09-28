@@ -6,6 +6,7 @@
 package com.egym;
 
 import Models.UserModel;
+import Stores.LoggedIn;
 import Stores.QuestionStore;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Dreads
  */
-@WebServlet(name = "getQuizQuestions", urlPatterns = {"/getQuizQuestions"})
+@WebServlet(name = "getQuizQuestions", urlPatterns = {"/getQuizQuestions/*"})
 public class getQuizQuestions extends HttpServlet {
     Connection con = null;
     Statement st = null;
@@ -71,11 +72,14 @@ public class getQuizQuestions extends HttpServlet {
     {
         try
         {
+            
+            String path = request.getPathInfo();
+            String username = path.substring(1);
             boolean runTest = true;
             String QuizNameString = request.getParameter("QuizName");
             int QuizName = Integer.parseInt(QuizNameString);
             //Get the logged in users username
-            String username = "test1";
+            //String username = "test1";
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             CallableStatement cs = null;
@@ -118,12 +122,12 @@ public class getQuizQuestions extends HttpServlet {
                 request.setAttribute("quizId", QuizNameString);
                 // Adds Username for testing.
                 request.setAttribute("userName", username);
-                RequestDispatcher rd = request.getRequestDispatcher("Quiz.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/Quiz.jsp");
                 rd.forward(request,response);
             }else{
                 con.close();
                 request.setAttribute("TestCompleted", QuizName);
-                RequestDispatcher rd = request.getRequestDispatcher("GetQuizzes");
+                RequestDispatcher rd = request.getRequestDispatcher("/GetQuizzes");
                 rd.forward(request,response);
             }
         }catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {
