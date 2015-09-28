@@ -89,7 +89,11 @@ libs/jquery/1.3.0/jquery.min.js">
             if (lg != null && lg.isLoggedIn()) 
             {
                 String username = lg.getUsername();
+                if (lg.getRole() == 2 || lg.getRole() == 3) { %>
+                
         %>
+        <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a>
+        <%}%>
                 <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
                 <table width='700px' border='1px'>
                     <tr>

@@ -4,6 +4,7 @@
     Author     : Yogi
 --%>
 
+<%@page import="Stores.LoggedIn"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.Iterator"%>
@@ -28,13 +29,25 @@
         <script>
       function myFunction(x) {
    $.get(x, function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
+        location.reload();
     });
 }      
         </script>
-        
+        <div class="jumbotron">
+  <h1>Register Event Attendees</h1>
+  
+  
+</div>
         <h1></h1>
         <%
+        
+            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+            if (lg != null && lg.isLoggedIn()) 
+            {
+                String username = lg.getUsername();
+                if (lg.getRole() == 2 || lg.getRole() == 3) { 
+                
+        
         for (BasicUser t : attendees){
         %>
         <div class="panel panel-default">
@@ -46,6 +59,16 @@
     <button onclick="myFunction('<%="/eGym/RegisterAttendee/"+t.getUsername()+"/"+activityid%>')">Register Attendee</button>
   </div>
 </div>
-        <%}%>
+        <%}}
+                else {
+                    %>
+                    You do not have permissions to access this page
+                    <%
+                }  
+    }
+            else {
+                    %>
+                    Sign in to access this page
+                    <%}%>
     </body>
 </html>
