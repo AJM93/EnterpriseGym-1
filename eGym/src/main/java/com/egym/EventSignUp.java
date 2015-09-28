@@ -10,10 +10,12 @@ import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -82,15 +84,35 @@ public class EventSignUp extends HttpServlet
         String username = request.getParameter("UsernameSignUp");
         try 
         {
+            boolean signUpUser = true;
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             CallableStatement cs = null;
-            cs = this.con.prepareCall("{call event_sign_up(?,?)}");
+            cs = this.con.prepareCall("call get_user_event_signups(?)");
             cs.setString(1, username);
-            cs.setInt(2, urlActivityID);
-            cs.executeQuery();
+            ResultSet rs = cs.executeQuery();
+            while(rs.next())
+            {
+                int completedEventId = rs.getInt("Activities_idActivities");
+                if(urlActivityID == completedEventId)
+                {
+                    signUpUser = false;
+                }
+            }
             cs.close();
+            if(signUpUser == true)
+            {
+                CallableStatement cs2 = null;
+                cs2 = this.con.prepareCall("{call event_sign_up(?,?)}");
+                cs2.setString(1, username);
+                cs2.setInt(2, urlActivityID);
+                cs2.executeQuery();
+                cs2.close();
+            }
             con.close();
+            String Eventid = String.valueOf(urlActivityID); 
+            RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+            rd.forward(request,response);
         } 
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(EventSignUp.class.getName()).log(Level.SEVERE, null, ex);
