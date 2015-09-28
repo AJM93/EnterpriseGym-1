@@ -8,13 +8,8 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
+<jsp:include page="header.jsp"></jsp:include>
+<link href="css/style.css" rel="stylesheet" />  
         <h1>Users</h1>
         <table width='700px' border='1px'>
             <tr>

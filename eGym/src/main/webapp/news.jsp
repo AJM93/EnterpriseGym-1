@@ -65,10 +65,10 @@
         <div>
             <div class="col-md-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="min-height: 50; max-height: 50;">
+                    <div class="panel-heading" style="min-height: 50px; max-height: 50px;">
                         <h3 class="panel-title"><a href="/eGym/NewsItem/<%=n.getNewsId()%>"><%=n.getNewsTitle()%></a></h3>
                     </div>
-                    <div class="panel-body" style="min-height: 80; max-height: 80;">
+                    <div class="panel-body" style="min-height: 100px; max-height: 100px;">
                         <%=bodyDisplay%>
                     </div>
                 </div>

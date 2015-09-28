@@ -75,7 +75,7 @@ $("#flash").hide();
             <div class="panel-heading">
                 <h3 class="panel-title"><%=nm.getNewsTitle()%></h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" style="color: black;">
                 <%=nm.getNewsBody()%>
             </div>
         </div>
