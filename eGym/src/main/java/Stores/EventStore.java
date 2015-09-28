@@ -22,7 +22,17 @@ public class EventStore {
     private Timestamp stop;
 
     
-    public EventStore(){}
+    public EventStore(final int id, final String title, final int points, final String body, final String trainer, final String type, final Timestamp start, final Timestamp stop)
+    {
+        this.id = id;
+        this.title = title;
+        this.points = points;
+        this.body = body;
+        this.trainer = trainer;
+        this.type = type;
+        this.start = start;
+        this.stop = stop;
+    }
     /**
      * @return the id
      */
