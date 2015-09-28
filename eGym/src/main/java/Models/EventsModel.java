@@ -125,15 +125,7 @@ public class EventsModel {
                 //java.util.Date dt = rs.getDate("DatePublished");
                 //String Date = dt.toString();
                 int Points = rs.getInt("Points");
-                rt = new EventStore(); //(idd, Title, Body, Trainer, Points);
-                rt.setBody(Body);
-                rt.setTitle(Title);
-                rt.setTrainer(Trainer);
-                rt.setId(idd);
-                rt.setPoints(Points);
-                rt.setStart(start);
-                rt.setStop(end);
-                rt.setType(Type);
+                rt = new EventStore(idd, Title, Points, Body, Trainer, Type, start, end); 
                 
       return rt;
   }

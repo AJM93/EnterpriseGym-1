@@ -3,6 +3,7 @@
     Created on : Sep 18, 2015, 4:29:03 PM
     Author     : Yogi
 --%>
+<%@page import="Stores.EventStore"%>
 <%@page import="Models.EventsCommentModel"%>
 <%@page import="Models.NewsCommentModel"%>
 <%@page import="java.util.ArrayList"%>
@@ -52,7 +53,7 @@ $("#flash").hide();
     <head>
         
         <%
-                        EventsModel em = (EventsModel) request.getAttribute("Event");
+                        EventStore es = (EventStore) request.getAttribute("Event");
                       //  LinkedList<NewsCommentModel> newsCommentList = (LinkedList<NewsCommentModel>) request.getAttribute("NewsComments");
         %>
         
@@ -75,8 +76,13 @@ $("#flash").hide();
 		<script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
     </head>
     <body>
-        <h1><%=em.getEventTitle()%></h1>
-        
+        <h1>Event <%=es.getId()%> : <%=es.getTitle()%></h1>
+        <p><%=es.getBody()%></p>
+        <p>Total Points: <%=es.getPoints()%> </p>
+        <p>Type of Event: <%=es.getType()%> </p>
+        <p>Event Trainer: <%=es.getTrainer()%></p>
+        <p>Start time: <%=es.getStart()%> </p>
+        <p>End time: <%=es.getStop()%> </p>
         
         <table width='700px' border='1px'>
             <tr>
