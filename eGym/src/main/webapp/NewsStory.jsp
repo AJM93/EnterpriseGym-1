@@ -71,6 +71,7 @@ $("#flash").hide();
 
 <div id="services" class="pad-section">
     <div class="container">
+        
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><%=nm.getNewsTitle()%></h3>
