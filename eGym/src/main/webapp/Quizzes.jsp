@@ -10,20 +10,16 @@
 <%@page import="java.util.LinkedList"%>
 <%@page import="Stores.QuizStore"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Select a Quiz</title>
-    </head>
-    <body>
+<jsp:include page="header.jsp"></jsp:include>
+    <link href="css/style.css" rel="stylesheet" />  
+    <div id="services" class="pad-section">
     <%
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         if (lg != null && lg.isLoggedIn()) {
             String username = lg.getUsername();
     %>
             <h1>Quizzes</h1>
-            <table width='700px' border='1px'>
+            <table class="table">
                 <tr>
                     <th>Quiz Id</th>
                     <th>Quiz Name</th>
@@ -57,7 +53,7 @@
                     <td><%=Name%></td>
                     <td><%=Points%></td>
                     <td><%=LearningMaterials%></td>
-                    <td><form action="/eGym/getQuizQuestions/<%=username%>" method="GET"><button type="submit" name="QuizName" value=<%=idQuiz%>>Start</button></form></td>
+                    <td><form action="getQuizQuestions/<%=username%>" method="GET"><button type="submit" class="btn btn-default" name="QuizName" value=<%=idQuiz%>>Start</button></form></td>
                 </tr>
                 <%
                     }
@@ -72,10 +68,9 @@
     <%
         }else{
     %>    
-            <h2>Please <a href="<%=response.encodeURL("login.jsp")%>">sign in</a></h2>
+            <h1>Please <a href="<%=response.encodeURL("login.jsp")%>">sign in</a></h1>
     <%
         } 
     %>            
-                
-    </body>
-</html>
+</div>
+<jsp:include page="footer.jsp"></jsp:include>

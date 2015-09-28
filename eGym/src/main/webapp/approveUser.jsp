@@ -78,8 +78,8 @@
                         <td><%=dob%></td>
                         <td><%=yos%></td>
                         <td><%=UserStatus%></td>
-                        <td><form action="getUserDetails"><button type="button" class="btn btn-default" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
-                        <td><form action="UserApproved"><button type="button" class="btn btn-default" name="username" value=<%=Username%>>Approve</button></form></td>
+                        <td><form action="getUserDetails"><button type="submit" class="btn btn-default" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
+                        <td><form action="UserApproved"><button type="submit" class="btn btn-default" name="username" value=<%=Username%>>Approve</button></form></td>
                     </tr>
                     <%
                     }
