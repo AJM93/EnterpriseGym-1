@@ -10,20 +10,18 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Approve users</title>
-    </head>
-    <body>
+
+<jsp:include page="header.jsp"></jsp:include>
+    <link href="css/style.css" rel="stylesheet" />  
+    <div id="services" class="pad-section">
     <%
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         if (lg != null && lg.isLoggedIn()) {
             if (lg.getRole() == 2 || lg.getRole() == 3) { // logged in user is an editor or an admin
         %>
-                <h1>Approve Users!</h1>
-                <table width='700px' border='1px'>
+                <h1>Approve Users</h1>
+                <div class="col-md-12">
+                <table class="table" >
                     <tr>
                         <th>Username</th>
                         <th>First name</th>
@@ -80,24 +78,25 @@
                         <td><%=dob%></td>
                         <td><%=yos%></td>
                         <td><%=UserStatus%></td>
-                        <td><form action="getUserDetails"><button type="submit" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
-                        <td><form action="UserApproved"><button type="submit" name="username" value=<%=Username%>>Approve</button></form></td>
+                        <td><form action="getUserDetails"><button type="button" class="btn btn-default" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
+                        <td><form action="UserApproved"><button type="button" class="btn btn-default" name="username" value=<%=Username%>>Approve</button></form></td>
                     </tr>
                     <%
                     }
                 %>
                 </table>
+                </div>
        <%
            }else{
        %>
-                <h2>You are not authorised to view this page. Please <a href="<%=response.encodeURL("login.jsp")%>">sign in</a> as an administrator.</h2>
+                <h1>You are not authorised to view this page. Please <a href="<%=response.encodeURL("login.jsp")%>">sign in</a> as an administrator.</h1>
 <%
             }
         }else{
 %>
-            <h2>Please <a href="<%=response.encodeURL("login.jsp")%>">sign in</a></h2>
+            <h1>Please <a href="<%=response.encodeURL("login.jsp")%>">sign in</a></h1>
 <%
         }
         %>
-    </body>
-</html>
+        </div>
+<jsp:include page="footer.jsp"></jsp:include>
