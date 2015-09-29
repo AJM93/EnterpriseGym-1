@@ -71,7 +71,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">The Enterprise Gym</a>
+                <a class="navbar-brand" href="/eGym/homePage">The Enterprise Gym</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -84,19 +84,30 @@
                     </li>
                     <li>
                         <a href="#">Contact</a>
-                    </li>
+                    
                 </ul>
-				<ul class="nav navbar-nav navbar-right">
+                </li>
+                <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/eGym/profile/<%=lg.getUsername()%>">Profile</a>
+                    </li>
+                <% if (lg.getRole() == 2 || lg.getRole() == 3) {%>
+				
+                                    
                          <li class="dropdown pull-right">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
+                                <li><a href="/eGym/GetAllUsers">View/Edit Users</a></li>
+                                <li><a href="/eGym/approveUsers">Approve Users</a></li>
+                                <li><a href="/eGym/createNews">Create News</a></li>
+                                <li><a href="/eGym/createActivity">Create Activity</a></li>
+                                <li><a href="#">Create Quiz</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Settings</a></li>
+                                
                             </ul>
                         </li>
                 </ul>
+              <%}%>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -116,7 +127,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">The Enterprise Gym</a>
+                <a class="navbar-brand" href="/eGym/homePage">The Enterprise Gym</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
