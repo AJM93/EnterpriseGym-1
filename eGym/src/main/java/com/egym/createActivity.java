@@ -66,8 +66,8 @@ public class createActivity extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection(url, user, password);
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                con = DriverManager.getConnection(url, user, password);
             
             // get the list of activity types
             CallableStatement cs = this.con.prepareCall("{call get_activity_types}");
