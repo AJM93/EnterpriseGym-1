@@ -91,6 +91,7 @@ public class CreateQuizQuestions extends HttpServlet {
         try
         {
             String quizName = request.getParameter("QuizName");
+            String learningMaterials = request.getParameter("LearningMaterials");
             
             String qBody1 = request.getParameter("QuestionBody1");
             String q1A1 = request.getParameter("Q1A1");
@@ -172,16 +173,25 @@ public class CreateQuizQuestions extends HttpServlet {
             String cAnswer10String = request.getParameter("Correct10");
             int cAnswer10 = Integer.parseInt(cAnswer10String);
             
-            int quizId = 0;
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
-            CallableStatement cs = this.con.prepareCall("{call get_quiz_id(?)}");
+            CallableStatement cs = this.con.prepareCall("{call create_new_quiz(?,?)}");
             cs.setString(1, quizName);
-            rs = cs.executeQuery();
+            cs.setString(2, learningMaterials);
+            cs.executeQuery();
+            cs.close();
+
+            
+            
+            
+            int quizId = 0;
+            CallableStatement csQuizId = this.con.prepareCall("{call get_quiz_id(?)}");
+            csQuizId.setString(1, quizName);
+            rs = csQuizId.executeQuery();
             if(rs.next())
             {
                 quizId = rs.getInt("idQuiz");
-                cs.close();
+                csQuizId.close();
                 
                 CallableStatement cs2 = this.con.prepareCall("{call create_quiz_questions(?,?,?,?,?,?,?)}");
                 cs2.setInt(1, quizId);

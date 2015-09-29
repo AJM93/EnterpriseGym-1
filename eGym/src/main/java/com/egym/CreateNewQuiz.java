@@ -79,26 +79,12 @@ public class CreateNewQuiz extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        try{
-            String quizName = request.getParameter("QuizName");
-            String learningMaterials = request.getParameter("LearningMaterials");
-
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection(url, user, password);
-            CallableStatement cs = this.con.prepareCall("{call create_new_quiz(?,?)}");
-            cs.setString(1, quizName);
-            cs.setString(2, learningMaterials);
-            cs.executeQuery();
-            cs.close();
-            con.close();
-            request.setAttribute("QuizName", quizName);
-            RequestDispatcher rd = request.getRequestDispatcher("/CreateQuizQuestions.jsp");
-            rd.forward(request,response);
-        } 
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) 
-        {
-            Logger.getLogger(CreateNewQuiz.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String quizName = request.getParameter("QuizName");
+        String learningMaterials = request.getParameter("LearningMaterials");
+        request.setAttribute("LearningMaterials", learningMaterials);
+        request.setAttribute("QuizName", quizName);
+        RequestDispatcher rd = request.getRequestDispatcher("/CreateQuizQuestions.jsp");
+        rd.forward(request,response);
     }
 
     /**

@@ -8,6 +8,7 @@
 <jsp:include page="header.jsp"></jsp:include>
 <%
     String quizName = (String) request.getAttribute("QuizName");
+    String learningMaterials = (String) request.getAttribute("LearningMaterials");
 %>
 <div id="services" class="pad-section">
     <div class="container">   
@@ -16,6 +17,7 @@
             <div id="QuizRegister" class="bs-example">
                 <form method="POST"  action="CreateQuizQuestions">
                     <div class="form-group" id="Q1">
+                        <input type="hidden" name="LearningMaterials" value="<%=learningMaterials%>">
                         <h1>Question 1:</h1>
                         <label for="QuizName1">Quiz Name</label>
                         <input type="text" class="form-control" id="QuizName1" name="QuizName" readonly value="<%=quizName%>">
@@ -30,7 +32,7 @@
                         <label for="inputAnswer4Q1">Answer 4</label>
                         <input type="text" class="form-control" id="inputAnswer4Q1" name="Q1A4" required placeholder="Please a possible answer">
                         <label for="inputCorrect1">Correct Answer</label>
-                        <input type="number" class="form-control" id="inputCorrect1" name="Correct1" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
+                        <input type="number" min="1" max="4" class="form-control" id="inputCorrect1" name="Correct1" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
                     </div>
 
                     <div class="form-group" id="Q2">
@@ -48,7 +50,7 @@
                         <label for="inputAnswer4Q2">Answer 4</label>
                         <input type="text" class="form-control" id="inputAnswer4Q2" name="Q2A4" required placeholder="Please a possible answer">
                         <label for="inputCorrect2">Correct Answer</label>
-                        <input type="number" class="form-control" id="inputCorrect2" name="Correct2" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
+                        <input type="number" min="1" max="4" class="form-control" id="inputCorrect2" name="Correct2" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
                     </div>
 
                     <div class="form-group"  id="Q3">
@@ -66,7 +68,7 @@
                         <label for="inputAnswer4Q3">Answer 4</label>
                         <input type="text" class="form-control" id="inputAnswer4Q3" name="Q3A4" required placeholder="Please a possible answer">
                         <label for="inputCorrect3">Correct Answer</label>
-                        <input type="number" class="form-control" id="inputCorrect3" name="Correct3" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
+                        <input type="number" min="1" max="4" class="form-control" id="inputCorrect3" name="Correct3" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
                     </div>
 
                     <div class="form-group" id="Q4">
@@ -84,7 +86,7 @@
                         <label for="inputAnswer4Q4">Answer 4</label>
                         <input type="text" class="form-control" id="inputAnswer4Q4" name="Q4A4" required placeholder="Please a possible answer">
                         <label for="inputCorrect4">Correct Answer</label>
-                        <input type="number" class="form-control" id="inputCorrect4" name="Correct4" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
+                        <input type="number" min="1" max="4" class="form-control" id="inputCorrect4" name="Correct4" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
                     </div>
 
                     <div class="form-group" id="Q5">
@@ -102,7 +104,7 @@
                         <label for="inputAnswer4Q5">Answer 4</label>
                         <input type="text" class="form-control" id="inputAnswer4Q5" name="Q5A4" required placeholder="Please a possible answer">
                         <label for="inputCorrect5">Correct Answer</label>
-                        <input type="number" class="form-control" id="inputCorrect5" name="Correct5" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
+                        <input type="number" min="1" max="4" class="form-control" id="inputCorrect5" name="Correct5" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
                     </div>    
 
                     <div class="form-group" id="Q6">
@@ -120,7 +122,7 @@
                         <label for="inputAnswer4Q6">Answer 4</label>
                         <input type="text" class="form-control" id="inputAnswer4Q6" name="Q6A4" required placeholder="Please a possible answer">
                         <label for="inputCorrect6">Correct Answer</label>
-                        <input type="number" class="form-control" id="inputCorrect6" name="Correct6" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
+                        <input type="number" min="1" max="4" class="form-control" id="inputCorrect6" name="Correct6" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
                     </div>
 
                     <div class="form-group" id="Q7">
@@ -138,7 +140,7 @@
                         <label for="inputAnswer4Q7">Answer 4</label>
                         <input type="text" class="form-control" id="inputAnswer4Q7" name="Q7A4" required placeholder="Please a possible answer">
                         <label for="inputCorrect7">Correct Answer</label>
-                        <input type="number" class="form-control" id="inputCorrect7" name="Correct7" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
+                        <input type="number" min="1" max="4" class="form-control" id="inputCorrect7" name="Correct7" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
                     </div>
 
                     <div class="form-group" id="Q8">
@@ -156,7 +158,7 @@
                         <label for="inputAnswer4Q8">Answer 4</label>
                         <input type="text" class="form-control" id="inputAnswer4Q8" name="Q8A4" required placeholder="Please a possible answer">
                         <label for="inputCorrect8">Correct Answer</label>
-                        <input type="number" class="form-control" id="inputCorrect8" name="Correct8" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
+                        <input type="number" min="1" max="4" class="form-control" id="inputCorrect8" name="Correct8" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
                     </div>
 
                     <div class="form-group" id="Q9">
@@ -174,7 +176,7 @@
                         <label for="inputAnswer4Q9">Answer 4</label>
                         <input type="text" class="form-control" id="inputAnswer4Q9" name="Q9A4" required placeholder="Please a possible answer">
                         <label for="inputCorrect9">Correct Answer</label>
-                        <input type="number" class="form-control" id="inputCorrect9" name="Correct9" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
+                        <input type="number" min="1" max="4" class="form-control" id="inputCorrect9" name="Correct9" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
                     </div>
 
                     <div class="form-group" id="Q10">
@@ -192,7 +194,7 @@
                         <label for="inputAnswer4Q10">Answer 4</label>
                         <input type="text" class="form-control" id="inputAnswer4Q10" name="Q10A4" required placeholder="Please a possible answer">
                         <label for="inputCorrect10">Correct Answer</label>
-                        <input type="number" class="form-control" id="inputCorrect10" name="Correct10" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
+                        <input type="number" min="1" max="4" class="form-control" id="inputCorrect10" name="Correct10" required placeholder="Please enter the NUMBER of the CORRECT ANSWER">
                     </div>
                     <button type="submit" value="CreateQuizQuestions" class="btn btn-default">Create Quiz Questions</button>    
                 </form>
