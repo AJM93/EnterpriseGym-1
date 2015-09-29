@@ -120,7 +120,7 @@ public class login extends HttpServlet {
                 session.setAttribute("LoggedIn", lg);
 
                 // redirect                
-                response.sendRedirect("userLogged.jsp");
+                response.sendRedirect("/eGym/homePage");
             } else {
                 // unsuccessful login
                 response.sendRedirect("loginFailed.jsp");
