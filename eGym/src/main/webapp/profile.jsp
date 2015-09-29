@@ -153,7 +153,7 @@
             </div>
             
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <h2>Total: <%=total%> pts</h2>
 
                     <form class="form-inline" role="form" method="POST" action="/eGym/userAnonymous">
@@ -167,7 +167,11 @@
                         %>
                             <input type="text" name="username" value="<%=username%>" hidden>
                             <button type="submit" class="btn btn-default">Update</button>
-                            <span class="help-block">Tick to show your name on the <a href="/eGym/overallLeaderboard">points leaderboard</a></span>
+                        </div>
+                            
+                        <div class="alert alert-info fade in" style="padding: 15px;">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            Tick to show your name on the <a href="/eGym/overallLeaderboard">points leaderboard</a>
                         </div>
                     </form>
                 </div>
