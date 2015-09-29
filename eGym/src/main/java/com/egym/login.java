@@ -127,7 +127,7 @@ public class login extends HttpServlet {
             }
             
         } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterNewUser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

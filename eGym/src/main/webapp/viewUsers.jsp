@@ -82,7 +82,7 @@
                     <td><%=dob%></td>
                     <td><%=yos%></td>
                     <td><%=UserStatus%></td>
-                    <td><form action="getUserDetails"><button type="submit" class="btn btn-default" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
+                    <td><form action="getUserDetails" method="POST"><button type="submit" class="btn btn-default" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
                     <td><form action="resetUserPassword" method="POST"><button type="submit" class="btn btn-default" name="getPasswordUsername" value=<%=Username%>>Reset Password</button></form></td>
                     <td><form action="DeleteUserAccount" method="POST"><button type="submit" class="btn btn-default" name="getDeletedUser" value=<%=Username%>>Delete Account</button></form></td>
                 </tr>

@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Dreads
  */
 @WebServlet(name = "Register", urlPatterns = {"/Register"})
-public class Register extends HttpServlet {
+public class RegisterNewUser extends HttpServlet {
 
     Connection con = null;
     Statement st = null;
@@ -103,7 +103,7 @@ public class Register extends HttpServlet {
                 System.out.println("Can't hash the password");
                 response.sendRedirect("index.html");
             } catch (InvalidKeySpecException ex) {
-                Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegisterNewUser.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             //*************************************************************
@@ -163,7 +163,7 @@ public class Register extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/index.html");
             rd.forward(request,response);
         } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterNewUser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
