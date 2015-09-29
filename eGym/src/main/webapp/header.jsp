@@ -84,7 +84,10 @@
                     </li>
                     <li>
                         <a href="#">Contact</a>
-                    
+                    </li>
+                    <li>
+                        <a href="/eGym/GetQuizzes">Quizzes</a>
+                    </li>
                 </ul>
                 </li>
                 <ul class="nav navbar-nav navbar-right">
