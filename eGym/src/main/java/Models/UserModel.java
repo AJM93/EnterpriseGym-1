@@ -95,7 +95,8 @@ public class UserModel {
                 Timestamp dob = rs.getTimestamp("DOB");
                 String yos = rs.getString("YearOfStudy");
                 int UserStatus = rs.getInt("UserStatus_idUserStatus");
-                UserStore current = new UserStore(Username, Firstname, Lastname, MatriculationNo, Email, PhoneNo, Gender, Country, Institution, SubInstitution, Degree, dob, yos, UserStatus);
+                String status = rs.getString("Type");
+                UserStore current = new UserStore(Username, Firstname, Lastname, MatriculationNo, Email, PhoneNo, Gender, Country, Institution, SubInstitution, Degree, dob, yos, UserStatus, status);
                 userList.add(current);
             }
             

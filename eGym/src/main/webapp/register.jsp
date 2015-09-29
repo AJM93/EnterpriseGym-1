@@ -111,7 +111,7 @@
                     <input type="text" class="form-control" id="inputYOS" name="yos" required placeholder="Year of Study">
                 </div>
                 <div class="from-group">
-                        <label for="inputAccountType">Account Type</label>
+                        <label for="inputAccountType">Users Status</label>
                         <select name="inputAccountType" style="color: black;" required>
                             <%
                                 while(statusTypeIterator.hasNext())

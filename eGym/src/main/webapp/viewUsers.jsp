@@ -19,7 +19,7 @@
             if (lg.getRole() == 2 || lg.getRole() == 3) { // logged in user is an editor or an admin
     %>
     
-    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+    
         <h1>Users</h1>
         <div class="table-responsive">    
         <table class="table" >
@@ -64,7 +64,7 @@
                     String Degree = us.getDegree();
                     Timestamp dob = us.getDob();
                     String yos = us.getYos();
-                    int UserStatus = us.getUserStatus();
+                    String UserStatus = us.getStatus();
             %>
             
                 <tr>
@@ -82,9 +82,9 @@
                     <td><%=dob%></td>
                     <td><%=yos%></td>
                     <td><%=UserStatus%></td>
-                    <td><form action="getUserDetails" method="POST"><button type="submit" class="btn btn-default" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
+                    <td><form action="getUserDetails" method="POST"><button type="submit" class="btn btn-default" name="getUsername" value=<%=Username%>>Edit User</button></form></td>
                     <td><form action="resetUserPassword" method="POST"><button type="submit" class="btn btn-default" name="getPasswordUsername" value=<%=Username%>>Reset Password</button></form></td>
-                    <td><form action="DeleteUserAccount" method="POST"><button type="submit" class="btn btn-default" name="getDeletedUser" value=<%=Username%>>Delete Account</button></form></td>
+                    <td><form action="DeleteUserAccount" method="POST"><button type="submit" class="btn btn-default" name="getDeletedUser" value=<%=Username%>>Delete</button></form></td>
                 </tr>
             
             <%
@@ -92,7 +92,6 @@
             %>
             </tbody>    
         </table>
-    </div>
     </div>
 
     <%

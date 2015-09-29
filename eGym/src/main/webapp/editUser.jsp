@@ -29,7 +29,7 @@
     String Degree = us.getDegree();
     Timestamp dob = us.getDob();
     String yos = us.getYos();
-    int UserStatus = us.getUserStatus();
+    int UserStatus = us.getUserStatusID();
 %>
 <div id="services" class="pad-section">
     <div class="container">    

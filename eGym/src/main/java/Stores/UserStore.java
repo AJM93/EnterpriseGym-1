@@ -80,6 +80,24 @@ public class UserStore {
     }
     
     public UserStore(String Username, String Firstname, String Lastname, String MatriculationNo, String Email, String PhoneNo, char Gender, String Country,
+            String Institution, String SubInstitution, String Degree, Timestamp dob, String yos, int UserStatus, String status){
+        this.Username = Username;
+        this.Firstname = Firstname;
+        this.Lastname = Lastname;
+        this.MatriculationNo = MatriculationNo;
+        this.Email = Email;
+        this.PhoneNo = PhoneNo;
+        this.Gender = Gender;
+        this.Country = Country;
+        this.Institution = Institution;
+        this.SubInstitution = SubInstitution;
+        this.Degree = Degree;
+        this.dob = dob;
+        this.yos = yos;
+        this.userStatusID = UserStatus;
+        this.status = status;
+    }
+    public UserStore(String Username, String Firstname, String Lastname, String MatriculationNo, String Email, String PhoneNo, char Gender, String Country,
             String Institution, String SubInstitution, String Degree, Timestamp dob, String yos, int UserStatus){
         this.Username = Username;
         this.Firstname = Firstname;
