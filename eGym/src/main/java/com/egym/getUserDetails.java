@@ -6,6 +6,7 @@
 package com.egym;
 
 import Models.UserModel;
+import Stores.UserStatusTypes;
 import Stores.UserStore;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -50,11 +52,26 @@ public class getUserDetails extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            con = DriverManager.getConnection(url, user, password);
+            LinkedList<UserStatusTypes> statusTypes = new LinkedList<UserStatusTypes>();
+            CallableStatement cs = this.con.prepareCall("{call get_status_types}");
+            ResultSet rs = cs.executeQuery();
+            
+            while(rs.next())
+            {
+                int statusId = rs.getInt("idUserStatus");
+                String type = rs.getString("Type");
+                UserStatusTypes st = new UserStatusTypes(statusId, type);
+                statusTypes.add(st);
+            } 
+            
+            
             String username = request.getParameter("getUsername");
             
             UserModel um = new UserModel();
             UserStore userStore = um.getUserDetails(username);
-            
+            request.setAttribute("StatusTypes", statusTypes);
             request.setAttribute("UserStore", userStore);
             
             RequestDispatcher rd = request.getRequestDispatcher("editUser.jsp");

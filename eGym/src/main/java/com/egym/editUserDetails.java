@@ -64,6 +64,7 @@ public class editUserDetails extends HttpServlet {
             String degree = request.getParameter("degree");
             String DoB = request.getParameter("dob");
             String YoS = request.getParameter("yos");
+            int userStatus = Integer.parseInt(request.getParameter("userStatus"));
             char gender = Gender.charAt(0);
             int yos = Integer.parseInt(YoS);
             
@@ -86,7 +87,7 @@ public class editUserDetails extends HttpServlet {
             cs.setString(11, degree);
             cs.setTimestamp(12, datePosted);
             cs.setInt(13, yos);
-            cs.setInt(14, 1);
+            cs.setInt(14, userStatus);
             cs.executeQuery();
             cs.close();
             RequestDispatcher rd = request.getRequestDispatcher("/index.html");
