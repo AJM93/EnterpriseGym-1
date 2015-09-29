@@ -21,7 +21,9 @@
         %>
                 <h1>Approve Users</h1>
                 <div class="col-md-12">
+                <div class="table-responsive">  
                 <table class="table" >
+                    <thead>
                     <tr>
                         <th>Username</th>
                         <th>First name</th>
@@ -40,6 +42,8 @@
                         <th>Edit User Details</th>
                         <th>Approve</th>
                     </tr>
+                    </thead>
+                </tbody>
                     <%
 
                     LinkedList<UserStore> usersList = (LinkedList<UserStore>) request.getAttribute("UserList");
@@ -84,7 +88,9 @@
                     <%
                     }
                 %>
+                </tbody>
                 </table>
+                </div>
                 </div>
        <%
            }else{

@@ -12,37 +12,42 @@
 
 <jsp:include page="header.jsp"></jsp:include>
     <link href="css/style.css" rel="stylesheet" />  
-
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <div id="services" class="pad-section">
     <%
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         if (lg != null && lg.isLoggedIn()) {
             if (lg.getRole() == 2 || lg.getRole() == 3) { // logged in user is an editor or an admin
     %>
-    <h1>Users</h1>
-    <div class="col-md-12">
-
-
+    
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <h1>Users</h1>
+        <div class="table-responsive">    
         <table class="table" >
-            <tr>
-                <th>Username</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Matriculation No</th>
-                <th>Email</th>
-                <th>Phone No</th>
-                <th>Gender</th>
-                <th>Country</th>
-                <th>Institution</th>
-                <th>Sub Institution</th>
-                <th>Degree</th>
-                <th>D.O.B</th>
-                <th>Y.O.S</th>
-                <th>User Status</th>
-                <th>Edit User Details</th>
-                <th>Reset User's Password</th>
-                <th>Delete User's Account</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Matriculation No</th>
+                    <th>Email</th>
+                    <th>Phone No</th>
+                    <th>Gender</th>
+                    <th>Country</th>
+                    <th>Institution</th>
+                    <th>Sub Institution</th>
+                    <th>Degree</th>
+                    <th>D.O.B</th>
+                    <th>Y.O.S</th>
+                    <th>User Status</th>
+                    <th>Edit User Details</th>
+                    <th>Reset User's Password</th>
+                    <th>Delete User's Account</th>
+                </tr>
+            </thead>    
+            <tbody>
             <%
                 LinkedList<UserStore> usersList = (LinkedList<UserStore>) request.getAttribute("UserList");
                 Iterator<UserStore> iterator = usersList.iterator();
@@ -64,30 +69,33 @@
                     String yos = us.getYos();
                     int UserStatus = us.getUserStatus();
             %>
-            <tr>
-                <td><%=Username%></td>
-                <td><%=Firstname%></td>
-                <td><%=Lastname%></td>
-                <td><%=MatriculationNo%></td>
-                <td><%=Email%></td>
-                <td><%=PhoneNo%></td>
-                <td><%=Gender%></td>
-                <td><%=Country%></td>
-                <td><%=Institution%></td>
-                <td><%=SubInstitution%></td>
-                <td><%=Degree%></td>
-                <td><%=dob%></td>
-                <td><%=yos%></td>
-                <td><%=UserStatus%></td>
-                <td><form action="getUserDetails"><button type="submit" class="btn btn-default" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
-                <td><form action="resetUserPassword" method="POST"><button type="submit" class="btn btn-default" name="getPasswordUsername" value=<%=Username%>>Reset Password</button></form></td>
-                <td><form action="DeleteUserAccount" method="POST"><button type="submit" class="btn btn-default" name="getDeletedUser" value=<%=Username%>>Delete Account</button></form></td>
-            </tr>
+            
+                <tr>
+                    <td><%=Username%></td>
+                    <td><%=Firstname%></td>
+                    <td><%=Lastname%></td>
+                    <td><%=MatriculationNo%></td>
+                    <td><%=Email%></td>
+                    <td><%=PhoneNo%></td>
+                    <td><%=Gender%></td>
+                    <td><%=Country%></td>
+                    <td><%=Institution%></td>
+                    <td><%=SubInstitution%></td>
+                    <td><%=Degree%></td>
+                    <td><%=dob%></td>
+                    <td><%=yos%></td>
+                    <td><%=UserStatus%></td>
+                    <td><form action="getUserDetails"><button type="submit" class="btn btn-default" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
+                    <td><form action="resetUserPassword" method="POST"><button type="submit" class="btn btn-default" name="getPasswordUsername" value=<%=Username%>>Reset Password</button></form></td>
+                    <td><form action="DeleteUserAccount" method="POST"><button type="submit" class="btn btn-default" name="getDeletedUser" value=<%=Username%>>Delete Account</button></form></td>
+                </tr>
+            
             <%
                 }
             %>
+            </tbody>    
         </table>
-
+    </div>
     </div>
 
     <%

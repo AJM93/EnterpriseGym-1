@@ -12,6 +12,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp"></jsp:include>
     <link href="css/style.css" rel="stylesheet" />  
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
     <div id="services" class="pad-section">
     <%
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
@@ -19,14 +23,18 @@
             String username = lg.getUsername();
     %>
             <h1>Quizzes</h1>
+            <div class="table-responsive">
             <table class="table">
-                <tr>
-                    <th>Quiz Id</th>
-                    <th>Quiz Name</th>
-                    <th>Total Points</th>
-                    <th>Learning Materials</th>
-                    <th>Start Quiz</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Quiz Id</th>
+                        <th>Quiz Name</th>
+                        <th>Total Points</th>
+                        <th>Learning Materials</th>
+                        <th>Start Quiz</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <%
                     int listCounter = 0;
                     int iterCounter = 0;
@@ -64,7 +72,9 @@
                         </script>
                   <%}
                 %>
+                 </tbody>  
             </table>
+            </div>
     <%
         }else{
     %>    
