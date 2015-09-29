@@ -20,7 +20,6 @@
             if (lg.getRole() == 2 || lg.getRole() == 3) { // logged in user is an editor or an admin
         %>
                 <h1>Approve Users</h1>
-                <div class="col-md-12">
                 <div class="table-responsive">  
                 <table class="table" >
                     <thead>
@@ -65,7 +64,7 @@
                         String Degree = um.getDegree();
                         Timestamp dob = um.getDob();
                         String yos = um.getYos();
-                        int UserStatus = um.getUserStatus();
+                        String UserStatus = um.getStatus();
                 %>
                     <tr>
                         <td><%=Username%></td>
@@ -90,7 +89,6 @@
                 %>
                 </tbody>
                 </table>
-                </div>
                 </div>
        <%
            }else{
