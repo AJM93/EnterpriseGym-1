@@ -4,6 +4,9 @@
     Author     : Dreads
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="Stores.UserStatusTypes"%>
 <jsp:include page="header.jsp"></jsp:include>
 <script>
     function check() {
@@ -26,8 +29,10 @@
 <script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
 <!-- Bootstrap Form Helpers -->
 <script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
-
-
+<%
+    LinkedList<UserStatusTypes> statusType = (LinkedList<UserStatusTypes>) request.getAttribute("StatusTypes");
+    Iterator<UserStatusTypes> statusTypeIterator = statusType.iterator();
+%>
 <div id="services" class="pad-section">
     <div class="container">    
         <h1>Register</h1>
@@ -105,7 +110,22 @@
                     <label for="inputYOS">Year Of Study</label>
                     <input type="text" class="form-control" id="inputYOS" name="yos" required placeholder="Year of Study">
                 </div>
-                
+                <div class="from-group">
+                        <label for="inputAccountType">Account Type</label>
+                        <select name="inputAccountType" style="color: black;" required>
+                            <%
+                                while(statusTypeIterator.hasNext())
+                                {
+                                    UserStatusTypes st = statusTypeIterator.next();
+                                    
+                            %>
+                            <option style="color: black;" value="<%=st.getId()%>"><%=st.getType()%></option>
+                            <%
+                                    
+                                }
+                            %>
+                        </select>
+                    </div>
                 <button type="submit" value="Register" class="btn btn-default" onload="check();" >Register</button>
             </form>
         </div>

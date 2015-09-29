@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Dreads
  */
-@WebServlet(name = "Register", urlPatterns = {"/Register"})
+@WebServlet(name = "RegisterNewUser", urlPatterns = {"/RegisterNewUser"})
 public class RegisterNewUser extends HttpServlet {
 
     Connection con = null;
@@ -126,6 +126,8 @@ public class RegisterNewUser extends HttpServlet {
             Timestamp datePosted = Timestamp.valueOf(startString);
             
             String YoS = request.getParameter("yos");
+            String userStatus = request.getParameter("inputAccountType");
+            int UserStat = Integer.parseInt(userStatus);
             char gender = Gender.charAt(0);
             int yos = Integer.parseInt(YoS);
             
@@ -149,7 +151,7 @@ public class RegisterNewUser extends HttpServlet {
             cs.setString(13, degree);
             cs.setTimestamp(14, datePosted);
             cs.setInt(15, yos);
-            cs.setInt(16,1);
+            cs.setInt(16,UserStat);
             cs.executeQuery();
             cs.close();
             
