@@ -77,10 +77,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">News</a>
+                        <a href="/eGym/news">News</a>
                     </li>
                     <li>
-                        <a href="#">Events</a>
+                        <a href="/eGym/events">Events</a>
                     </li>
                     <li>
                         <a href="#">Contact</a>
@@ -133,10 +133,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">News</a>
+                        <a href="/eGym/news">News</a>
                     </li>
                     <li>
-                        <a href="#">Events</a>
+                        <a href="/eGym/events">Events</a>
                     </li>
                     <li>
                         <a href="#">Contact</a>
@@ -144,7 +144,7 @@
                 </ul>
 				<ul class="nav navbar-nav navbar-right">
                          <li>
-                             <a href="http://localhost:8080/eGym/login.jsp">Sign In</a>
+                             <a href="/eGym/login.jsp">Sign In</a>
                         </li>
                 </ul>
             </div>

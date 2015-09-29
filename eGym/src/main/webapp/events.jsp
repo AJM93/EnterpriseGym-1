@@ -10,53 +10,32 @@
 <%@page import="Models.EventsModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-        <table width='700px' border='1px'>
-            <tr>
-                <th>Title</th>
-                <th>Body</th>
-                <th>Trainer</th>
-                <th>Points</th>
-            </tr>
+<jsp:include page="header.jsp"></jsp:include>
+<div id="news" class="pad-section">
+        <div class="container">       
+        
         <%
-            ArrayList events_titles = new ArrayList();
-            ArrayList events_body = new ArrayList();
-            ArrayList events_trainer = new ArrayList();
+            
             LinkedList<EventsModel> llsr = (LinkedList<EventsModel>) request.getAttribute("EventsList");
-            Iterator<EventsModel> iterator;
-            iterator = llsr.iterator();
-            while (iterator.hasNext()) 
-            {
-                EventsModel nm = (EventsModel) iterator.next();
-                int id = nm.getEventID();
-                String Title = nm.getEventTitle();
-                String Body = nm.getEventBody();
-                String Trainer = nm.getEventTrainer();
-                int Points = nm.getEventPoints();
-                //events_titles.add(Title + ": " + Date);
-                events_body.add(Body);
-                events_trainer.add(Trainer);
+           
+           for (EventsModel t : llsr){
         %>
-            <tr>
-                <td><a href="/eGym/EventItem/<%=id%>"><%=Title%></a> </td>
-                <td><%=Body%></td>
-                <td><%=Trainer%></td>
-                <td><%=Points%></td>
-            </tr>
+           <div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="min-height: 50px; max-height: 50px;">
+                        <h3 class="panel-title"><a href="/eGym/EventItem/<%=t.getEventID()%>"><%=t.getEventTitle()%></a></h3>
+                    </div>
+                    <div class="panel-body" style="min-height: 100px; max-height: 100px;">
+                        <%="body of event..."%>
+                    </div>
+                </div>
+            </div>
+        </div>
             <%
             }
         %>
-        </table>
         
+        </div>
        
-        
-    </body>
-</html>
+<jsp:include page="footer.jsp"></jsp:include>

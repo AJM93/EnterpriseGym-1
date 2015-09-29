@@ -36,7 +36,7 @@
             String degree = profile.getDegree();
             Timestamp dob = profile.getDob();
             String yos = profile.getYos();
-            int status = profile.getUserStatus();
+           
             String anon = profile.getAnonymous();
             
             int onlineTheory = profile.getOnlineTheory();
