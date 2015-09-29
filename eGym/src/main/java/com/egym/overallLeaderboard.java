@@ -52,10 +52,9 @@ public class overallLeaderboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         try {
             UserModel um = new UserModel();
-            LinkedList<UserStore> leaderboard = um.getLeaderboard(10, true);
+            LinkedList<UserStore> leaderboard = um.getLeaderboard(20, true);
             
             request.setAttribute("leaderboard", leaderboard);
             
