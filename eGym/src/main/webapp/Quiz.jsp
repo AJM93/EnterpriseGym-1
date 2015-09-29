@@ -112,12 +112,16 @@
                     {
                         document.getElementById('UserScore').value = percent;
                         alert("Congradulations! YOU PASSED!" + "\n" + noCorrect + "\n" + perCorr);
+                        $('.yourButtonClassName').show();
+                        $('.SubmitButton').hide();
                         alert("Click on the return button to finish the test.");
                     }
                     else
                     {
                         document.getElementById('UserScore').value = percent;
                         alert("Unfortuently, you need 75% to pass! \n" + noCorrect + "\n" + perCorr);
+                        $('.yourButtonClassName').show();
+                        $('.SubmitButton').hide();
                         alert("Click on the return button to finish the test.");
                     }
                     _("quiz_status").innerHTML = "Quiz Completed";
@@ -137,7 +141,7 @@
                 quiz.innerHTML += "<input type='radio' name='posAnswers' value='2'> " + ans2 + "<br>";
                 quiz.innerHTML += "<input type='radio' name='posAnswers' value='3'> " + ans3 + "<br>";
                 quiz.innerHTML += "<input type='radio' name='posAnswers' value='4'> " + ans4 + "<br><br>";
-                quiz.innerHTML += "<button onclick='checkAnswer()'>Submit</button>";
+                quiz.innerHTML += "<button class='SubmitButton' onclick='checkAnswer()'>Submit</button>";
             }
             function checkAnswer()
             {
@@ -184,7 +188,7 @@
                     <input id="QuizId" name="QuizId" type="hidden" value="<%=quizId%>" />
                     <input id="Username" name="Username" type="hidden" value="<%=Username%>" />
                     <input id="UserScore" name="UserScore" type="hidden" value="" />
-                    <button type="submit" value="updateQuizAttempts">Finish Test</button>
+                    <button type="submit" class='yourButtonClassName' style='display:none' value="updateQuizAttempts">Finish Test</button>
                 </form>
             </div>
     <%
