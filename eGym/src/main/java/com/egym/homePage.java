@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -64,16 +65,34 @@ public class homePage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        NewsModel nm = new NewsModel();
-        EventsModel em = new EventsModel();
-        
         try {
-            java.util.LinkedList<NewsModel> homeNews = nm.getHomeNews();
-            java.util.LinkedList<EventsModel> homeEvents = em.getHomeEvents();
-            request.setAttribute("HomeNews", homeNews);
-            request.setAttribute("HomeEvents", homeEvents);
-            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-            rd.forward(request,response);
+            NewsModel nm = new NewsModel();
+            EventsModel em = new EventsModel();
+            UserModel um = new UserModel();
+            HttpSession session=request.getSession();
+            
+            try {
+                LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                 if (lg != null && lg.isLoggedIn()) {
+                UserStore profile = um.getUserDetails(lg.getUsername());
+                request.setAttribute("UserProfile", profile);
+                 }
+                java.util.LinkedList<NewsModel> homeNews = nm.getHomeNews();
+                java.util.LinkedList<EventsModel> homeEvents = em.getHomeEvents();
+                
+                request.setAttribute("HomeNews", homeNews);
+                request.setAttribute("HomeEvents", homeEvents);
+                RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+                rd.forward(request,response);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(homePage.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(homePage.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(homePage.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(homePage.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(homePage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
