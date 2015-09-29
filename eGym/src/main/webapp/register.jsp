@@ -34,7 +34,7 @@
 
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
         <div class="bs-example">
-            <form method="POST"  action="Register">
+            <form method="POST"  action="RegisterNewUser">
                 <div class="form-group">
                     <label for="inputUsername">Username</label>
                     <input type="text" class="form-control" id="inputUsername" name="username" required placeholder="Enter Username">
@@ -105,6 +105,7 @@
                     <label for="inputYOS">Year Of Study</label>
                     <input type="text" class="form-control" id="inputYOS" name="yos" required placeholder="Year of Study">
                 </div>
+                
                 <button type="submit" value="Register" class="btn btn-default" onload="check();" >Register</button>
             </form>
         </div>
