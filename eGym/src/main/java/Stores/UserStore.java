@@ -35,11 +35,12 @@ public class UserStore {
     private int Action = 0;
     private int Project = 0;
     private int Total = 0;
-    private int UserStatus;
+    private int userStatusID;
+    private String status;
     private String Anonymous;
     
     public UserStore(final String Username, final String Firstname, final String Lastname, final String MatriculationNo, final String Email, final String PhoneNo, final char Gender, final String Country, final String Institution, final String SubInstitution, 
-            final String Degree, final Timestamp dob, final String yos, final int UserStatus, final int OnlineTheory, final int Challenge, final int Action, final int Project, final int Total, String anon)
+            final String Degree, final Timestamp dob, final String yos, final int userStatusID, final String status, final int OnlineTheory, final int Challenge, final int Action, final int Project, final int Total, String anon)
     {
          this.Username = Username;
          this.Firstname = Firstname;
@@ -54,7 +55,8 @@ public class UserStore {
          this.Degree = Degree;
          this.dob = dob;
          this.yos = yos;
-         this.UserStatus = UserStatus;
+         this.userStatusID = userStatusID;
+         this.status = status;
          this.OnlineTheory = OnlineTheory;
          this.Action = Action;
          this.Project = Project;
@@ -92,7 +94,7 @@ public class UserStore {
         this.Degree = Degree;
         this.dob = dob;
         this.yos = yos;
-        this.UserStatus = UserStatus;
+        this.userStatusID = UserStatus;
     }
 
     /**
@@ -295,17 +297,17 @@ public class UserStore {
      * 
      * @return UserStatus
      */
-    public int getUserStatus()
+    public int getUserStatusID()
     {
-        return this.UserStatus;
+        return this.userStatusID;
     }
     /**
      * 
-     * @param UserStatus the UserStatus to set
+     * @param userStatusID the UserStatus to set
      */
-    public void setUserStatus(int UserStatus)
+    public void setUserStatusID(int userStatusID)
     {
-        this.UserStatus = UserStatus;
+        this.userStatusID = userStatusID;
     }
 
     /**
@@ -390,5 +392,19 @@ public class UserStore {
      */
     public void setAnonymous(String Anonymous) {
         this.Anonymous = Anonymous;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -55,14 +55,15 @@ public class UserModel {
                 String degree = rs.getString("Degree");
                 Timestamp dob = rs.getTimestamp("DOB");
                 String yos = rs.getString("YearOfStudy");
-                int Userstatus = rs.getInt("UserStatus_idUserStatus");
+                int userStatusID = rs.getInt("UserStatus_idUserStatus");
+                String status = rs.getString("Status");
                 int ot = rs.getInt("Online_Theory");
                 int ch = rs.getInt("Challenge");
                 int ac = rs.getInt("Action");
                 int pr = rs.getInt("Project");
                 int tt = rs.getInt("Total");
                 String anon = rs.getString("IncludeInLeaderboard");
-                userDetails = new UserStore(Username, Firstname, Lastname, Matric, Email, PhoneNo, Gender.charAt(0), Country, Inst, sInst, degree, dob, yos, Userstatus, ot, ch, ac, pr, tt, anon);
+                userDetails = new UserStore(Username, Firstname, Lastname, Matric, Email, PhoneNo, Gender.charAt(0), Country, Inst, sInst, degree, dob, yos, userStatusID, status, ot, ch, ac, pr, tt, anon);
             }
             
             cs.close();
