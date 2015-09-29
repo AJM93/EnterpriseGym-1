@@ -6,6 +6,7 @@
 package com.egym;
 
 import Stores.UserStatusTypes;
+import Stores.UserTypes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
@@ -28,8 +29,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Dreads
  */
-@WebServlet(name = "register", urlPatterns = {"/register"})
-public class register extends HttpServlet {
+@WebServlet(name = "GetUserTypes", urlPatterns = {"/GetUserTypes"})
+public class GetUserTypes extends HttpServlet {
     Connection con = null;
     Statement st = null;
     ResultSet rs = null;
@@ -54,10 +55,10 @@ public class register extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet register</title>");            
+            out.println("<title>Servlet GetUserTypes</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet register at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet GetUserTypes at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,28 +76,7 @@ public class register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection(url, user, password);
-            LinkedList<UserStatusTypes> statusTypes = new LinkedList<UserStatusTypes>();
-            CallableStatement cs = this.con.prepareCall("{call get_status_types}");
-            ResultSet rs = cs.executeQuery();
-            
-            while(rs.next())
-            {
-                int statusId = rs.getInt("idUserStatus");
-                String type = rs.getString("Type");
-                UserStatusTypes st = new UserStatusTypes(statusId, type);
-                statusTypes.add(st);
-            } 
-            cs.close();
-            con.close();
-            request.setAttribute("StatusTypes", statusTypes);
-            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
-            rd.forward(request,response);
-    }   catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -109,8 +89,39 @@ public class register extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
+        try {
+            String username = request.getParameter("Username");
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            con = DriverManager.getConnection(url, user, password);
+            LinkedList<UserTypes> userTypes = new LinkedList<UserTypes>();
+            CallableStatement cs = this.con.prepareCall("{call get_all_user_types}");
+            ResultSet rs = cs.executeQuery();
+            while(rs.next())
+            {
+                int typeId = rs.getInt("idUserTypes");
+                String type = rs.getString("Type");
+                UserTypes st = new UserTypes(typeId, type);
+                userTypes.add(st);
+            } 
+            cs.close();
+            CallableStatement cs2 = this.con.prepareCall("{call get_users_type(?)}");
+            cs2.setString(1, username);
+            ResultSet rs2 = cs2.executeQuery();
+            rs2.next();
+            String memberType = rs2.getString("UserTypes_idUserTypes");
+            con.close();
+            request.setAttribute("Username", username);
+            request.setAttribute("MemberType", memberType);
+            request.setAttribute("UserTypes", userTypes);
+            RequestDispatcher rd = request.getRequestDispatcher("EditUserAccountType.jsp");
+            rd.forward(request,response);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(GetUserTypes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
     /**
      * Returns a short description of the servlet.
      *

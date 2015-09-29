@@ -39,6 +39,7 @@
                     <th>D.O.B</th>
                     <th>Y.O.S</th>
                     <th>User Status</th>
+                    <th>Edit User Type</th>
                     <th>Edit User Details</th>
                     <th>Reset User's Password</th>
                     <th>Delete User's Account</th>
@@ -82,6 +83,7 @@
                     <td><%=dob%></td>
                     <td><%=yos%></td>
                     <td><%=UserStatus%></td>
+                    <td><form action="GetUserTypes" method="POST"><button type="submit" class="btn btn-default" name="Username" value=<%=Username%>>Edit Type</button></form></td>
                     <td><form action="getUserDetails" method="POST"><button type="submit" class="btn btn-default" name="getUsername" value=<%=Username%>>Edit User</button></form></td>
                     <td><form action="resetUserPassword" method="POST"><button type="submit" class="btn btn-default" name="getPasswordUsername" value=<%=Username%>>Reset Password</button></form></td>
                     <td><form action="DeleteUserAccount" method="POST"><button type="submit" class="btn btn-default" name="getDeletedUser" value=<%=Username%>>Delete</button></form></td>
