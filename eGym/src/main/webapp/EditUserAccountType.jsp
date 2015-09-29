@@ -21,7 +21,7 @@
             <h1>Edit User's Account Type</h1>
             <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
                 <div class="bs-example">
-                    <form method="POST"  action="UpdateUserType">
+                    <form method="POST"  action="UpdateUserAccountType">
                         <div class="form-group">
                             <label for="inputUsername">Username</label>
                             <input type="text" class="form-control" id="inputUsername" name="username" readonly value="<%=Username%>">
@@ -47,7 +47,7 @@
                                 %>
                             </select>
                         </div>
-                            
+                       <button type="submit" value="UpdateUserAccountType" class="btn btn-default">Confirm</button>      
                 </form>
             </div>
         </div>
