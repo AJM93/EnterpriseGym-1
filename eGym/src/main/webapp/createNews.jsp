@@ -7,13 +7,8 @@
 <%@page import="Stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <script src="//cdn.ckeditor.com/4.5.3/full-all/ckeditor.js"></script>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create news</title>
-    </head>
-    <body>
+<jsp:include page="header.jsp"></jsp:include>
+<script src="//cdn.ckeditor.com/4.5.3/full-all/ckeditor.js"></script>
         <%
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
             if (lg != null && lg.isLoggedIn()) {
@@ -44,5 +39,4 @@
         <%
             }
         %>
-    </body>
-</html>
+ <jsp:include page="footer.jsp"></jsp:include>

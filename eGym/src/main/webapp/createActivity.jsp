@@ -11,12 +11,8 @@
 <%@page import="Stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create activity</title>
-    </head>
-    <body>
+<jsp:include page="header.jsp"></jsp:include>
+<script src="//cdn.ckeditor.com/4.5.3/full-all/ckeditor.js"></script>
         <%
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
             if (lg != null && lg.isLoggedIn()) {
@@ -72,6 +68,9 @@
             
             <label for="Body">Body</label>
             <textarea name="body" placeholder="Enter content here" required autofocus></textarea>
+            <script>
+            CKEDITOR.replace( 'body' );
+             </script>
             <br>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
         </form>
@@ -87,5 +86,4 @@
         <%
             }
         %>
-    </body>
-</html>
+<jsp:include page="footer.jsp"></jsp:include>

@@ -11,10 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <jsp:include page="header.jsp"></jsp:include>
-    <link href="css/style.css" rel="stylesheet" />  
-   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   
     <div id="services" class="pad-section">
     <%
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
