@@ -10,10 +10,8 @@
 <%@page import="Stores.QuestionStore"%>
 <%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    
-    <head>
+<jsp:include page="header.jsp"></jsp:include>
+    <link href="css/style.css" rel="stylesheet" />  
     <%
     LinkedList<QuestionStore> questionList = (LinkedList<QuestionStore>) request.getAttribute("QuestionList");
     Iterator<QuestionStore> iterator;
@@ -42,8 +40,6 @@
 
 %>
 
-        <title>Quiz</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript">
             var pos = 0, quiz, quiz_status, question, userAnswer, posAnswers, ans1, ans2, ans3, ans4, correct = 0;
             var percentPass = 80;
@@ -168,12 +164,14 @@
             }
             window.addEventListener("load", startQuiz, false);
 	</script>
-    </head>
-    <body>
+<div id="services" class="pad-section">
+    
+    <div class="container">   
     <%
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         if (lg != null && lg.isLoggedIn()) {      
     %>
+    
             <div>
                 <h3>Time Left: <span id="timer"><span></h3>
             </div>
@@ -196,6 +194,6 @@
     <%
         }     
     %>
-    
-    </body>
-</html>
+    </div>
+    </div>
+<jsp:include page="footer.jsp"></jsp:include>
