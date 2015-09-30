@@ -14,21 +14,12 @@
     }
 </script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <!-- Bootstrap Form Helpers -->
 <link href="http://bootstrapformhelpers.com/assets/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <script src="assets/js/jquery.validate.js"></script> 
-<!-- jQuery -->
-<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<!-- Bootstrap -->
-<script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
-<!-- Bootstrap Form Helpers -->
 <script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
+
 <%
     LinkedList<UserStatusTypes> statusType = (LinkedList<UserStatusTypes>) request.getAttribute("StatusTypes");
     Iterator<UserStatusTypes> statusTypeIterator = statusType.iterator();
@@ -77,10 +68,10 @@
                     <div id="inputCountry" data-input-name="country" class="bfh-selectbox bfh-countries" data-flags="true" onChange="check();">
                         <input form='form1' type="hidden" >
                         <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-                            <span class="bfh-selectbox-option input-medium" data-option=""></span>
+                            <span class="bfh-selectbox-option input-medium"></span>
                             <b class="caret"></b>
                         </a>
-                        <div class="bfh-selectbox-options countries" required>
+                        <div class="bfh-selectbox-options countries">
                             <div role="listbox">
                                 <ul role="option">
                                 </ul>

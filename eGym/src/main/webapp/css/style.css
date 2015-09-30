@@ -35,7 +35,10 @@ html, body {
   margin: 0;
   padding: 0;
 }
-
+.glyphicon bfh-flag {
+  width: 14px;  // 14px * 2
+  height: 14px;
+}
 /* additional sections */
 #home {
   background: url(../images/home.jpg) no-repeat center center fixed; 
@@ -61,7 +64,29 @@ html, body {
   background-color: #AC2647;
   color: #ffffff;
 }
-#services .glyphicon {
+#services .glyphicon.glyphicon-phone {
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 60px;
+  height: 140px;
+  line-height: 140px;
+  text-align: center;
+  vertical-align: middle;
+  width: 140px;
+}
+#services .glyphicon.glyphicon-pushpin {
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 60px;
+  height: 140px;
+  line-height: 140px;
+  text-align: center;
+  vertical-align: middle;
+  width: 140px;
+}
+#services .glyphicon.glyphicon-envelope {
   border: 2px solid #FFFFFF;
   border-radius: 50%;
   display: inline-block;
