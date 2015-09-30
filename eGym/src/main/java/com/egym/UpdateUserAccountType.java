@@ -5,39 +5,36 @@
  */
 package com.egym;
 
-import Lib.AeSimpleSHA256;
-import Stores.LoggedIn;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Tom
+ * @author Dreads
  */
-@WebServlet(name = "login", urlPatterns = {"/login"})
-public class login extends HttpServlet {
-    
+@WebServlet(name = "UpdateUserAccountType", urlPatterns = {"/UpdateUserAccountType"})
+public class UpdateUserAccountType extends HttpServlet {
     Connection con = null;
+    Statement st = null;
+    ResultSet rs = null;
     static final String JDBC_DRIVER ="com.mysql.jdbc.Driver";  
     String url = "jdbc:mysql://46.101.32.81:3306/EGAlexander";
     String user = "root";
     String password = "teameight";
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,7 +46,19 @@ public class login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateUserAccountType</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateUserAccountType at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +73,7 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("login.jsp");
+        processRequest(request, response);
     }
 
     /**
@@ -77,57 +86,28 @@ public class login extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            String username = request.getParameter("username");
-            String passwordAttempt = request.getParameter("password");
-            
+            throws ServletException, IOException 
+    {
+        try
+        {
+            String username = (String) request.getParameter("username");
+            String getStatus = (String) request.getParameter("userType");
+            int userStatus = Integer.parseInt(getStatus);
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
-            
-            CallableStatement cs = this.con.prepareCall("{call login_users(?)}");
+            CallableStatement cs = null;
+            cs = this.con.prepareCall("{call update_user_account_type(?,?)}"); 
             cs.setString(1, username);
-            ResultSet rs = cs.executeQuery();
-            rs.next();
-            
-            int userType = rs.getInt("UserTypes_idUserTypes");
-            
-            String storedPassword = rs.getString("password");
-            String hexSalt = rs.getString("salt");
-            byte[] salt = AeSimpleSHA256.fromHex(hexSalt);
-            
+            cs.setInt(2, userStatus);
+            cs.executeQuery();
             cs.close();
             con.close();
-            
-            String encodedPasswordAttempt = null;
-            try
-            {
-                encodedPasswordAttempt = AeSimpleSHA256.getHash(passwordAttempt, salt);
-            }
-            catch (UnsupportedEncodingException | NoSuchAlgorithmException et)
-            {
-                System.out.println("Can't check the password");
-                response.sendRedirect("loginFailed.jsp");
-            } catch (InvalidKeySpecException ex) {
-                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            if (encodedPasswordAttempt != null && encodedPasswordAttempt.equals(storedPassword)) {
-                // login success
-                LoggedIn lg = new LoggedIn(true, username, userType);
-
-                HttpSession session = request.getSession();
-                session.setAttribute("LoggedIn", lg);
-
-                // redirect                
-                response.sendRedirect("/eGym/homePage");
-            } else {
-                // unsuccessful login
-                response.sendRedirect("loginFailed.jsp");
-            }
-            
-        } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(RegisterNewUser.class.getName()).log(Level.SEVERE, null, ex);
+            RequestDispatcher rd = request.getRequestDispatcher("GetAllUsers");
+            rd.forward(request,response);
+        } 
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) 
+        {
+            Logger.getLogger(UpdateUserAccountType.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

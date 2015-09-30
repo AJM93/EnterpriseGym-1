@@ -89,6 +89,8 @@ public class register extends HttpServlet {
                 UserStatusTypes st = new UserStatusTypes(statusId, type);
                 statusTypes.add(st);
             } 
+            cs.close();
+            con.close();
             request.setAttribute("StatusTypes", statusTypes);
             RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
             rd.forward(request,response);

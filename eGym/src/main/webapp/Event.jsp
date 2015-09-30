@@ -54,9 +54,9 @@ success: function(html){
 }
 });
             
-alert("Comment Posted");
-$('#commentTable').load(document.URL +  ' #commentTable');
-$("ol#update li:first").slideDown("slow");
+location.reload();
+//$('#Comments').load(document.URL +  ' #commentTable');
+//$("ol#update li:first").slideDown("slow");
 document.getElementById('commentBox').value='';
 document.getElementById('commentBox').focus();
 $("#flash").hide();
@@ -64,8 +64,7 @@ $("#flash").hide();
 });
 });
    </script>
-<html>
-    <head>
+<jsp:include page="header.jsp"></jsp:include>
         
         <%
             EventStore es = (EventStore) request.getAttribute("Event");
@@ -79,9 +78,22 @@ $("#flash").hide();
 		<script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
 		<!-- Bootstrap Form Helpers -->
 		<script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
-                <jsp:include page="header.jsp"></jsp:include>
-        <h1>Event <%=es.getId()%> : <%=es.getTitle()%></h1>
-        <p><%=es.getBody()%></p>
+                
+                
+                <div id="services" class="pad-section">
+    <div class="container">
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><%=es.getId()%> : <%=es.getTitle()%></h3>
+            </div>
+            <div class="panel-body" style="color: black;">
+                <%=es.getBody()%>
+            </div>
+        </div>
+    
+
+        
         <p>Total Points: <%=es.getPoints()%> </p>
         <p>Type of Event: <%=es.getType()%> </p>
         <p>Event Trainer: <%=es.getTrainer()%></p>
@@ -100,12 +112,7 @@ $("#flash").hide();
         <%}%>
                 <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
                 <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
-                <table width='700px' border='1px' name="commentTable" id="commentTable">
-                    <tr>
-                        <th>Author</th>
-                        <th>Body</th>
-                        <th>Date Posted</th>
-                    </tr>
+               
                 <%
                     LinkedList<EventsCommentModel> eventComments = (LinkedList<EventsCommentModel>) request.getAttribute("EventsCommentList");
                     Iterator<EventsCommentModel> iterator = eventComments.iterator();
@@ -114,25 +121,35 @@ $("#flash").hide();
                     {
                         EventsCommentModel comment = (EventsCommentModel) iterator.next();
                 %>
-                        <tr>
-                            <td><%=comment.getAuthor()%></td>
-                            <td><%=comment.getBody()%></td>
-                            <td><%=comment.getDatePosted()%></td>
-                        </tr>
+                      
+                        <div id="Comments">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading" >
+                        <h3 class="panel-title"><a href="/eGym/profile/<%=comment.getAuthor()%>"><%=comment.getAuthor()%></a></h3>
+                    </div>
+                    <div class="panel-body" style="color: black;">
+                        <%=comment.getBody()%>
+                    </div>
+                </div>
+            </div>
+        </div>
                 <%
                     }
                 %>
 
-                </table>
+                
 
-             
-        
-        
+           
 <textarea rows="4" cols="50" name="commentBox" id="commentBox" maxlength="145" ></textarea><br />
 <input type="button" value="Submit Comment" name="submit" class="comment_button"/>
     <div id="flash"></div>
 <ol id="update" class="timeline">
 </ol>
+    
+      </div>
+        </div>
+        
     
     <%
             }

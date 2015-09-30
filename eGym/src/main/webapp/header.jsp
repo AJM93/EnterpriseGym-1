@@ -84,6 +84,9 @@
                     </li>
                     <li>
                         <a href="#">Contact</a>
+                    </li>
+                    <li>
+                        <a href="/eGym/GetQuizzes">Quizzes</a>
                     
                 </ul>
                 </li>
@@ -101,7 +104,7 @@
                                 <li><a href="/eGym/approveUsers">Approve Users</a></li>
                                 <li><a href="/eGym/createNews">Create News</a></li>
                                 <li><a href="/eGym/createActivity">Create Activity</a></li>
-                                <li><a href="#">Create Quiz</a></li>
+                                <li><a href="/eGym/CreateQuiz.jsp">Create Quiz</a></li>
                                 <li class="divider"></li>
                                 
                             </ul>

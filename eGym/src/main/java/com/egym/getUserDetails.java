@@ -66,7 +66,8 @@ public class getUserDetails extends HttpServlet {
                 statusTypes.add(st);
             } 
             
-            
+            cs.close();
+            con.close();
             String username = request.getParameter("getUsername");
             
             UserModel um = new UserModel();
