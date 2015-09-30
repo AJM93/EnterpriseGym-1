@@ -5,7 +5,7 @@
  */
 package com.egym;
 
-import Stores.UserStatusTypes;
+import Stores.CarouselImageStore;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
@@ -28,8 +28,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Dreads
  */
-@WebServlet(name = "register", urlPatterns = {"/register"})
-public class register extends HttpServlet {
+@WebServlet(name = "updateCarouselItem", urlPatterns = {"/updateCarouselItem"})
+public class updateCarouselItem extends HttpServlet 
+{
     Connection con = null;
     Statement st = null;
     ResultSet rs = null;
@@ -49,18 +50,6 @@ public class register extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet register</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet register at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,28 +64,7 @@ public class register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection(url, user, password);
-            LinkedList<UserStatusTypes> statusTypes = new LinkedList<UserStatusTypes>();
-                CallableStatement cs = this.con.prepareCall("{call get_status_types}");
-            ResultSet rs = cs.executeQuery();
-            
-            while(rs.next())
-            {
-                int statusId = rs.getInt("idUserStatus");
-                String type = rs.getString("Type");
-                UserStatusTypes st = new UserStatusTypes(statusId, type);
-                statusTypes.add(st);
-            } 
-            cs.close();
-            con.close();
-            request.setAttribute("StatusTypes", statusTypes);
-            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
-            rd.forward(request,response);
-    }   catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -109,8 +77,37 @@ public class register extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
+        try
+        {
+            String carouselid = request.getParameter("carouselId");
+            int id = Integer.parseInt(carouselid);
+            String picLink = request.getParameter("pictureLink");
+            String captionLink = request.getParameter("captionLink");
+            String captionText = request.getParameter("captionText");
+          
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            con = DriverManager.getConnection(url, user, password);
+            CallableStatement cs = null;
+            cs = this.con.prepareCall("{call set_home_picture(?, ?, ?, ?)}");
+            cs.setInt(1, id);
+            cs.setString(2, picLink);
+            cs.setString(3, captionLink);
+            cs.setString(4, captionText);
+            cs.executeQuery();
+            cs.close();
+            con.close();
+            RequestDispatcher rd = request.getRequestDispatcher("homePage");
+            rd.forward(request,response);
+            
+        } 
+        catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) 
+        {
+            Logger.getLogger(updateCarouselItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
     /**
      * Returns a short description of the servlet.
      *

@@ -105,7 +105,7 @@ public class updateQuizAttempts extends HttpServlet {
                 cs2.close();
             }
             con.close();
-            RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+            RequestDispatcher rd = request.getRequestDispatcher("homePage");
             rd.forward(request,response);
         }
         catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {

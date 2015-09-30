@@ -87,9 +87,7 @@
                     <li>
                         <a href="/eGym/events">Events</a>
                     </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
+                   
                     <li>
                         <a href="/eGym/GetQuizzes">Quizzes</a>
                     
@@ -108,7 +106,8 @@
                             <li><a href="/eGym/createNews">Create News</a></li>
                             <li><a href="/eGym/createActivity">Create Activity</a></li>
                             <li><a href="/eGym/CreateQuiz.jsp">Create Quiz</a></li>
-                            <li><a href="/eGym/quickRegistration.jsp"/>Quick Registration</a></li>
+                            <li><a href="/eGym/quickRegistration.jsp">Quick Registration</a></li>
+                            <li><a href="/eGym/GetCarouselInformation">Edit Carousel</a><li>
                             <li class="divider"></li>
 
                         </ul>
@@ -147,9 +146,7 @@
                     <li>
                         <a href="/eGym/events">Events</a>
                     </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
+                    
                 </ul>
 				<ul class="nav navbar-nav navbar-right">
                          <li>
@@ -179,6 +176,7 @@
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
                 <div class="fill" style="background-image:url('<%=carouselImage.get(0).getImageLink()%>');"></div>
+                
                 <div class="carousel-caption">
                     <h2> <a href="<%=carouselImage.get(0).getCaptionLink()%>"><%=carouselImage.get(0).getCaptionText()%> </a> </h2>
                 </div>
