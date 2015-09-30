@@ -50,9 +50,9 @@ success: function(html){
 }
 });
 
-alert("Comment Posted");
-$('#commentTable').load(document.URL +  ' #commentTable');
-$("ol#update li:first").slideDown("slow");
+location.reload();
+//$('#commentTable').load(document.URL +  ' #commentTable');
+//$("ol#update li:first").slideDown("slow");
 document.getElementById('commentBox').value='';
 document.getElementById('commentBox').focus();
 $("#flash").hide();
@@ -63,68 +63,123 @@ $("#flash").hide();
     
     
 <%
+    LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+    
     NewsModel nm = (NewsModel) request.getAttribute("NewsStory");
+    int newsID = nm.getNewsId();
+    String newsTitle = nm.getNewsTitle();
+    String newsBody = nm.getNewsBody();
+    String newsAuthor = nm.getNewsUser();
+    String newsDatePosted = new java.text.SimpleDateFormat("E dd MMM yyyy HH:mm:ss").format(nm.getNewsDate());
 %>
-<title><%=nm.getNewsTitle()%></title>
-<input type="hidden" name="newsIDBox" id="newsIDBox" value="<%=nm.getNewsId()%>">
+<title><%=newsTitle%></title>
+<input type="hidden" name="newsIDBox" id="newsIDBox" value="<%=newsID%>">
 
 
 <div id="services" class="pad-section">
     <div class="container">
         
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><%=nm.getNewsTitle()%></h3>
+        <ol class="breadcrumb">
+            <li><a href="/eGym/homePage">Home</a></li>
+            <li><a href="/eGym/news">News</a></li>
+            <li class="active"><a href="/eGym/news/<%=newsID%>"><%=newsTitle%></a></li>
+        </ol>
+        
+        <div class="row">
+            <div class="col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong><%=newsTitle%></strong></h3>
+                    </div>
+                    <div class="panel-body" style="color: black;">
+                        <%=newsBody%>
+                    </div>
+                </div>
             </div>
-            <div class="panel-body" style="color: black;">
-                <%=nm.getNewsBody()%>
+            
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Info</strong></h3>
+                    </div>
+                    <div class="panel-body" style="color: black;">
+                        <p><strong>Author:</strong> <a href="/eGym/profile/<%=newsAuthor%>"><%=newsAuthor%></a></p>
+                        <p><strong>Published:</strong> <%=newsDatePosted%></p>
+            <%
+                            if (lg != null && lg.isLoggedIn()) {
+                                if (lg.getRole() == 2 || lg.getRole() == 3) {
+            %>
+                                    <a href="/eGym/EditNews/<%=nm.getNewsId()%>">Edit this news story</a>
+            <%
+                                }
+                            }
+            %>
+                    </div>
+                </div>
             </div>
         </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Comments</h3>
+    <%
+                LinkedList<NewsCommentModel> newsComments = (LinkedList<NewsCommentModel>) request.getAttribute("NewsCommentList");
+                
+                if (newsComments.isEmpty()) { // no comments on the news story
+    %>
+                    <div id="Comments">
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="color: black;">
+                                Be the first to comment on this news story!
+                            </div>
+                        </div>
+                    </div>
+    <%
+                } else { // show comments on the news story
+                    Iterator<NewsCommentModel> iterator = newsComments.iterator();
+                    
+                    while (iterator.hasNext()) {
+                        NewsCommentModel comment = (NewsCommentModel) iterator.next();
+                        String commentAuthor = comment.getAuthor();
+                        String commentBody = comment.getBody();
+                        String commentPosted = new java.text.SimpleDateFormat("E dd MMM yyyy - HH:mm:ss").format(comment.getDatePosted());
+    %>
+                        <div id="Comments">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" >
+                                    <a href="/eGym/profile/<%=commentAuthor%>"><%=commentAuthor%></a> (<%=commentPosted%>)
+                                </div>
+                                <div class="panel-body" style="color: black;">
+                                    <%=commentBody%>
+                                </div>
+                            </div>
+                        </div>
+    <%
+                    }
+                }
+    %>
+            </div>
+        </div>
+    <%
+        if (lg != null && lg.isLoggedIn()) {
+    %>
+            <form role="form">
+                <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
+                <div class="form-group">
+                    <label for="commentBox">Comment:</label>
+                    <textarea class="form-control" rows="5" name="commentBox" id="commentBox"></textarea>
+                    <br />
+                    <input type="button" value="Submit" name="submit" class="btn btn-default comment_button"/>
+                </div>
+            </form>
+    <%  } else {
+    %>
+    <a href="/eGym/login">Sign in</a> to post a comment
+    <%
+        }
+    %>
     </div>
 </div>
-
-            
-        <%
-        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-        if (lg != null && lg.isLoggedIn()) {
-        if (lg.getRole() == 2 || lg.getRole() == 3) {%>
-    <a href="/eGym/EditNews/<%=nm.getNewsId()%>">Edit this</a><%}%>
-    <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
-    
-    
-    
-                <table width='700px' border='1px' name="commentTable" id="commentTable">
-                    <tr>
-                        <th>Author</th>
-                        <th>Body</th>
-                        <th>Date Posted</th>
-                    </tr>
-                <%
-                    LinkedList<NewsCommentModel> newsComments = (LinkedList<NewsCommentModel>) request.getAttribute("NewsCommentList");
-                    Iterator<NewsCommentModel> iterator = newsComments.iterator();
-
-                    while (iterator.hasNext()) 
-                    {
-                        NewsCommentModel comment = (NewsCommentModel) iterator.next();
-                %>
-                        <tr>
-                            <td><%=comment.getAuthor()%></td>
-                            <td><%=comment.getBody()%></td>
-                            <td><%=comment.getDatePosted()%></td>
-                        </tr>
-                <%
-                    }
-                %>
-
-                </table>
-                
-                <textarea rows="4" cols="50" name="commentBox" id="commentBox" maxlength="145" ></textarea><br />
-<input type="button" value="Submit Comment" name="submit" class="comment_button"/>
-    <div id="flash"></div>
-<ol id="update" class="timeline">
-</ol>
-    
-    <%}%>
     <jsp:include page="footer.jsp"></jsp:include>
 
    

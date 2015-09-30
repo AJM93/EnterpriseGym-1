@@ -14,8 +14,7 @@
     %>
     <meta charset="utf-8" />
     <meta name="author" content="Script Tutorials" />
-    <title>TEG Bootstrap one-page template with Parallax effect | Script Tutorials</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">

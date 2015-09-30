@@ -153,11 +153,11 @@ setTimeout(function(){ location.reload(); }, 0);
 
             <div class="row">
                 <div class="col-md-12">
+                    <h3>Comments</h3>
                 <%
                     LinkedList<EventsCommentModel> eventComments = (LinkedList<EventsCommentModel>) request.getAttribute("EventsCommentList");
                     
-                    if (eventComments.isEmpty()) {
-                        // no comments on the activity
+                    if (eventComments.isEmpty()) { // no comments on the activity
                 %>
                         <div id="Comments">
                             <div class="panel panel-default">
@@ -168,9 +168,7 @@ setTimeout(function(){ location.reload(); }, 0);
                         </div>
                 
                 <%
-                    } else {
-                        // show comments on the activity
-                    
+                    } else { // show comments on the activity
                         Iterator<EventsCommentModel> iterator = eventComments.iterator();
 
                         while (iterator.hasNext()) 
@@ -206,7 +204,11 @@ setTimeout(function(){ location.reload(); }, 0);
                         <input type="button" value="Submit" name="submit" class="btn btn-default comment_button"/>
                     </div>
                 </form>
-            <% } %>
+            <%  } else {
+            %>
+                    <a href="/eGym/login">Sign in</a> to post a comment
+            <%
+            }%>
     </div>
 </div>
 
