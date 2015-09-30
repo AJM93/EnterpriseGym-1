@@ -8,7 +8,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <jsp:include page="header.jsp"></jsp:include>
-<link href="css/style.css" rel="stylesheet" />  
         <div id="services" class="pad-section">
     <%
         String carouselId = request.getParameter("CarouselId");
