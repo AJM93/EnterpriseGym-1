@@ -88,43 +88,44 @@ public class login extends HttpServlet {
             CallableStatement cs = this.con.prepareCall("{call login_users(?)}");
             cs.setString(1, username);
             ResultSet rs = cs.executeQuery();
-            rs.next();
             
-            int userType = rs.getInt("UserTypes_idUserTypes");
+            if (rs.next()) { // found an account for the given username
+                int userType = rs.getInt("UserTypes_idUserTypes");
             
-            String storedPassword = rs.getString("password");
-            String hexSalt = rs.getString("salt");
-            byte[] salt = AeSimpleSHA256.fromHex(hexSalt);
-            
-            cs.close();
-            con.close();
-            
-            String encodedPasswordAttempt = null;
-            try
-            {
-                encodedPasswordAttempt = AeSimpleSHA256.getHash(passwordAttempt, salt);
-            }
-            catch (UnsupportedEncodingException | NoSuchAlgorithmException et)
-            {
-                System.out.println("Can't check the password");
-                response.sendRedirect("loginFailed.jsp");
-            } catch (InvalidKeySpecException ex) {
-                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            if (encodedPasswordAttempt != null && encodedPasswordAttempt.equals(storedPassword)) {
-                // login success
-                LoggedIn lg = new LoggedIn(true, username, userType);
+                String storedPassword = rs.getString("password");
+                String hexSalt = rs.getString("salt");
+                byte[] salt = AeSimpleSHA256.fromHex(hexSalt);
 
-                HttpSession session = request.getSession();
-                session.setAttribute("LoggedIn", lg);
+                cs.close();
+                con.close();
 
-                // redirect                
-                response.sendRedirect("/eGym/homePage");
-            } else {
-                // unsuccessful login
-                response.sendRedirect("loginFailed.jsp");
+                String encodedPasswordAttempt = null;
+                try
+                {
+                    encodedPasswordAttempt = AeSimpleSHA256.getHash(passwordAttempt, salt);
+                    
+                    if (encodedPasswordAttempt.equals(storedPassword)) { // login success
+                        LoggedIn lg = new LoggedIn(true, username, userType);
+
+                        HttpSession session = request.getSession();
+                        session.setAttribute("LoggedIn", lg);
+
+                        response.sendRedirect("/eGym/homePage");
+                    } else { // incorrect password
+                        response.sendRedirect("/eGym/login");
+                    }
+                }
+                catch (UnsupportedEncodingException | NoSuchAlgorithmException et)
+                {
+                    response.sendRedirect("/eGym/login");
+                } catch (InvalidKeySpecException ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else { // no account for the given username
+                response.sendRedirect("/eGym/login");
             }
+            
+            
             
         } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(RegisterNewUser.class.getName()).log(Level.SEVERE, null, ex);
