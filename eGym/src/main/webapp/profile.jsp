@@ -89,6 +89,10 @@
                             <h3>Matric No: <%=matric%></h3>
                             <h3>Phone No: <%=phoneNo%></h3>
                             <h3>DoB: <%=dob%></h3>
+                             <form action="/eGym/getUserDetails" method="POST">
+                                    <button type="submit" class="btn btn-default" name="getUsername" value=<%=username%>>Edit User</button>
+                                    </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -174,7 +178,9 @@
                         <div class="alert alert-info" style="padding: 15px;">
                             Tick to show your name on the <a href="/eGym/overallLeaderboard">points leaderboard</a>
                         </div>
+                            
                     </form>
+                            
                 </div>
             </div>
         </div>
