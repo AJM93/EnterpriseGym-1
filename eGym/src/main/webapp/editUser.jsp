@@ -28,6 +28,7 @@
     String SubInstitution = us.getSubInstitution();
     String Degree = us.getDegree();
     Timestamp dob = us.getDob();
+    java.sql.Date date = new java.sql.Date(dob.getTime());
     String yos = us.getYos();
     int UserStatus = us.getUserStatusID();
 %>
@@ -84,7 +85,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputDOB">Date Of Birth</label>
-                        <input type="text" class="form-control" id="inputDOB" name="dob" value="<%=dob%>" placeholder="YYYY-MM-DD" >
+                        <input type="date" value="<%=date%>" required name="DOBdate" style="color: black;">
                     </div>
                     <div class="form-group">
                         <label for="inputYOS">Year Of Study</label>

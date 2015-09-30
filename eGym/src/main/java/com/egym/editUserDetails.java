@@ -62,13 +62,15 @@ public class editUserDetails extends HttpServlet {
             String institution = request.getParameter("institution");
             String subInstitution = request.getParameter("subInstitution");
             String degree = request.getParameter("degree");
-            String DoB = request.getParameter("dob");
+            String DoB = request.getParameter("DOBdate");
+            String dob = DoB + " 12:00:00";
+            Timestamp datePosted = Timestamp.valueOf(dob);
             String YoS = request.getParameter("yos");
             int userStatus = Integer.parseInt(request.getParameter("userStatus"));
             char gender = Gender.charAt(0);
             int yos = Integer.parseInt(YoS);
             
-            Timestamp datePosted = Timestamp.valueOf(DoB);
+            
             
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
