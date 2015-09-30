@@ -65,45 +65,76 @@
 <div id="profile" class="pad-section">
     <div class="container">
         <div id="node-51">
-       <h2>Progress to Gold Medal (2 Silver Medals)</h2>
-        <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%=highestPercent%>" aria-valuemin="0" aria-valuemax="<%=goldMedalPoints%>" style="width:<%=highestPercent%>%; min-width: 2em">
-              <%=highestPercent%>%
-            </div>
-            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<%=nextHighestPercent%>" aria-valuemin="0" aria-valuemax="<%=goldMedalPoints%>" style="width:<%=nextHighestPercent%>%; min-width: 2em">
-              <%=nextHighestPercent%>%
-            </div>
-        </div>
-            <h2>Progress to Silver Medal (70 pts)</h2>
-        <h3>Online Theory - <%=onlineTheory%> pts</h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="<%=onlineTheory%>" aria-valuemin="0" aria-valuemax="<%=silverMedalPoints%>" style="width:<%=onlinePercent%>%; min-width: 2em">
-              <%=onlinePercent%>%
-            </div>
-        </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4>Progress to Gold Medal (2 Silver Medals)</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%=highestPercent%>" aria-valuemin="0" aria-valuemax="<%=goldMedalPoints%>" style="width:<%=highestPercent%>%; min-width: 2em">
+                              <%=highestPercent%>%
+                            </div>
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<%=nextHighestPercent%>" aria-valuemin="0" aria-valuemax="<%=goldMedalPoints%>" style="width:<%=nextHighestPercent%>%; min-width: 2em">
+                              <%=nextHighestPercent%>%
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <h3>Action - <%=action%> pts</h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="<%=action%>" aria-valuemin="0" aria-valuemax="<%=silverMedalPoints%>" style="width:<%=actionPercent%>%; min-width: 2em">
-              <%=actionPercent%>%
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Progress to Silver Medal (70 pts)</h4>
+                    </div>
+                </div>
 
-        <h3>Project - <%=project%> pts</h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="<%=project%>" aria-valuemin="0" aria-valuemax="<%=silverMedalPoints%>" style="width:<%=projectPercent%>%; min-width: 2em">
-              <%=projectPercent%>%
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Online Theory - <%=onlineTheory%> pts</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<%=onlineTheory%>" aria-valuemin="0" aria-valuemax="<%=silverMedalPoints%>" style="width:<%=onlinePercent%>%; min-width: 2em">
+                              <%=onlinePercent%>%
+                            </div>
+                        </div>
 
-        <h3>Challenge - <%=challenge%> pts</h3>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="<%=challenge%>" aria-valuemin="0" aria-valuemax="<%=silverMedalPoints%>" style="width:<%=challengePercent%>%; min-width: 2em">
-              <%=challengePercent%>%
-            </div>
-        </div>
+                        <h5>Action - <%=action%> pts</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<%=action%>" aria-valuemin="0" aria-valuemax="<%=silverMedalPoints%>" style="width:<%=actionPercent%>%; min-width: 2em">
+                              <%=actionPercent%>%
+                            </div>
+                        </div>
+                    </div>
 
-        <h2>Total: <%=total%> pts</h2>
+                    <div class="col-md-6">
+                        <h5>Project - <%=project%> pts</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<%=project%>" aria-valuemin="0" aria-valuemax="<%=silverMedalPoints%>" style="width:<%=projectPercent%>%; min-width: 2em">
+                              <%=projectPercent%>%
+                            </div>
+                        </div>
+
+                        <h5>Challenge - <%=challenge%> pts</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<%=challenge%>" aria-valuemin="0" aria-valuemax="<%=silverMedalPoints%>" style="width:<%=challengePercent%>%; min-width: 2em">
+                              <%=challengePercent%>%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Total: <%=total%> pts</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="/eGym/overallLeaderboard"><h6>View the points leaderboard</h6></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -169,8 +169,7 @@
                             <button type="submit" class="btn btn-default">Update</button>
                         </div>
                             
-                        <div class="alert alert-info fade in" style="padding: 15px;">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <div class="alert alert-info" style="padding: 15px;">
                             Tick to show your name on the <a href="/eGym/overallLeaderboard">points leaderboard</a>
                         </div>
                     </form>

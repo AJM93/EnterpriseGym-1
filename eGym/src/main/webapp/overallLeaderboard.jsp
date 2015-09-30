@@ -19,7 +19,7 @@
         <div class="container">
             <h1 style="text-align: center;">Points leaderboard</h1>
         <div class="table-responsive">
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th style="text-align: center;">Rank</th>
