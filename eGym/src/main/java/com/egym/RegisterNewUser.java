@@ -101,7 +101,7 @@ public class RegisterNewUser extends HttpServlet {
             }
             catch (NoSuchAlgorithmException et) {
                 System.out.println("Can't hash the password");
-                response.sendRedirect("index.html");
+                response.sendRedirect("/homePage");
             } catch (InvalidKeySpecException ex) {
                 Logger.getLogger(RegisterNewUser.class.getName()).log(Level.SEVERE, null, ex);
             }

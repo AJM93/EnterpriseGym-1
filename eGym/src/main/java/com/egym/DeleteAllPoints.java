@@ -90,7 +90,7 @@ public class DeleteAllPoints extends HttpServlet
             cs2.executeQuery();
             cs2.close();
             con.close();
-            RequestDispatcher rd = request.getRequestDispatcher("homePage");
+            RequestDispatcher rd = request.getRequestDispatcher("/homePage");
             rd.forward(request,response);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
             Logger.getLogger(DeleteAllPoints.class.getName()).log(Level.SEVERE, null, ex);

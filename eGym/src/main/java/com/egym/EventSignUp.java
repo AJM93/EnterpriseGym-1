@@ -111,7 +111,7 @@ public class EventSignUp extends HttpServlet
             }
             con.close();
             String Eventid = String.valueOf(urlActivityID); 
-            RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/homePage");
             rd.forward(request,response);
         } 
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {

@@ -112,11 +112,11 @@ public class ResetPassword extends HttpServlet {
                 }else
                 {
                     // if request is after timeout
-                    RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+                    RequestDispatcher rd = request.getRequestDispatcher("/homePage");
                     rd.forward(request,response);
                 }
             }else{
-                RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+                RequestDispatcher rd = request.getRequestDispatcher("/homePage");
                 rd.forward(request,response);
             }
             
@@ -151,7 +151,7 @@ public class ResetPassword extends HttpServlet {
         }
         catch (NoSuchAlgorithmException et) {
             System.out.println("Can't hash the password");
-            response.sendRedirect("index.html");
+            response.sendRedirect("/homePage");
         } catch (InvalidKeySpecException ex) {
             Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -173,7 +173,7 @@ public class ResetPassword extends HttpServlet {
             cs2.close();
             con.close();
             
-            RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/homePage");
             rd.forward(request,response);
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);

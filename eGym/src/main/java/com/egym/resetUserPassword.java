@@ -134,7 +134,7 @@ public class resetUserPassword extends HttpServlet {
             final String emailMessage = "<p>A request for a new password was logged at " + timeRequested + "</p>" + "<p>Please go to the following link within an hour to create a new password." + "</p>" + "Link: <a href=\"" + url + "\">  " + url + "</a>";
             ResetPasswordEmail.SendEmail(emailAddressTo, emailSubject, emailMessage);
             
-            RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/homePage");
             rd.forward(request,response);
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);

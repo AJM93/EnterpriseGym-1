@@ -305,14 +305,14 @@ public class CreateQuizQuestions extends HttpServlet {
                 cs11.close();
                 
                 con.close();
-                RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+                RequestDispatcher rd = request.getRequestDispatcher("/homePage");
                 rd.forward(request,response);
             }
             else
             {
                 cs.close();
                 con.close();
-                RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+                RequestDispatcher rd = request.getRequestDispatcher("/homePage");
                 rd.forward(request,response);
             }
             

@@ -91,7 +91,7 @@ public class editUserDetails extends HttpServlet {
             cs.executeQuery();
             cs.close();
             con.close();
-            RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/homePage");
             rd.forward(request,response);
         } catch (SQLException ex) {
             Logger.getLogger(editUserDetails.class.getName()).log(Level.SEVERE, null, ex);

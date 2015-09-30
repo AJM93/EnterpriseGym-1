@@ -105,7 +105,7 @@ public class QuickRegisterUser extends HttpServlet {
             catch (NoSuchAlgorithmException et) 
             {
                 System.out.println("Can't hash the password");
-                response.sendRedirect("index.html");
+                response.sendRedirect("/homePage");
             } 
             catch (InvalidKeySpecException ex) 
             {
@@ -128,7 +128,7 @@ public class QuickRegisterUser extends HttpServlet {
             cs2.executeQuery();
             cs2.close();
             con.close();
-            RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/homePage");
             rd.forward(request,response);
         } 
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) 
