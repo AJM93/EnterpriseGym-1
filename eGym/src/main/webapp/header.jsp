@@ -76,7 +76,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/eGym/homePage">The Enterprise Gym</a>
+                <a class="navbar-brand" href="/eGym/homePage"><img src="${pageContext.request.contextPath}/images/logo-eg.png"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -135,7 +135,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/eGym/homePage">The Enterprise Gym</a>
+                <a class="navbar-brand" href="/eGym/homePage"><img src="${pageContext.request.contextPath}/images/logo-eg.png"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -151,7 +151,9 @@
 				<ul class="nav navbar-nav navbar-right">
                          <li>
                              <a href="/eGym/login.jsp">Sign In</a>
+                            
                         </li>
+                        <li> <a href="/eGym/register">Register</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

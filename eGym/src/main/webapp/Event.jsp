@@ -124,7 +124,8 @@ setTimeout(function(){ location.reload(); }, 0);
                                         <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=es.getId()%>">
                         <%
                                 if (lg.getRole() == 3 || lg.getRole() == 4) { %>
-                                    <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a>
+                                <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a></br>
+                                    <a href="eGym/EditEvent/<%=es.getId()%>">Edit Event</a>
                         <%      } else {
                         %>
                                     <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
