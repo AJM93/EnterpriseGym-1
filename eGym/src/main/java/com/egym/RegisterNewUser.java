@@ -118,11 +118,9 @@ public class RegisterNewUser extends HttpServlet {
             String institution = request.getParameter("institution");
             String subInstitution = request.getParameter("subInstitution");
             String degree = request.getParameter("degree");
-            String DoB = request.getParameter("dob");
            
             String startDate = request.getParameter("DOBdate");
-            String startTime = request.getParameter("DOBtime");
-            String startString = startDate + " " + startTime + ":00";
+            String startString = startDate + " 12:00:00";
             Timestamp datePosted = Timestamp.valueOf(startString);
             
             String YoS = request.getParameter("yos");
@@ -162,7 +160,7 @@ public class RegisterNewUser extends HttpServlet {
             
             con.close();
             
-            RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/homePage");
             rd.forward(request,response);
         } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(RegisterNewUser.class.getName()).log(Level.SEVERE, null, ex);

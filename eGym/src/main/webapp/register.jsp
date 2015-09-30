@@ -104,7 +104,6 @@
                 <div class="form-group" >
                     <label for="DOBdate">Date Of Birth</label>
                     <input type="date" required name="DOBdate" style="color: black;">
-                    <input type="time" required name="DOBtime" style="color: black;">
                 </div>
                 <div class="form-group">
                     <label for="inputYOS">Year Of Study</label>
