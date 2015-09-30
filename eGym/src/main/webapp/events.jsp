@@ -19,6 +19,26 @@
             LinkedList<EventsModel> llsr = (LinkedList<EventsModel>) request.getAttribute("EventsList");
            
            for (EventsModel t : llsr){
+               boolean htmlTag = false;
+                String originalBody = t.getEventBody();
+                String noHtmlBody = "";
+
+                for (int i = 0; i < originalBody.length(); ++i) {
+                    if (!htmlTag && originalBody.charAt(i) == '<') {
+                        htmlTag = true;
+                        continue;
+                    }
+                    if (htmlTag && originalBody.charAt(i) == '>') {
+                        htmlTag = false;
+                        continue;
+                    }
+                    if (!htmlTag) {
+                        noHtmlBody = noHtmlBody + originalBody.charAt(i);
+                    }
+                }
+
+                String bodyDisplay = noHtmlBody.substring(0, Math.min(noHtmlBody.length(), 70));
+                bodyDisplay = bodyDisplay + "...";
         %>
            <div>
             <div class="col-md-4">
@@ -27,7 +47,7 @@
                         <h3 class="panel-title"><a href="/eGym/EventItem/<%=t.getEventID()%>"><%=t.getEventTitle()%></a></h3>
                     </div>
                     <div class="panel-body" style="min-height: 100px; max-height: 100px;">
-                        <%="body of event..."%>
+                        <%=bodyDisplay%>
                     </div>
                 </div>
             </div>
