@@ -22,42 +22,27 @@
      LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
      UserStore profile = null;
             if (lg != null && lg.isLoggedIn()) {
-             profile = (UserStore) request.getAttribute("UserProfile");
-             String username = profile.getUsername();
-            String firstName = profile.getFirstname();
-            String lastName = profile.getLastname();
-            String matric = profile.getMatriculationNo();
-            String email = profile.getEmail();
-            String phoneNo = profile.getPhoneNo();
-            char gender = profile.getGender();
-            String country = profile.getCountry();
-            String inst = profile.getInstitution();
-            String subInst = profile.getSubInstitution();
-            String degree = profile.getDegree();
-            Timestamp dob = profile.getDob();
-            String yos = profile.getYos();
-           
-            String anon = profile.getAnonymous();
-            
-            int onlineTheory = profile.getOnlineTheory();
-            int action = profile.getAction();
-            int project = profile.getProject();
-            int challenge = profile.getChallenge();
-            int total = profile.getTotal();
-            
-            float silverMedalPoints = 70;
-            float goldMedalPoints = silverMedalPoints * 2f;
-            
-            float[] points = {onlineTheory, action, project, challenge};
-            java.util.Arrays.sort(points);
+                profile = (UserStore) request.getAttribute("UserProfile");
+                
+                int onlineTheory = profile.getOnlineTheory();
+                int action = profile.getAction();
+                int project = profile.getProject();
+                int challenge = profile.getChallenge();
+                int total = profile.getTotal();
 
-            int highestPercent = Math.round((points[3] / goldMedalPoints) * 100);
-            int nextHighestPercent = Math.round((points[2] / goldMedalPoints) * 100);
-            
-            int onlinePercent = Math.round((onlineTheory / silverMedalPoints) * 100);
-            int actionPercent = Math.round((action / silverMedalPoints) * 100);
-            int projectPercent = Math.round((project / silverMedalPoints) * 100);
-            int challengePercent = Math.round((challenge / silverMedalPoints) * 100);
+                float silverMedalPoints = 70;
+                float goldMedalPoints = silverMedalPoints * 2f;
+
+                float[] points = {onlineTheory, action, project, challenge};
+                java.util.Arrays.sort(points);
+
+                int highestPercent = Math.round((points[3] / goldMedalPoints) * 100);
+                int nextHighestPercent = Math.round((points[2] / goldMedalPoints) * 100);
+
+                int onlinePercent = Math.round((onlineTheory / silverMedalPoints) * 100);
+                int actionPercent = Math.round((action / silverMedalPoints) * 100);
+                int projectPercent = Math.round((project / silverMedalPoints) * 100);
+                int challengePercent = Math.round((challenge / silverMedalPoints) * 100);
             
 %>
 <!-- /first section -->

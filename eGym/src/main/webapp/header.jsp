@@ -95,22 +95,22 @@
                             <a href="/eGym/profile/<%=lg.getUsername()%>">Profile</a>
                     </li>
                 <% if (lg.getRole() == 2 || lg.getRole() == 3) {%>
-				
-                                    
-                         <li class="dropdown pull-right">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/eGym/GetAllUsers">View/Edit Users</a></li>
-                                <li><a href="/eGym/approveUsers">Approve Users</a></li>
-                                <li><a href="/eGym/createNews">Create News</a></li>
-                                <li><a href="/eGym/createActivity">Create Activity</a></li>
-                                <li><a href="/eGym/CreateQuiz.jsp">Create Quiz</a></li>
-                                <li class="divider"></li>
-                                
-                            </ul>
-                        </li>
+                    <li class="dropdown pull-right">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/eGym/GetAllUsers">View/Edit Users</a></li>
+                            <li><a href="/eGym/approveUsers">Approve Users</a></li>
+                            <li><a href="/eGym/createNews">Create News</a></li>
+                            <li><a href="/eGym/createActivity">Create Activity</a></li>
+                            <li><a href="/eGym/CreateQuiz.jsp">Create Quiz</a></li>
+                            <li class="divider"></li>
+
+                        </ul>
+                    </li>
+                <%}%>
+                    <li><a href="/eGym/logout">Sign Out</a></li>
                 </ul>
-              <%}%>
+              
             </div>
             <!-- /.navbar-collapse -->
         </div>

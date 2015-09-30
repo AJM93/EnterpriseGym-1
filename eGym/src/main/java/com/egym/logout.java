@@ -34,7 +34,7 @@ public class logout extends HttpServlet {
         HttpSession session = request.getSession();
         if (session != null){
             session.invalidate();
-            response.sendRedirect("index.html");
+            response.sendRedirect("/eGym/homePage");
         }
     }
 
