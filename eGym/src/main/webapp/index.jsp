@@ -244,6 +244,7 @@
     </div>
 </div>
 
+<% if (em != null) { %>
 <div id="information" class="pad-section">
     <div class="container">
         <div class="row">
@@ -336,6 +337,7 @@
         </div>
     </div>
 </div>
+<% } %>
 <!-- /fourth section -->
 <!-- attach JavaScripts -->
 <jsp:include page="footer.jsp"></jsp:include>

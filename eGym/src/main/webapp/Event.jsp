@@ -93,7 +93,6 @@ $("#flash").hide();
     <!-- Bootstrap Form Helpers -->
     <script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
 
-
     <div id="services" class="pad-section">
         <div class="container">
             <div class="row">
@@ -123,24 +122,29 @@ $("#flash").hide();
                                     <p><strong>Time:</strong> <%=startTime%> - <%=endTime%></p>
                                 </div>
                             </div>
-                            <div class="row" style="border-top: 1px solid#888; padding: 5px 0px;">
-                                <div class="col-md-12">
-                                    <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=es.getId()%>">
-                                    <%
-                                        if (lg != null && lg.isLoggedIn()) {
-                                            String username = lg.getUsername();
-                                            
-                                            if (lg.getRole() == 3 || lg.getRole() == 4) { %>
-                                                <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a>
-                                    <%      } else {
-                                    %>          <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
-                                                <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
-                                    <%
-                                            }
-                                        }
-                                    %>
+                            
+                        <%
+                            if (lg != null && lg.isLoggedIn()) {
+                                String username = lg.getUsername();
+                        %>
+                                <div class="row">
+                                    <div class="col-md-12" style="border-top: 1px solid#888; padding: 10px;">
+                                        <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=es.getId()%>">
+                        <%
+                                if (lg.getRole() == 3 || lg.getRole() == 4) { %>
+                                    <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a>
+                        <%      } else {
+                        %>
+                                    <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
+                                    <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
+                        <%
+                                }
+                        %>
+                                    </div>
                                 </div>
-                            </div>
+                        <%
+                            }
+                        %>
                         </div>
                     </div>
                 </div>
@@ -150,40 +154,59 @@ $("#flash").hide();
                 <div class="col-md-12">
                 <%
                     LinkedList<EventsCommentModel> eventComments = (LinkedList<EventsCommentModel>) request.getAttribute("EventsCommentList");
-                    Iterator<EventsCommentModel> iterator = eventComments.iterator();
-
-                    while (iterator.hasNext()) 
-                    {
-                        EventsCommentModel comment = (EventsCommentModel) iterator.next();
-                        String commentAuthor = comment.getAuthor();
-                        String commentBody = comment.getBody();
-                        String commentPosted = new java.text.SimpleDateFormat("E dd MMM yyyy - HH:mm:ss").format(comment.getDatePosted());
+                    
+                    if (eventComments.isEmpty()) {
+                        // no comments on the activity
                 %>
-                    <div id="Comments">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" >
-                                <a href="/eGym/profile/<%=commentAuthor%>"><%=commentAuthor%></a> (<%=commentPosted%>)
-                            </div>
-                            <div class="panel-body" style="color: black;">
-                                <%=commentBody%>
+                        <div id="Comments">
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="color: black;">
+                                    Be the first to comment on this activity!
+                                </div>
                             </div>
                         </div>
-                    </div>
+                
                 <%
+                    } else {
+                        // show comments on the activity
+                    
+                        Iterator<EventsCommentModel> iterator = eventComments.iterator();
+
+                        while (iterator.hasNext()) 
+                        {
+                            EventsCommentModel comment = (EventsCommentModel) iterator.next();
+                            String commentAuthor = comment.getAuthor();
+                            String commentBody = comment.getBody();
+                            String commentPosted = new java.text.SimpleDateFormat("E dd MMM yyyy - HH:mm:ss").format(comment.getDatePosted());
+                %>
+                        <div id="Comments">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" >
+                                    <a href="/eGym/profile/<%=commentAuthor%>"><%=commentAuthor%></a> (<%=commentPosted%>)
+                                </div>
+                                <div class="panel-body" style="color: black;">
+                                    <%=commentBody%>
+                                </div>
+                            </div>
+                        </div>
+                <%
+                        }
                     }
                 %>
                 </div>
             </div>
-        </div>
+            <% if (lg != null && lg.isLoggedIn()) { %>
+                <form role="form">
+                    <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
+                    <div class="form-group">
+                        <label for="commentBox">Comment:</label>
+                        <textarea class="form-control" rows="5" name="commentBox" id="commentBox"></textarea>
+                        <br />
+                        <input type="button" value="Submit" name="submit" class="btn btn-default comment_button"/>
+                    </div>
+                </form>
+            <% } %>
     </div>
+</div>
 
-
-
-
-    
-        <textarea rows="4" cols="50" name="commentBox" id="commentBox" maxlength="145" ></textarea><br />
-        <input type="button" value="Submit Comment" name="submit" class="comment_button"/>
-            <div id="flash"></div>
-        <ol id="update" class="timeline">
-        </ol>
-        <jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"></jsp:include>
