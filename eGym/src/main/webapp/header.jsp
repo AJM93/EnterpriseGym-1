@@ -1,4 +1,6 @@
-
+<%@page import="Stores.CarouselImageStore"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="Models.*"%>
 <%@page import="Stores.LoggedIn"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +8,10 @@
 
 
 <head>
-
+    <%
+        CarouselImageModel imageModel = new CarouselImageModel();
+        LinkedList<CarouselImageStore> carouselImage = imageModel.getImages();
+    %>
     <meta charset="utf-8" />
     <meta name="author" content="Script Tutorials" />
     <title>TEG Bootstrap one-page template with Parallax effect | Script Tutorials</title>
@@ -173,23 +178,23 @@
         <div class="carousel-inner">
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+                <div class="fill" style="background-image:url('<%=carouselImage.get(0).getImageLink()%>');"></div>
                 <div class="carousel-caption">
-                    <h2>Caption 1</h2>
+                    <h2> <a href="<%=carouselImage.get(0).getCaptionLink()%>"><%=carouselImage.get(0).getCaptionText()%> </a> </h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+                <div class="fill" style="background-image:url('<%=carouselImage.get(1).getImageLink()%>');"></div>
                 <div class="carousel-caption">
-                    <h2>Caption 2</h2>
+                    <h2> <a href="<%=carouselImage.get(1).getCaptionLink()%>"><%=carouselImage.get(1).getCaptionText()%> </a> </h2>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the third background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+                <div class="fill" style="background-image:url('<%=carouselImage.get(2).getImageLink()%>');"></div>
                 <div class="carousel-caption">
-                    <h2>Caption 3</h2>
+                    <h2> <a href="<%=carouselImage.get(2).getCaptionLink()%>"><%=carouselImage.get(2).getCaptionText()%> </a> </h2>
                 </div>
             </div>
         </div>
