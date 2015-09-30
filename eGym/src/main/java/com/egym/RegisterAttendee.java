@@ -65,20 +65,7 @@ public class RegisterAttendee extends HttpServlet {
             cs.setInt(2, Integer.parseInt(args[3]));
             ResultSet rs = cs.executeQuery();
             cs.close();
-                    con.close();
-           
-            //2 username 3 activity id
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterAttendee</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>"+args[2]+"</h1>");
-            out.println("<h1>"+args[3]+"</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            con.close();
         }
     }
 

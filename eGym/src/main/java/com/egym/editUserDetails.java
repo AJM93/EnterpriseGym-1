@@ -90,6 +90,7 @@ public class editUserDetails extends HttpServlet {
             cs.setInt(14, userStatus);
             cs.executeQuery();
             cs.close();
+            con.close();
             RequestDispatcher rd = request.getRequestDispatcher("/index.html");
             rd.forward(request,response);
         } catch (SQLException ex) {

@@ -98,7 +98,7 @@ public class NewsItem extends HttpServlet {
             
             request.setAttribute("NewsCommentList", newsCommentList);
                 
-                cs.close();
+                nComments.close();
             
             
             con.close();

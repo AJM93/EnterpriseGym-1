@@ -67,7 +67,8 @@ public class NewsModel
                 NewsModel news_model = new NewsModel(id, Title, Body, User, Date);
                 tr.add(news_model);
             }
-       
+            cs.close();
+            con.close();
        
        return tr;
     }

@@ -68,6 +68,8 @@ public class EventsModel {
                 EventsModel events_model = new EventsModel(id, Title, Body, Trainer, Points);
                 tr.add(events_model);
             }
+            cs.close();
+            con.close();
        return tr;
     }
     
@@ -94,6 +96,8 @@ public class EventsModel {
                 EventsModel events_model = new EventsModel(id, Title, Body, Trainer, Points);
                 tr.add(events_model);
             }
+            cs.close();
+            con.close();
        return tr;
     }  
   
@@ -101,24 +105,25 @@ public class EventsModel {
       EventStore rt = null;
       Class.forName("com.mysql.jdbc.Driver").newInstance();
              
-            con = DriverManager.getConnection(url, user, password);
-            CallableStatement cs = null;
-            cs = this.con.prepareCall("{call get_single_activity(?)}");   //(?,?)}"
-            cs.setInt(1, id);
-            ResultSet rs = cs.executeQuery();
-            rs.next();
-                int idd = rs.getInt("idActivities");
-                String Title = rs.getString("Title");
-                String Body = rs.getString("Body");
-                String Trainer = rs.getString("Users_Username");
-                String Type = rs.getString("Type");
-                Timestamp start = rs.getTimestamp("StartTime");
-                Timestamp end = rs.getTimestamp("EndTime");
-                //java.util.Date dt = rs.getDate("DatePublished");
-                //String Date = dt.toString();
-                int Points = rs.getInt("Points");
-                rt = new EventStore(idd, Title, Points, Body, Trainer, Type, start, end); 
-                
+        con = DriverManager.getConnection(url, user, password);
+        CallableStatement cs = null;
+        cs = this.con.prepareCall("{call get_single_activity(?)}");   //(?,?)}"
+        cs.setInt(1, id);
+        ResultSet rs = cs.executeQuery();
+        rs.next();
+        int idd = rs.getInt("idActivities");
+        String Title = rs.getString("Title");
+        String Body = rs.getString("Body");
+        String Trainer = rs.getString("Users_Username");
+        String Type = rs.getString("Type");
+        Timestamp start = rs.getTimestamp("StartTime");
+        Timestamp end = rs.getTimestamp("EndTime");
+        //java.util.Date dt = rs.getDate("DatePublished");
+        //String Date = dt.toString();
+        int Points = rs.getInt("Points");
+        rt = new EventStore(idd, Title, Points, Body, Trainer, Type, start, end); 
+        cs.close();
+        con.close();
       return rt;
   }
      

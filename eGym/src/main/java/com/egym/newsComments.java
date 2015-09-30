@@ -53,9 +53,8 @@ public class newsComments extends HttpServlet {
     
     public java.util.LinkedList<NewsCommentModel> GetComments(int id){
         LinkedList<NewsCommentModel> newsCommentList = new LinkedList<>();
-        try {
-            
-            
+        try 
+        {
             con = DriverManager.getConnection(url, user, password);
             CallableStatement cs = this.con.prepareCall("{call news_comments(?)}");   //(?,?)}"
             cs.setInt(1,id);
@@ -72,7 +71,8 @@ public class newsComments extends HttpServlet {
                 NewsCommentModel newsComment = new NewsCommentModel(commentID, newsID, author, body, datePosted);
                 newsCommentList.add(newsComment);
             }
-            
+            cs.close();
+            con.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(newsComments.class.getName()).log(Level.SEVERE, null, ex);
