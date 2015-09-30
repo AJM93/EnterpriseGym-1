@@ -15,11 +15,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/
-libs/jquery/1.3.0/jquery.min.js">
-</script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
- <script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+ <script>
 $(function() {
 
 $(".comment_button").click(function() {
@@ -43,24 +40,19 @@ $(".comment_button").click(function() {
 	}
         else
 {
-$("#flash").show();
-$("#flash").fadeIn(400).html('<img src="ajax-loader.gif" align="absmiddle"> <span class="loading">Loading Comment...</span>');
 
 $.ajax({
 type: "POST",
 url: "/eGym/PostEventComment",
 data: {commentBox: boxval, userName: usernameval, eventID: eventidval},
-cache: false,
-success: function(html){
-}
+cache: false
 });
-            
-location.reload();
+
 //$('#Comments').load(document.URL +  ' #commentTable');
 //$("ol#update li:first").slideDown("slow");
 document.getElementById('commentBox').value='';
 document.getElementById('commentBox').focus();
-$("#flash").hide();
+setTimeout(function(){ location.reload(); }, 0);
 } return false;
 });
 });
