@@ -10,6 +10,16 @@
 <%@page import="java.sql.Timestamp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp"></jsp:include>
+<!-- Bootstrap Form Helpers -->
+<link href="http://bootstrapformhelpers.com/assets/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="assets/js/jquery.validate.js"></script> 
+<script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
+    <script>
+    function check() {
+        document.getElementById("inputCountry2").value = document.getElementById("inputCountry").value;
+    }
+</script>
 <%
     UserStore us = (UserStore) request.getAttribute("UserStore");
     
@@ -67,10 +77,24 @@
                         <label for="inputGender">Gender</label>
                         <input type="text" class="form-control" id="inputGender" name="gender" value="<%=Gender%>" placeholder="Gender">
                     </div>
+                    
                     <div class="form-group">
-                        <label for="inputCountry">Country</label>
-                        <input type="text" class="form-control" id="inputCountry" name="country" value="<%=Country%>" placeholder="Country of Origin">
+                    <label for="inputCountry">Country</label>
+                    <div id="inputCountry" data-input-name="country" class="bfh-selectbox bfh-countries" data-country="<%=Country%>" data-flags="true" onChange="check();">
+                        <input form='form1' type="hidden" >
+                        <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
+                            <span class="bfh-selectbox-option input-medium"></span>
+                            <b class="caret"></b>
+                        </a>
+                        <div class="bfh-selectbox-options countries">
+                            <div role="listbox">
+                                <ul role="option">
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+                    <input type="hidden" class="form-control" id="inputCountry2" required name="country2">
+                </div>
                     <div class="form-group">
                         <label for="inputInstitution">Institution</label>
                         <input type="text" class="form-control" id="inputInstitution" name="institution" value="<%=Institution%>" placeholder="Institution">
