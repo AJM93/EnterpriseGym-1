@@ -71,6 +71,7 @@ $("#flash").hide();
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         
         EventStore es = (EventStore) request.getAttribute("Event");
+        int eventID = es.getId();
         String title = es.getTitle();
         String body = es.getBody();
         int points = es.getPoints();
@@ -95,6 +96,13 @@ $("#flash").hide();
 
     <div id="services" class="pad-section">
         <div class="container">
+            
+            <ol class="breadcrumb">
+                <li><a href="/eGym/homePage">Home</a></li>
+                <li><a href="/eGym/events">Events</a></li>
+                <li class="active"><a href="/eGym/events/<%=eventID%>"><%=title%></a></li>
+            </ol>
+            
             <div class="row">
                 <div class="col-md-8">
                     <div class="panel panel-default">
@@ -129,13 +137,13 @@ $("#flash").hide();
                         %>
                                 <div class="row">
                                     <div class="col-md-12" style="border-top: 1px solid#888; padding: 10px;">
-                                        <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=es.getId()%>">
+                                        <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=eventID%>">
                         <%
                                 if (lg.getRole() == 3 || lg.getRole() == 4) { %>
-                                    <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a>
+                                    <a href="/eGym/GetAttendees/<%=eventID%>">Register Event Attendance</a>
                         <%      } else {
                         %>
-                                    <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
+                                    <form action="/eGym/EventSignUp/<%=eventID%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
                                     <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
                         <%
                                 }

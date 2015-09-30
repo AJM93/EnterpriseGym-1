@@ -56,6 +56,7 @@
                 if (lg.getUsername().equals(username)) {
                     // logged in and viewing own profile
         %>
+        <title><%=firstName%> <%=lastName%>'s Profile</title>
         <div class="container" style="border-bottom: 1px solid#888; padding: 15px;">
             <div class="row">
                 <div class="col-md-4">
@@ -187,6 +188,7 @@
             <% } else {
                     // logged in but not viewing own profile
             %>
+                <title><%=firstName%> <%=lastName%>'s Profile</title>
                 <div class="container" style="border-bottom: 1px solid#888; padding: 15px;">
                     <div class="row">
                         <div class="col-md-4">
@@ -288,6 +290,7 @@
     } else {
         // not logged in
     %>
+        <title><%=firstName%> <%=lastName%>'s Profile</title>
         <div class="container" style="border-bottom: 1px solid#888; padding: 15px;">
             <div class="row">
                 <div class="col-md-4">
@@ -321,6 +324,7 @@
 <%
     } else {
     %>
+        <title>User not found</title>
         <div class="container"><h1>User does not exist!</h1></div>
 <%
     }
