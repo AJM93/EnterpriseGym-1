@@ -37,10 +37,10 @@ public class UserStore {
     private int Total = 0;
     private int userStatusID;
     private String status;
-    private String Anonymous;
+    private String showPoints;
     
     public UserStore(final String Username, final String Firstname, final String Lastname, final String MatriculationNo, final String Email, final String PhoneNo, final char Gender, final String Country, final String Institution, final String SubInstitution, 
-            final String Degree, final Timestamp dob, final String yos, final int userStatusID, final String status, final int OnlineTheory, final int Challenge, final int Action, final int Project, final int Total, String anon)
+            final String Degree, final Timestamp dob, final String yos, final int userStatusID, final String status, final int OnlineTheory, final int Challenge, final int Action, final int Project, final int Total, String showPoints)
     {
          this.Username = Username;
          this.Firstname = Firstname;
@@ -62,7 +62,7 @@ public class UserStore {
          this.Project = Project;
          this.Challenge = Challenge;
          this.Total = Total;
-         this.Anonymous = anon;
+         this.showPoints = showPoints;
     }
     
     public UserStore(String username, String firstName, String lastName, int onlineTheory, int challenge, int action, int project, int total, String institution,
@@ -399,17 +399,17 @@ public class UserStore {
     }
 
     /**
-     * @return the Anonymous
+     * @return the showPoints
      */
-    public String getAnonymous() {
-        return Anonymous;
+    public String getShowPoints() {
+        return showPoints;
     }
 
     /**
-     * @param Anonymous the Anonymous to set
+     * @param showPoints the showPoints to set
      */
-    public void setAnonymous(String Anonymous) {
-        this.Anonymous = Anonymous;
+    public void setShowPoints(String showPoints) {
+        this.showPoints = showPoints;
     }
 
     /**
