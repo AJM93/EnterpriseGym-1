@@ -3,6 +3,7 @@
     Created on : Sep 18, 2015, 4:29:03 PM
     Author     : Yogi
 --%>
+<%@page import="Stores.UserStore"%>
 <%@page import="Stores.LoggedIn"%>
 <%@page import="Stores.EventStore"%>
 <%@page import="Models.EventsCommentModel"%>
@@ -66,53 +67,87 @@ $("#flash").hide();
    </script>
 <jsp:include page="header.jsp"></jsp:include>
         
-        <%
-            EventStore es = (EventStore) request.getAttribute("Event");
-        %>
-
-		<script src="assets/js/jquery.validate.js"></script> 
-                <!-- jQuery -->
-		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-		<!-- Bootstrap -->
-		<script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
-		<!-- Bootstrap Form Helpers -->
-		<script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
-                
-                
-                <div id="services" class="pad-section">
-    <div class="container">
+    <%
+        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><%=es.getId()%> : <%=es.getTitle()%></h3>
-            </div>
-            <div class="panel-body" style="color: black;">
-                <%=es.getBody()%>
-            </div>
-        </div>
-    
-
+        EventStore es = (EventStore) request.getAttribute("Event");
+        String title = es.getTitle();
+        String body = es.getBody();
+        int points = es.getPoints();
+        String type = es.getType();
+        String trainer = es.getTrainer();
+        String date = new java.text.SimpleDateFormat("E dd MMM yyyy").format(es.getStart());
+        String startTime = new java.text.SimpleDateFormat("HH:mm").format(es.getStart());
+        String endTime = new java.text.SimpleDateFormat("HH:mm").format(es.getStop());
         
-        <p>Total Points: <%=es.getPoints()%> </p>
-        <p>Type of Event: <%=es.getType()%> </p>
-        <p>Event Trainer: <%=es.getTrainer()%></p>
-        <p>Start time: <%=es.getStart()%> </p>
-        <p>End time: <%=es.getStop()%> </p>
-        <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=es.getId()%>">
-        <%
-            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-            if (lg != null && lg.isLoggedIn()) 
-            {
-                String username = lg.getUsername();
-                if (lg.getRole() == 2 || lg.getRole() == 3) { %>
-                
-        %>
-        <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a>
-        <%}%>
-                <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
-                <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
-               
+        UserStore us = (UserStore) request.getAttribute("Trainer");
+        String trainerEmail = us.getEmail();
+    %>
+
+    <script src="assets/js/jquery.validate.js"></script> 
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Form Helpers -->
+    <script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
+
+
+    <div id="services" class="pad-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><strong><%=title%></strong></h3>
+                        </div>
+                        <div class="panel-body" style="color: black;">
+                            <%=body%>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><strong>Info</strong></h3>
+                        </div>
+                        <div class="panel-body" style="color: black;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p><strong>Total Points:</strong> <%=points%> </p>
+                                    <p><strong>Type of Event:</strong> <%=type%> </p>
+                                    <p><strong>Event Trainer:</strong> <a href="/eGym/profile/<%=trainer%>"><%=trainer%></a> <a href="mailto:<%=trainerEmail%>">(email)</a></p>
+                                    <p><strong>Date:</strong> <%=date%></p>
+                                    <p><strong>Time:</strong> <%=startTime%> - <%=endTime%></p>
+                                </div>
+                            </div>
+                            <div class="row" style="border-top: 1px solid#888; padding: 5px 0px;">
+                                <div class="col-md-12">
+                                    <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=es.getId()%>">
+                                    <%
+                                        if (lg != null && lg.isLoggedIn()) {
+                                            String username = lg.getUsername();
+                                            
+                                            if (lg.getRole() == 3 || lg.getRole() == 4) { %>
+                                                <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a>
+                                    <%      } else {
+                                    %>          <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
+                                                <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
+                                    <%
+                                            }
+                                        }
+                                    %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
                 <%
                     LinkedList<EventsCommentModel> eventComments = (LinkedList<EventsCommentModel>) request.getAttribute("EventsCommentList");
                     Iterator<EventsCommentModel> iterator = eventComments.iterator();
@@ -120,40 +155,35 @@ $("#flash").hide();
                     while (iterator.hasNext()) 
                     {
                         EventsCommentModel comment = (EventsCommentModel) iterator.next();
+                        String commentAuthor = comment.getAuthor();
+                        String commentBody = comment.getBody();
+                        String commentPosted = new java.text.SimpleDateFormat("E dd MMM yyyy - HH:mm:ss").format(comment.getDatePosted());
                 %>
-                      
-                        <div id="Comments">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading" >
-                        <h3 class="panel-title"><a href="/eGym/profile/<%=comment.getAuthor()%>"><%=comment.getAuthor()%></a></h3>
+                    <div id="Comments">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" >
+                                <a href="/eGym/profile/<%=commentAuthor%>"><%=commentAuthor%></a> (<%=commentPosted%>)
+                            </div>
+                            <div class="panel-body" style="color: black;">
+                                <%=commentBody%>
+                            </div>
+                        </div>
                     </div>
-                    <div class="panel-body" style="color: black;">
-                        <%=comment.getBody()%>
-                    </div>
-                </div>
-            </div>
-        </div>
                 <%
                     }
                 %>
-
-                
-
-           
-<textarea rows="4" cols="50" name="commentBox" id="commentBox" maxlength="145" ></textarea><br />
-<input type="button" value="Submit Comment" name="submit" class="comment_button"/>
-    <div id="flash"></div>
-<ol id="update" class="timeline">
-</ol>
-    
-      </div>
+                </div>
+            </div>
         </div>
-        
+    </div>
+
+
+
+
     
-    <%
-            }
-                    
-        %>
-        
+        <textarea rows="4" cols="50" name="commentBox" id="commentBox" maxlength="145" ></textarea><br />
+        <input type="button" value="Submit Comment" name="submit" class="comment_button"/>
+            <div id="flash"></div>
+        <ol id="update" class="timeline">
+        </ol>
         <jsp:include page="footer.jsp"></jsp:include>

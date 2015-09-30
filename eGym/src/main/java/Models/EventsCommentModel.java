@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  */
 public class EventsCommentModel {
     
-private int eventsCommentID;
+    private int eventsCommentID;
     private int eventsID;
     private String author;
     private String body;

@@ -6,9 +6,9 @@
 package com.egym;
 
 import Models.EventsCommentModel;
-import Models.EventsModel;
-import Models.NewsModel;
+import Models.UserModel;
 import Stores.EventStore;
+import Stores.UserStore;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
@@ -38,8 +38,6 @@ public class EventItem extends HttpServlet {
 
     
      Connection con = null;
-    Statement st = null;
-    ResultSet rs = null;
     static final String JDBC_DRIVER ="com.mysql.jdbc.Driver";  
     String url = "jdbc:mysql://46.101.32.81:3306/EGAlexander";
     String user = "root";
@@ -59,8 +57,8 @@ public class EventItem extends HttpServlet {
         int urlActivityID = Integer.parseInt(path.substring(1));
         response.setContentType("text/html;charset=UTF-8");
         int urlEventsCommentsID = Integer.parseInt(path.substring(1));
-        try (PrintWriter out = response.getWriter()) 
-        {
+        
+        try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(url, user, password);
             CallableStatement cs = null;
@@ -84,7 +82,9 @@ public class EventItem extends HttpServlet {
             Event = new EventStore(id, Title, Points, Body, Trainer, Type, Start, Stop);
             request.setAttribute("Event", Event);
 
-                
+            UserModel um = new UserModel();
+            UserStore trainer = um.getUserDetails(Trainer);
+            request.setAttribute("Trainer", trainer);
                 
             CallableStatement eComments = this.con.prepareCall("{call events_comments(?)}");   //(?,?)}"
             eComments.setInt(1,urlEventsCommentsID);
@@ -138,11 +138,7 @@ public class EventItem extends HttpServlet {
             throws ServletException, IOException {
          try {
              processRequest(request, response);
-         } catch (SQLException ex) {
-             Logger.getLogger(EventItem.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(EventItem.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (InstantiationException ex) {
+         } catch (SQLException | ClassNotFoundException | InstantiationException ex) {
              Logger.getLogger(EventItem.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
