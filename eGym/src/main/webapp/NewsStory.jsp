@@ -82,7 +82,7 @@ $("#flash").hide();
         <ol class="breadcrumb">
             <li><a href="/eGym/homePage">Home</a></li>
             <li><a href="/eGym/news">News</a></li>
-            <li class="active"><a href="/eGym/news/<%=newsID%>"><%=newsTitle%></a></li>
+            <li class="active"><a href="/eGym/NewsItem/<%=newsID%>"><%=newsTitle%></a></li>
         </ol>
         
         <div class="row">

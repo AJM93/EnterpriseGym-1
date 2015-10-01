@@ -16,40 +16,30 @@
 <!DOCTYPE html>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
- <script>
-$(function() {
+<script>
+    $(function() {
+        $(".comment_button").click(function() {
+            var boxval = $("#commentBox").val();
+            var usernameval = $("#userNameBox").val();
+            var eventidval = $("#eventIDBox").val();
 
-$(".comment_button").click(function() {
+            if(boxval=='')  {
+                alert("Please Enter Some Text");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/eGym/PostEventComment",
+                    data: {commentBox: boxval, userName: usernameval, eventID: eventidval},
+                    cache: false
+                });
 
-
-   
-    var boxval = $("#commentBox").val();
-	
-    var usernameval = $("#userNameBox").val();
-    
-    var eventidval = $("#eventIDBox").val();
-	
-	if(boxval=='')
-	{
-	alert("Please Enter Some Text");
-	
-	}
-        else
-{
-
-$.ajax({
-type: "POST",
-url: "/eGym/PostEventComment",
-data: {commentBox: boxval, userName: usernameval, eventID: eventidval},
-cache: false
-});
-
-document.getElementById('commentBox').value='';
-document.getElementById('commentBox').focus();
-setTimeout(function(){ location.reload(); }, 0);
-} return false;
-});
-});
+                document.getElementById('commentBox').value='';
+                document.getElementById('commentBox').focus();
+                setTimeout(function(){ location.reload(); }, 0);
+            }
+            return false;
+        });
+    });
 </script>
 
 <jsp:include page="header.jsp"></jsp:include>
@@ -71,23 +61,17 @@ setTimeout(function(){ location.reload(); }, 0);
         UserStore us = (UserStore) request.getAttribute("Trainer");
         String trainerEmail = us.getEmail();
     %>
-
-    <script src="assets/js/jquery.validate.js"></script> 
-    <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
-    <!-- Bootstrap Form Helpers -->
-    <script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
-
     <div id="services" class="pad-section">
         <div class="container">
-            <ol class="breadcrumb">
-                <li><a href="/eGym/homePage">Home</a></li>
-                <li><a href="/eGym/events">Events</a></li>
-                <li class="active"><a href="/eGym/EventItem/<%=eventID%>"><%=title%></a></li>
-            </ol>
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/eGym/homePage">Home</a></li>
+                        <li><a href="/eGym/events">Events</a></li>
+                        <li class="active"><a href="/eGym/EventItem/<%=eventID%>"><%=title%></a></li>
+                    </ol>
+                </div>
+            </div>
             
             <div class="row">
                 <div class="col-md-8">
@@ -123,13 +107,15 @@ setTimeout(function(){ location.reload(); }, 0);
                         %>
                                 <div class="row">
                                     <div class="col-md-12" style="border-top: 1px solid#888; padding: 10px;">
-                                        <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=es.getId()%>">
+                                        <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=eventID%>">
                         <%
                                 if (lg.getRole() == 3 || lg.getRole() == 4) { %>
-                                    <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a>
+                                    <a href="/eGym/GetAttendees/<%=eventID%>">Register Event Attendance</a><br>
+                                    <a href="/eGym/EditEvent/<%=eventID%>">Edit Event</a>                                  
                         <%      } else {
                         %>
-                                    <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
+                                    <form action="/eGym/EventSignUp/<%=eventID%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
+                                    <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
                         <%
                                 }
                         %>
@@ -145,11 +131,11 @@ setTimeout(function(){ location.reload(); }, 0);
 
             <div class="row">
                 <div class="col-md-12">
+                    <h3>Comments</h3>
                 <%
                     LinkedList<EventsCommentModel> eventComments = (LinkedList<EventsCommentModel>) request.getAttribute("EventsCommentList");
                     
-                    if (eventComments.isEmpty()) {
-                        // no comments on the activity
+                    if (eventComments.isEmpty()) { // no comments on the activity
                 %>
                         <div id="Comments">
                             <div class="panel panel-default">
@@ -160,8 +146,7 @@ setTimeout(function(){ location.reload(); }, 0);
                         </div>
                 
                 <%
-                    } else {
-                        // show comments on the activity
+                    } else { // show comments on the activity
                     
                         Iterator<EventsCommentModel> iterator = eventComments.iterator();
 

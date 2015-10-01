@@ -13,14 +13,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp"></jsp:include>
 
-
-
     <div id="news" class="pad-section">
         <div class="container">
-            <ol class="breadcrumb">
-                <li><a href="/eGym/homePage">Home</a></li>
-                <li><a href="/eGym/news">News</a></li>
-            </ol>
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="/eGym/homePage">Home</a></li>
+                    <li><a href="/eGym/news">News</a></li>
+                </ol>
+            </div>
 
         <%
             LinkedList<NewsModel> llsr = (LinkedList<NewsModel>) request.getAttribute("NewsList");
