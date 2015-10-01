@@ -12,7 +12,11 @@
 <!DOCTYPE html>
 <jsp:include page="header.jsp"></jsp:include>
 <div id="news" class="pad-section">
-        <div class="container">       
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="/eGym/homePage">Home</a></li>
+                <li><a href="/eGym/events">Events</a></li>
+            </ol>
         
         <%
             

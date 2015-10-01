@@ -58,6 +58,7 @@ setTimeout(function(){ location.reload(); }, 0);
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         
         EventStore es = (EventStore) request.getAttribute("Event");
+        int eventID = es.getId();
         String title = es.getTitle();
         String body = es.getBody();
         int points = es.getPoints();
@@ -82,6 +83,12 @@ setTimeout(function(){ location.reload(); }, 0);
 
     <div id="services" class="pad-section">
         <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="/eGym/homePage">Home</a></li>
+                <li><a href="/eGym/events">Events</a></li>
+                <li class="active"><a href="/eGym/EventItem/<%=eventID%>"><%=title%></a></li>
+            </ol>
+            
             <div class="row">
                 <div class="col-md-8">
                     <div class="panel panel-default">
@@ -181,7 +188,9 @@ setTimeout(function(){ location.reload(); }, 0);
                 %>
                 </div>
             </div>
-            <% if (lg != null && lg.isLoggedIn()) { %>
+            <%
+            if (lg != null && lg.isLoggedIn()) {
+        %>
                 <form role="form">
                     <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
                     <div class="form-group">
@@ -191,7 +200,12 @@ setTimeout(function(){ location.reload(); }, 0);
                         <input type="button" value="Submit" name="submit" class="btn btn-default comment_button"/>
                     </div>
                 </form>
-            <% } %>
+        <%  } else {
+        %>
+        <a href="/eGym/login">Sign in</a> to post a comment
+        <%
+            }
+        %>
     </div>
 </div>
 

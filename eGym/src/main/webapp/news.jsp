@@ -16,7 +16,11 @@
 
 
     <div id="news" class="pad-section">
-        <div class="container">       
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="/eGym/homePage">Home</a></li>
+                <li><a href="/eGym/news">News</a></li>
+            </ol>
 
         <%
             LinkedList<NewsModel> llsr = (LinkedList<NewsModel>) request.getAttribute("NewsList");
