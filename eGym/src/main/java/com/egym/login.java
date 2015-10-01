@@ -90,43 +90,48 @@ public class login extends HttpServlet {
             ResultSet rs = cs.executeQuery();
             
             if (rs.next()) { // found an account for the given username
-                int userType = rs.getInt("UserTypes_idUserTypes");
-            
-                String storedPassword = rs.getString("password");
-                String hexSalt = rs.getString("salt");
-                byte[] salt = AeSimpleSHA256.fromHex(hexSalt);
+                int approved = rs.getInt("Approved");
+                
+                if (approved == 1) { // is an approved account
+                    int userType = rs.getInt("UserTypes_idUserTypes");
 
-                cs.close();
-                con.close();
+                    String storedPassword = rs.getString("password");
+                    String hexSalt = rs.getString("salt");
+                    byte[] salt = AeSimpleSHA256.fromHex(hexSalt);
 
-                String encodedPasswordAttempt = null;
-                try
-                {
-                    encodedPasswordAttempt = AeSimpleSHA256.getHash(passwordAttempt, salt);
-                    
-                    if (encodedPasswordAttempt.equals(storedPassword)) { // login success
-                        LoggedIn lg = new LoggedIn(true, username, userType);
+                    cs.close();
+                    con.close();
 
-                        HttpSession session = request.getSession();
-                        session.setAttribute("LoggedIn", lg);
+                    String encodedPasswordAttempt = null;
+                    try
+                    {
+                        encodedPasswordAttempt = AeSimpleSHA256.getHash(passwordAttempt, salt);
 
-                        response.sendRedirect("/eGym/homePage");
-                    } else { // incorrect password
-                        response.sendRedirect("/eGym/login");
+                        if (encodedPasswordAttempt.equals(storedPassword)) { // login success
+                            LoggedIn lg = new LoggedIn(true, username, userType);
+
+                            HttpSession session = request.getSession();
+                            session.setAttribute("LoggedIn", lg);
+
+                            response.sendRedirect("/eGym/homePage");
+                        } else { // incorrect password
+                            response.sendRedirect("/eGym/login");
+                        }
                     }
-                }
-                catch (UnsupportedEncodingException | NoSuchAlgorithmException et)
-                {
+                    catch (UnsupportedEncodingException | NoSuchAlgorithmException et)
+                    {
+                        response.sendRedirect("/eGym/login");
+                    } catch (InvalidKeySpecException ex) {
+                        Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else { // is an unnapproved user
+                    con.close();
                     response.sendRedirect("/eGym/login");
-                } catch (InvalidKeySpecException ex) {
-                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else { // no account for the given username
+                con.close();
                 response.sendRedirect("/eGym/login");
             }
-            
-            
-            
         } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(RegisterNewUser.class.getName()).log(Level.SEVERE, null, ex);
         }
