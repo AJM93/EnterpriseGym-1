@@ -12,6 +12,40 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp"></jsp:include>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+ <script>
+$(function() {
+
+$(".regUsers_button").click(function() {
+
+
+   
+    var userval = $("#regUsersBox").val();
+    var eventidval = $("#eventIDBox").val();
+	
+	if(userval=='')
+	{
+	alert("Please Enter Some Text");
+	
+	}
+        else
+{
+
+$.ajax({
+type: "POST",
+url: "/eGym/PostRegisterEventsUsers",
+data: {registerUsersBox: userval, eventID: eventidval},
+cache: false
+});
+document.getElementById('regUsersBox').value='';
+document.getElementById('regUsersBox').focus();
+setTimeout(function(){ location.reload(); }, 1000);
+} return false;
+});
+});
+</script>
+
     <script>
 
         $(document).ready(function () {
@@ -81,7 +115,7 @@
 <div id="services" class="pad-section">
     <div class="container">
         <h1>Register Event Attendees</h1>
-
+        <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=activityid%>">
 
 
         <%
@@ -102,6 +136,7 @@
                 <button onclick="myFunction('<%="/eGym/RegisterAttendee/" + t.getUsername() + "/" + activityid%>')">Register Attendee</button>
             </div>
         </div>
+            
 
         <div id="dvData" style="display: none;">
             <table>
@@ -115,6 +150,14 @@
         </div>
 
         <%}%>
+        <form role="form">
+        <div class="form-group">
+                <label for="regUsersBox">Register multiple users:</label>
+                <textarea class="form-control" rows="5" name="regUsersBox" id="regUsersBox"></textarea>
+                <br />
+                <input type="button" value="Submit" name="submitUsers" class="btn btn-default regUsers_button"/>
+            </div>
+        </form>
         <a href="#" class="export">Export into CSV</a>
         <%} else {
         %>

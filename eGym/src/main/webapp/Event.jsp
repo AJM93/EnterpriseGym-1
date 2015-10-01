@@ -25,11 +25,7 @@ $(".comment_button").click(function() {
    
     var boxval = $("#commentBox").val();
 	
-    //var commentBox = 'commentBox='+ boxval;
-    
     var usernameval = $("#userNameBox").val();
-    
-    //var userName = 'userName='+ usernameval;
     
     var eventidval = $("#eventIDBox").val();
 	
@@ -48,22 +44,20 @@ data: {commentBox: boxval, userName: usernameval, eventID: eventidval},
 cache: false
 });
 
-//$('#Comments').load(document.URL +  ' #commentTable');
-//$("ol#update li:first").slideDown("slow");
 document.getElementById('commentBox').value='';
 document.getElementById('commentBox').focus();
 setTimeout(function(){ location.reload(); }, 0);
 } return false;
 });
 });
-   </script>
+</script>
+
 <jsp:include page="header.jsp"></jsp:include>
         
     <%
         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
         
         EventStore es = (EventStore) request.getAttribute("Event");
-        int eventID = es.getId();
         String title = es.getTitle();
         String body = es.getBody();
         int points = es.getPoints();
@@ -88,13 +82,6 @@ setTimeout(function(){ location.reload(); }, 0);
 
     <div id="services" class="pad-section">
         <div class="container">
-            
-            <ol class="breadcrumb">
-                <li><a href="/eGym/homePage">Home</a></li>
-                <li><a href="/eGym/events">Events</a></li>
-                <li class="active"><a href="/eGym/events/<%=eventID%>"><%=title%></a></li>
-            </ol>
-            
             <div class="row">
                 <div class="col-md-8">
                     <div class="panel panel-default">
@@ -129,15 +116,13 @@ setTimeout(function(){ location.reload(); }, 0);
                         %>
                                 <div class="row">
                                     <div class="col-md-12" style="border-top: 1px solid#888; padding: 10px;">
-                                        <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=eventID%>">
+                                        <input type="hidden" name="eventIDBox" id="eventIDBox" value="<%=es.getId()%>">
                         <%
                                 if (lg.getRole() == 3 || lg.getRole() == 4) { %>
-                                    <a href="/eGym/GetAttendees/<%=eventID%>">Register Event Attendance</a><br>
-                                    <a href="/eGym/EditEvent/<%=eventID%>">Edit Event</a>
+                                    <a href="/eGym/GetAttendees/<%=es.getId()%>">Register Event Attendance</a>
                         <%      } else {
                         %>
-                                    <form action="/eGym/EventSignUp/<%=eventID%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
-                                    <input type="hidden" name="userNameBox" id="userNameBox" value="<%=lg.getUsername()%>">
+                                    <form action="/eGym/EventSignUp/<%=es.getId()%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
                         <%
                                 }
                         %>
@@ -153,11 +138,11 @@ setTimeout(function(){ location.reload(); }, 0);
 
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Comments</h3>
                 <%
                     LinkedList<EventsCommentModel> eventComments = (LinkedList<EventsCommentModel>) request.getAttribute("EventsCommentList");
                     
-                    if (eventComments.isEmpty()) { // no comments on the activity
+                    if (eventComments.isEmpty()) {
+                        // no comments on the activity
                 %>
                         <div id="Comments">
                             <div class="panel panel-default">
@@ -168,7 +153,9 @@ setTimeout(function(){ location.reload(); }, 0);
                         </div>
                 
                 <%
-                    } else { // show comments on the activity
+                    } else {
+                        // show comments on the activity
+                    
                         Iterator<EventsCommentModel> iterator = eventComments.iterator();
 
                         while (iterator.hasNext()) 
@@ -204,11 +191,7 @@ setTimeout(function(){ location.reload(); }, 0);
                         <input type="button" value="Submit" name="submit" class="btn btn-default comment_button"/>
                     </div>
                 </form>
-            <%  } else {
-            %>
-                    <a href="/eGym/login">Sign in</a> to post a comment
-            <%
-            }%>
+            <% } %>
     </div>
 </div>
 
