@@ -128,42 +128,49 @@
 <%//if (lg != null && lg.isLoggedIn()) {} else {%>
 <div id="services" class="pad-section">
     <div class="container">
-        <h1>
-            About the Enterprise Gym
-        </h1>
-        <div id="node-51">
-            <div>
-                <p>
-                    <strong>What is The Enterprise Gym all about</strong>
-                    ? Some key words and sentences for you to set the scene:
-                </p>
-                <p>
-                    Enterprise &amp; Entrepreneurship isn't all about business.
-                </p>
-                <p>
-                    Enterprise = the application of creative ideas and innovations to practical situations.
-                </p>
-                <p>
-                    Enterprise combines creativity, ideas development and problem solving with expression, communication and practical action.
-                </p>
-                <p>
-                    An enterprising individual has a positive, flexible and adaptive disposition to change, seeing it as normal and as an opportunity rather than a
-                    problem.
-                </p>
-                <p>
-                    An enterprising individual has the capacity to initiate creative ideas and develop them into action in a determined manner.
-                </p>
-                <p>
-                    An enterprising individual is an effective communicator, negotiator, influencer, planner and organiser.
-                </p>
-                <p>
-                    An enterprising individual is active, confident and purposeful ? not uncertain and dependent
-                </p>
-                <p>
-                    The above is what we strive to help you achieve and become at The Enterprise Gym.
-                    <br/>
-                </p>
-                <p>
+        <div class="row">
+            <div class="col-md-6">
+                <h1>
+                    About the Enterprise Gym
+                </h1>
+                <div id="node-51">
+                    <div>
+                        <p>
+                            <strong>What is The Enterprise Gym all about</strong>
+                            ? Some key words and sentences for you to set the scene:
+                        </p>
+                        <p>
+                            Enterprise &amp; Entrepreneurship isn't all about business.
+                        </p>
+                        <p>
+                            Enterprise = the application of creative ideas and innovations to practical situations.
+                        </p>
+                        <p>
+                            Enterprise combines creativity, ideas development and problem solving with expression, communication and practical action.
+                        </p>
+                        <p>
+                            An enterprising individual has a positive, flexible and adaptive disposition to change, seeing it as normal and as an opportunity rather than a
+                            problem.
+                        </p>
+                        <p>
+                            An enterprising individual has the capacity to initiate creative ideas and develop them into action in a determined manner.
+                        </p>
+                        <p>
+                            An enterprising individual is an effective communicator, negotiator, influencer, planner and organiser.
+                        </p>
+                        <p>
+                            An enterprising individual is active, confident and purposeful ? not uncertain and dependent
+                        </p>
+                        <p>
+                            The above is what we strive to help you achieve and become at The Enterprise Gym.
+                            <br/>
+                        </p>
+                        <p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2621.6739090992855!2d-2.9815235198786416!3d56.45817865045104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48865cbf178fe0e1%3A0x2aab14c6f86e6b2e!2sThe+Enterprise+Gym!5e0!3m2!1szh-CN!2suk!4v1443697078802" width="700" height="500" frameborder="0" style="border:0" ></iframe>
             </div>
         </div>
     </div>
