@@ -12,23 +12,35 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp"></jsp:include>
     <div id="services" class="pad-section">
-        <div class="container">
-            <h1>Edit News Story</h1>
+        <div class="container" style="border-bottom: 1px solid#888; padding: 15px;">
         <%
-            NewsModel nm = (NewsModel) request.getAttribute("NewsStory");
             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+            
+            NewsModel nm = (NewsModel) request.getAttribute("NewsStory");
+            int newsID = nm.getNewsId();
+            String newsTitle = nm.getNewsTitle();
+            String newsBody = nm.getNewsBody();
+            
             if (lg != null && lg.isLoggedIn()) {
                 if (lg.getRole() == 2 || lg.getRole() == 3) { // logged in user is an editor or an admin
         %>
+        <title>Edit news story #<%=newsID%></title>
         <script src="//cdn.ckeditor.com/4.5.3/full-all/ckeditor.js"></script>
-        <form role="form" method="POST" action=<%="" + nm.getNewsId()%>>
-            <textarea name="title" required autofocus><%=nm.getNewsTitle()%></textarea>
-            <textarea name="body" required autofocus><%=nm.getNewsBody()%></textarea>
-            <script>
-                CKEDITOR.replace('body');
-            </script>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
-        </form>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Edit news story</h2>
+                <form role="form" method="POST" action=<%="" + newsID%>>
+                    <textarea name="title" class="form-control" rows="2" required autofocus><%=newsTitle%></textarea>
+                    <br>
+                    <textarea name="body" class="form-control" required><%=newsBody%></textarea>
+                    <script>
+                        CKEDITOR.replace('body');
+                    </script>
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
+                </form>
+            </div>
+        </div>
     </div>
     <%
     } else {
