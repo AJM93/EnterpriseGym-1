@@ -96,12 +96,32 @@
                     <input type="hidden" class="form-control" id="inputCountry2" required name="country2">
                 </div>
                     <div class="form-group">
-                        <label for="inputInstitution">Institution</label>
-                        <input type="text" class="form-control" id="inputInstitution" name="institution" value="<%=Institution%>" placeholder="Institution">
+                        <label>Institution</label>
+                        <input type="text" class="form-control" list="institution" name="institution" value="<%=Institution%>" required>
+                        <datalist id="institution">
+                          <option value="University of Dundee">
+                          <option value="University of Abertay">
+                          <option value="Dundee College">
+                          <option value="Other">
+                          <option value="N/A">
+                        </datalist>
                     </div>
                     <div class="form-group">
-                        <label for="inputSubInstitution">Sub Institution</label>
-                        <input type="text" class="form-control" id="inputSubInstitution" name="subInstitution" value="<%=SubInstitution%>" placeholder="Sub Institution">
+                        <label>Sub Institution</label>
+                        <input type="text" class="form-control" list="subInstitution" name="subInstitution" value="<%=SubInstitution%>" required>
+                        <datalist id="subInstitution">
+                          <option value="Art & Design (DJCAD)">
+                          <option value="Dentistry">
+                          <option value="Education & Social Work">
+                          <option value="Humanities">
+                          <option value="Life Sciences">
+                          <option value="Medicine">
+                          <option value="Nursing & Midwifery">
+                          <option value="Physcial Sciences & Engineering">
+                          <option value="Social Sciences">
+                          <option value="Other">
+                          <option value="N/A">
+                        </datalist>
                     </div>
                     <div class="form-group">
                         <label for="inputDegree">Degree</label>
@@ -112,9 +132,16 @@
                         <input type="date" value="<%=date%>" required name="DOBdate" style="color: black;">
                     </div>
                     <div class="form-group">
-                        <label for="inputYOS">Year Of Study</label>
-                        <input type="text" class="form-control" id="inputYOS" name="yos" value="<%=yos%>" placeholder="Year of Study">
-                    </div>
+                        <label>Year of Study</label>
+                        <input type="number" class="form-control" list="yos" name="yos" min="0" max="4" value="<%=yos%>" required>
+                        <datalist id="yos">
+                          <option value="1">
+                          <option value="2">
+                          <option value="3">
+                          <option value="4">
+                          <option value="0">
+                        </datalist>
+                </div>
                     <div class="from-group">
                         <label for="inputUserStatus">User Account Status</label>
                         <select name="userStatus" required>
