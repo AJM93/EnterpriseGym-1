@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import Models.*;
 import Stores.*;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -70,16 +71,21 @@ public class homePage extends HttpServlet {
             EventsModel em = new EventsModel();
             UserModel um = new UserModel();
             HttpSession session=request.getSession();
-            
+            LinkedList<EventsModel> upcomingUserEvents = new LinkedList<EventsModel>();
+
+                    
+
+                
             try {
                 LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                  if (lg != null && lg.isLoggedIn()) {
                 UserStore profile = um.getUserDetails(lg.getUsername());
                 request.setAttribute("UserProfile", profile);
+                upcomingUserEvents = em.getUserEvents(lg.getUsername());
                  }
                 java.util.LinkedList<NewsModel> homeNews = nm.getHomeNews();
                 java.util.LinkedList<EventsModel> homeEvents = em.getHomeEvents();
-                
+                request.setAttribute("UserEvents", upcomingUserEvents);
                 request.setAttribute("HomeNews", homeNews);
                 request.setAttribute("HomeEvents", homeEvents);
                 RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");

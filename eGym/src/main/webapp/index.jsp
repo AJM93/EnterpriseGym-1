@@ -430,7 +430,69 @@
         </div>
     </div>
 </div>
-<% } %>
+                                        <%
+                    if (lg != null && lg.isLoggedIn()) {
+                        if (lg.getRole() == 1 || lg.getRole() == 2) 
+                        { 
+                            LinkedList<EventsModel> upcomingUserEvents = (LinkedList<EventsModel>) request.getAttribute("UserEvents");
+                            if(upcomingUserEvents.size() != 0)
+                            {
+                                int numberOfSignUps = upcomingUserEvents.size();
+                                if(numberOfSignUps > 3)
+                                {
+                                    numberOfSignUps = 3;
+                                }
+                %>                  
+                <div id="information" class="pad-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h2 class="panel-title">My Upcoming Events</h2>
+                                            </div>
+                                            <div class="panel-body lead">
+                                                <div class="panel-group" id="accordionUserEvents" role="tablist" aria-multiselectable="true">
+                                                <%
+
+                                                    for(int i=0;i<numberOfSignUps;i++)
+                                                    {
+                                                %>
+                                                    <div class="col-md-12">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title"><a href="/eGym/EventItem/<%=upcomingUserEvents.get(i).getEventID()%>"><%=upcomingUserEvents.get(i).getEventTitle()%></a></h3>
+                                                            </div>
+                                                            <p>Trainer: <%=upcomingUserEvents.get(i).getEventTrainer()%></p>  
+                                                            <div class="panel-body">
+                                                                <%=upcomingUserEvents.get(i).getEventBody()%>
+                                                                <a href="/eGym/EventItem/<%=upcomingUserEvents.get(i).getEventID()%>">Click to see the full event</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                
+                                                        
+
+                                                <%
+                                                    }
+                                                %>
+                                                </div>
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        <%
+                                    }
+                                
+                            }
+                        }
+                    }
+                    
+                %>
+
 <!-- /fourth section -->
 <!-- attach JavaScripts -->
 <jsp:include page="footer.jsp"></jsp:include>
