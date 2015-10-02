@@ -152,7 +152,9 @@ setTimeout(function(){ location.reload(); }, 1000);
         <%}%>
         <form role="form">
         <div class="form-group">
-                <label for="regUsersBox">Register multiple users:</label>
+            <div class="alert alert-info" style="padding: 15px;">
+                Register multiple users: (Please enter the usernames separated with a comma and no space. For Example: User1,User2,User3)
+            </div>
                 <textarea class="form-control" rows="5" name="regUsersBox" id="regUsersBox"></textarea>
                 <br />
                 <input type="button" value="Submit" name="submitUsers" class="btn btn-default regUsers_button"/>

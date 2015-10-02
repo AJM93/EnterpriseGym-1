@@ -42,7 +42,7 @@ public class PostMultipleUsers extends HttpServlet
     {
         int urlActivityID = Integer.parseInt(request.getParameter("eventID"));
         String usernameBox = request.getParameter("registerUsersBox");
-        String[] usernameSplit = usernameBox.split(";");
+        String[] usernameSplit = usernameBox.split(",");
         String username;
         try 
         {
