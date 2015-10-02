@@ -3,6 +3,7 @@
     Created on : 24-Sep-2015, 13:30:50
     Author     : Tom
 --%>
+<%@page import="java.util.Arrays"%>
 <%@page import="Stores.LoggedIn"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="Stores.UserStore"%>
@@ -36,25 +37,27 @@
             int action = profile.getAction();
             int project = profile.getProject();
             int challenge = profile.getChallenge();
+            int virtual = profile.getVirtual();
             int total = profile.getTotal();
             
             float silverAwardPoints = 70;
             float goldAwardPoints = silverAwardPoints * 2f;
             
-            float[] points = {onlineTheory, action, project, challenge};
-            java.util.Arrays.sort(points);
+            float[] points = {onlineTheory, action, project, challenge, virtual};
+            Arrays.sort(points);
+            int numPointsCategories = points.length;
 
-            int highestPercent = Math.round((points[3] / goldAwardPoints) * 100);
-            int nextHighestPercent = Math.round((points[2] / goldAwardPoints) * 100);
+            int highestPercent = Math.round((points[numPointsCategories - 1] / goldAwardPoints) * 100);
+            int nextHighestPercent = Math.round((points[numPointsCategories - 2] / goldAwardPoints) * 100);
             
             int onlinePercent = Math.round((onlineTheory / silverAwardPoints) * 100);
             int actionPercent = Math.round((action / silverAwardPoints) * 100);
             int projectPercent = Math.round((project / silverAwardPoints) * 100);
             int challengePercent = Math.round((challenge / silverAwardPoints) * 100);
+            int virtualPercent = Math.round((virtual / silverAwardPoints) * 100);
             
             if (lg != null) {
-                if (lg.getUsername().equals(username)) {
-                    // logged in and viewing own profile
+                if (lg.getUsername().equals(username)) { // logged in and viewing own profile
         %>
         <title><%=firstName%> <%=lastName%>'s Profile</title>
         <div class="container" style="border-bottom: 1px solid#888; padding: 15px;">
@@ -90,10 +93,10 @@
                             <h3>Matric No: <%=matric%></h3>
                             <h3>Phone No: <%=phoneNo%></h3>
                             <h3>DoB: <%=dob%></h3>
-                             <form action="/eGym/getUserDetails" method="POST">
-                                    <button type="submit" class="btn btn-default" name="getUsername" value=<%=username%>>Edit User</button>
-                                    </form>
                             
+                            <form action="/eGym/getUserDetails" method="POST">
+                                <button type="submit" class="btn btn-default" name="getUsername" value=<%=username%>>Edit User</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -160,6 +163,15 @@
             </div>
             
             <div class="row">
+                <div class="col-md-6">
+                    <h3>Virtual - <%=virtual%> pts</h3>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="<%=virtual%>" aria-valuemin="0" aria-valuemax="<%=silverAwardPoints%>" style="width:<%=virtualPercent%>%; min-width: 2em">
+                          <%=virtualPercent%>%
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="col-md-6">
                     <h2>Total: <%=total%> pts</h2>
 

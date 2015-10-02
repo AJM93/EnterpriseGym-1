@@ -34,13 +34,14 @@ public class UserStore {
     private int Challenge = 0;
     private int Action = 0;
     private int Project = 0;
+    private int Virtual = 0;
     private int Total = 0;
     private int userStatusID;
     private String status;
     private String showPoints;
     
     public UserStore(final String Username, final String Firstname, final String Lastname, final String MatriculationNo, final String Email, final String PhoneNo, final char Gender, final String Country, final String Institution, final String SubInstitution, 
-            final String Degree, final Timestamp dob, final String yos, final int userStatusID, final String status, final int OnlineTheory, final int Challenge, final int Action, final int Project, final int Total, String showPoints)
+            final String Degree, final Timestamp dob, final String yos, final int userStatusID, final String status, final int OnlineTheory, final int Challenge, final int Action, final int Project, final int Virtual, final int Total, String showPoints)
     {
          this.Username = Username;
          this.Firstname = Firstname;
@@ -61,6 +62,7 @@ public class UserStore {
          this.Action = Action;
          this.Project = Project;
          this.Challenge = Challenge;
+         this.Virtual = Virtual;
          this.Total = Total;
          this.showPoints = showPoints;
     }
@@ -424,5 +426,19 @@ public class UserStore {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the Virtual
+     */
+    public int getVirtual() {
+        return Virtual;
+    }
+
+    /**
+     * @param Virtual the Virtual to set
+     */
+    public void setVirtual(int Virtual) {
+        this.Virtual = Virtual;
     }
 }

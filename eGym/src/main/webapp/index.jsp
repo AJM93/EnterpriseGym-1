@@ -4,6 +4,7 @@
     Author     : danielmackay
 --%>
 
+<%@page import="java.util.Arrays"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="Stores.*"%>
 <%@page import="Models.NewsCommentModel"%>
@@ -28,21 +29,24 @@
                 int action = profile.getAction();
                 int project = profile.getProject();
                 int challenge = profile.getChallenge();
+                int virtual = profile.getVirtual();
                 int total = profile.getTotal();
 
                 float silverAwardPoints = 70;
                 float goldAwardPoints = silverAwardPoints * 2f;
 
-                float[] points = {onlineTheory, action, project, challenge};
-                java.util.Arrays.sort(points);
+                float[] points = {onlineTheory, action, project, challenge, virtual};
+                Arrays.sort(points);
+                int numPointsCategories = points.length;
 
-                int highestPercent = Math.round((points[3] / goldAwardPoints) * 100);
-                int nextHighestPercent = Math.round((points[2] / goldAwardPoints) * 100);
+                int highestPercent = Math.round((points[numPointsCategories - 1] / goldAwardPoints) * 100);
+                int nextHighestPercent = Math.round((points[numPointsCategories - 2] / goldAwardPoints) * 100);
 
                 int onlinePercent = Math.round((onlineTheory / silverAwardPoints) * 100);
                 int actionPercent = Math.round((action / silverAwardPoints) * 100);
                 int projectPercent = Math.round((project / silverAwardPoints) * 100);
                 int challengePercent = Math.round((challenge / silverAwardPoints) * 100);
+                int virtualPercent = Math.round((virtual / silverAwardPoints) * 100);
             
 %>
 <!-- /first section -->
@@ -111,12 +115,19 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <h4>Total: <%=total%> pts</h4>
+                        <h5>Virtual - <%=virtual%> pts</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<%=virtual%>" aria-valuemin="0" aria-valuemax="<%=silverAwardPoints%>" style="width:<%=virtualPercent%>%; min-width: 2em">
+                              <%=virtualPercent%>%
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
+                
                     <div class="col-md-6">
-                        <a href="/eGym/overallLeaderboard"><h6>View the points leaderboard</h6></a>
+                        <h4>Total: <%=total%> pts</h4>
+                        <div class="alert alert-info" style="padding: 0px 5px;">
+                            <a href="/eGym/overallLeaderboard"><h6>View the points leaderboard</h6></a>
+                        </div>
                     </div>
                 </div>
             </div>

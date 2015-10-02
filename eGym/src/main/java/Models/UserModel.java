@@ -61,9 +61,10 @@ public class UserModel {
                 int ch = rs.getInt("Challenge");
                 int ac = rs.getInt("Action");
                 int pr = rs.getInt("Project");
+                int vl = rs.getInt("Virtual");
                 int tt = rs.getInt("Total");
                 String showPoints = rs.getString("IncludeInLeaderboard");
-                userDetails = new UserStore(Username, Firstname, Lastname, Matric, Email, PhoneNo, Gender.charAt(0), Country, Inst, sInst, degree, dob, yos, userStatusID, status, ot, ch, ac, pr, tt, showPoints);
+                userDetails = new UserStore(Username, Firstname, Lastname, Matric, Email, PhoneNo, Gender.charAt(0), Country, Inst, sInst, degree, dob, yos, userStatusID, status, ot, ch, ac, pr, vl, tt, showPoints);
             }
             
             cs.close();
