@@ -191,14 +191,11 @@
                         <div class="alert alert-info" style="padding: 15px;">
                             Tick to show your name on the <a href="/eGym/overallLeaderboard">points leaderboard</a>
                         </div>
-                            
                     </form>
-                            
                 </div>
             </div>
         </div>
-            <% } else {
-                    // logged in but not viewing own profile
+            <% } else { // logged in but not viewing own profile
             %>
                 <title><%=firstName%> <%=lastName%>'s Profile</title>
                 <div class="container" style="border-bottom: 1px solid#888; padding: 15px;">
@@ -292,8 +289,20 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <h3>Virtual - <%=virtual%> pts</h3>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="<%=virtual%>" aria-valuemin="0" aria-valuemax="<%=silverAwardPoints%>" style="width:<%=virtualPercent%>%; min-width: 2em">
+                                  <%=virtualPercent%>%
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="col-md-6">
                             <h2>Total: <%=total%> pts</h2>
+                            <div class="alert alert-info" style="padding: 15px;">
+                                Click to view the <a href="/eGym/overallLeaderboard">points leaderboard</a>
+                            </div>
                         </div>
                     </div>
                 </div>
