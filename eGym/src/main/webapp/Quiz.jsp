@@ -119,7 +119,7 @@
                     else
                     {
                         document.getElementById('UserScore').value = percent;
-                        alert("Unfortuently, you need 75% to pass! \n" + noCorrect + "\n" + perCorr);
+                        alert("Unfortuently, you need 80% to pass! \n" + noCorrect + "\n" + perCorr);
                         $('.yourButtonClassName').show();
                         $('.SubmitButton').hide();
                         alert("Click on the return button to finish the test.");
