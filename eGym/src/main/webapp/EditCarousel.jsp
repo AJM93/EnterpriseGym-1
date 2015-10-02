@@ -17,7 +17,7 @@
             if (lg.getRole() == 2 || lg.getRole() == 3) { // logged in user is an editor or an admin
     %>
     <div class="container">    
-        <h1>Register</h1>
+        <h1>Enter Carousel Item</h1>
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
             <div class="bs-example">
                 <form method="POST"  action="updateCarouselItem">

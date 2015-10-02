@@ -20,7 +20,7 @@
     %>
     
     
-        <h1>Users</h1>
+    <h1>Users</h1>
         <div class="table-responsive">    
         <table class="table" >
             <thead>
@@ -95,7 +95,6 @@
             </tbody>    
         </table>
     </div>
-
     <%
     } else {
     %>                

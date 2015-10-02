@@ -13,8 +13,10 @@ html, body {
   /*background-color: #AC2647;*/
 }
 
-
-
+.table-responsive
+{
+    overflow-x: auto;
+}
 /* padded section */
 .pad-section {
   padding: 50px 0;
