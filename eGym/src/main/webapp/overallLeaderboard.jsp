@@ -29,6 +29,7 @@
                     <th style="text-align: center;">Challenge</th>
                     <th style="text-align: center;">Action</th>
                     <th style="text-align: center;">Project</th>
+                    <th style="text-align: center;">Virtual</th>
                     <th>Institution</th>
                     <th>Department</th>
                 </tr>
@@ -51,6 +52,7 @@
                 int challenge = user.getChallenge();
                 int action = user.getAction();
                 int project = user.getProject();
+                int virtual = user.getVirtual();
                 int total = user.getTotal();
                 String institution = user.getInstitution();
                 String subInstitution = user.getSubInstitution();
@@ -80,6 +82,7 @@
                 <td style="text-align: center;"><%=challenge%></td>
                 <td style="text-align: center;"><%=action%></td>
                 <td style="text-align: center;"><%=project%></td>
+                <td style="text-align: center;"><%=virtual%></td>
                 <td><%=institution%></td>
                 <td><%=subInstitution%></td>
             </tr>

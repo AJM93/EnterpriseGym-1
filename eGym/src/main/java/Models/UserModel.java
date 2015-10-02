@@ -169,10 +169,11 @@ public class UserModel {
                 int challenge = rs.getInt("Challenge");
                 int action = rs.getInt("Action");
                 int project = rs.getInt("Project");
+                int virtual = rs.getInt("Virtual");
                 int total = rs.getInt("Total");
                 String institution = rs.getString("Institution");
                 String subInstitution = rs.getString("Sub_Institution");
-                UserStore lbUser = new UserStore(username, firstName, lastName, onlineTheory, challenge, action, project, total, institution, subInstitution);
+                UserStore lbUser = new UserStore(username, firstName, lastName, onlineTheory, challenge, action, project, virtual, total, institution, subInstitution);
                 leaderboard.add(lbUser);
             }
             

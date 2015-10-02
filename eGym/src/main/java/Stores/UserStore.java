@@ -67,7 +67,7 @@ public class UserStore {
          this.showPoints = showPoints;
     }
     
-    public UserStore(String username, String firstName, String lastName, int onlineTheory, int challenge, int action, int project, int total, String institution,
+    public UserStore(String username, String firstName, String lastName, int onlineTheory, int challenge, int action, int project, int virtual, int total, String institution,
             String subInstitution) {
         this.Username = username;
         this.Firstname = firstName;
@@ -76,6 +76,7 @@ public class UserStore {
         this.Challenge = challenge;
         this.Action = action;
         this.Project = project;
+        this.Virtual = virtual;
         this.Total = total;
         this.Institution = institution;
         this.SubInstitution = subInstitution;
