@@ -58,7 +58,7 @@ public class editUserDetails extends HttpServlet {
             String email = request.getParameter("email");
             String phoneNo = request.getParameter("phoneNO");
             String Gender = request.getParameter("gender");
-            String country = request.getParameter("country");
+            String country = request.getParameter("country2");
             String institution = request.getParameter("institution");
             String subInstitution = request.getParameter("subInstitution");
             String degree = request.getParameter("degree");
