@@ -40,6 +40,7 @@
                         <th>User Status</th>
                         <th>Edit User Details</th>
                         <th>Approve</th>
+                        <th>Delete User's Account</th>
                     </tr>
                     </thead>
                 </tbody>
@@ -83,6 +84,7 @@
                         <td><%=UserStatus%></td>
                         <td><form action="getUserDetails"><button type="submit" class="btn btn-default" name="getUsername" value=<%=Username%>>Edit User Details</button></form></td>
                         <td><form action="UserApproved"><button type="submit" class="btn btn-default" name="username" value=<%=Username%>>Approve</button></form></td>
+                        <td><form action="DeleteUserAccount" method="POST"><button type="submit" class="btn btn-default" name="getDeletedUser" value=<%=Username%>>Delete</button></form></td>
                     </tr>
                     <%
                     }

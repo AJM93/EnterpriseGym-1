@@ -43,7 +43,7 @@ public class DeleteUserAccount extends HttpServlet {
             String username = request.getParameter("getDeletedUser");
             UserModel um = new UserModel();
             um.deleteUsersAccount(username);
-            RequestDispatcher rd = request.getRequestDispatcher("GetAllUsers");
+            RequestDispatcher rd = request.getRequestDispatcher("homePage");
             rd.forward(request,response);
         } 
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) 
