@@ -106,7 +106,8 @@
                             <li><a href="/eGym/createActivity">Create Activity</a></li>
                             <li><a href="/eGym/CreateQuiz.jsp">Create Quiz</a></li>
                             <li><a href="/eGym/quickRegistration.jsp">Quick Registration</a></li>
-                            <li><a href="/eGym/GetCarouselInformation">Edit Carousel</a><li>
+                            <li><a href="/eGym/GetCarouselInformation">Edit Carousel</a></li>
+                            <li><a href="/eGym/ClearUserPoints.jsp">Clear User Points</a></li>
                             <li class="divider"></li>
 
                         </ul>
