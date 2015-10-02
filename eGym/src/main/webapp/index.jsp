@@ -191,6 +191,7 @@
                     <p>User: <%=nm.get(0).getNewsUser()%></p>    
                     <div class="panel-body">
                         <%=nm.get(0).getNewsBody()%>
+                        <a href="/eGym/NewsItem/<%=nm.get(0).getNewsId()%>">Click to see the full news story.</a>
                     </div>
 
                 </div>
@@ -205,6 +206,7 @@
                     <p>User: <%=nm.get(1).getNewsUser()%></p>    
                     <div class="panel-body">
                         <%=nm.get(1).getNewsBody()%>
+                        <a href="/eGym/NewsItem/<%=nm.get(1).getNewsId()%>">Click to see the full news story.</a>
                     </div>
                 </div>
             </div>
@@ -218,6 +220,7 @@
                     <p>User: <%=nm.get(2).getNewsUser()%></p>    
                     <div class="panel-body">
                         <%=nm.get(2).getNewsBody()%>
+                        <a href="/eGym/NewsItem/<%=nm.get(2).getNewsId()%>">Click to see the full news story.</a>
                     </div>
                 </div>
             </div>
@@ -231,6 +234,7 @@
                     <p>User: <%=nm.get(3).getNewsUser()%></p>    
                     <div class="panel-body">
                         <%=nm.get(3).getNewsBody()%>
+                        <a href="/eGym/NewsItem/<%=nm.get(3).getNewsId()%>">Click to see the full news story.</a>
                     </div>
                 </div>
             </div>
@@ -244,6 +248,7 @@
                     <p>User: <%=nm.get(4).getNewsUser()%></p>    
                     <div class="panel-body">
                         <%=nm.get(4).getNewsBody()%>
+                        <a href="/eGym/NewsItem/<%=nm.get(4).getNewsId()%>">Click to see the full news story.</a>
                     </div>
                 </div>
             </div>                  
@@ -280,7 +285,21 @@
                                 <div id="collapseOneE" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOneE">
                                     <p>Trainer: <%=em.get(0).getEventTrainer()%></p>    
                                     <div class="panel-body">
-                                        <%=nm.get(0).getNewsBody()%>
+                                        <%=em.get(0).getEventBody()%>
+                                        <a href="/eGym/EventItem/<%=em.get(0).getEventID()%>">Click to see the full event</a>
+                                        <%
+                                            if (lg != null && lg.isLoggedIn()) {
+                                                if (lg.getRole() == 1 || lg.getRole() == 2) 
+                                                { 
+                                                    String username = lg.getUsername();
+                                                    int eventID = em.get(0).getEventID();
+                                        %>
+                                            <form action="/eGym/EventSignUp/<%=eventID%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
+                                            <input type="hidden" name="userNameBox" id="userNameBox" value="<%=username%>">
+                                        <%
+                                                }
+                                            }
+                                        %>
                                     </div>
 
                                 </div>
@@ -295,6 +314,20 @@
                                     <p>Trainer: <%=em.get(1).getEventTrainer()%></p>    
                                     <div class="panel-body">
                                         <%=em.get(1).getEventBody()%>
+                                        <a href="/eGym/EventItem/<%=em.get(1).getEventID()%>">Click to see the full event</a>
+                                        <%
+                                            if (lg != null && lg.isLoggedIn()) {
+                                                if (lg.getRole() == 1 || lg.getRole() == 2) 
+                                                { 
+                                                    String username = lg.getUsername();
+                                                    int eventID = em.get(1).getEventID();
+                                        %>
+                                            <form action="/eGym/EventSignUp/<%=eventID%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
+                                            <input type="hidden" name="userNameBox" id="userNameBox" value="<%=username%>">
+                                        <%
+                                                }
+                                            }
+                                        %>
                                     </div>
                                 </div>
                             </div>
@@ -308,6 +341,20 @@
                                     <p>Trainer: <%=em.get(2).getEventTrainer()%></p>    
                                     <div class="panel-body">
                                         <%=em.get(2).getEventBody()%>
+                                        <a href="/eGym/EventItem/<%=em.get(2).getEventID()%>">Click to see the full event</a>
+                                        <%
+                                            if (lg != null && lg.isLoggedIn()) {
+                                                if (lg.getRole() == 1 || lg.getRole() == 2) 
+                                                { 
+                                                    String username = lg.getUsername();
+                                                    int eventID = em.get(2).getEventID();
+                                        %>
+                                            <form action="/eGym/EventSignUp/<%=eventID%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
+                                            <input type="hidden" name="userNameBox" id="userNameBox" value="<%=username%>">
+                                        <%
+                                                }
+                                            }
+                                        %>
                                     </div>
                                 </div>
                             </div>
@@ -321,6 +368,20 @@
                                     <p>Trainer: <%=em.get(3).getEventTrainer()%></p>    
                                     <div class="panel-body">
                                         <%=em.get(3).getEventBody()%>
+                                        <a href="/eGym/EventItem/<%=em.get(3).getEventID()%>">Click to see the full event</a>
+                                        <%
+                                            if (lg != null && lg.isLoggedIn()) {
+                                                if (lg.getRole() == 1 || lg.getRole() == 2) 
+                                                { 
+                                                    String username = lg.getUsername();
+                                                    int eventID = em.get(3).getEventID();
+                                        %>
+                                            <form action="/eGym/EventSignUp/<%=eventID%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
+                                            <input type="hidden" name="userNameBox" id="userNameBox" value="<%=username%>">
+                                        <%
+                                                }
+                                            }
+                                        %>
                                     </div>
                                 </div>
                             </div>
@@ -334,6 +395,20 @@
                                     <p>Trainer: <%=em.get(4).getEventTrainer()%></p>    
                                     <div class="panel-body">
                                         <%=em.get(4).getEventBody()%>
+                                        <a href="/eGym/EventItem/<%=em.get(4).getEventID()%>">Click to see the full event</a>
+                                        <%
+                                            if (lg != null && lg.isLoggedIn()) {
+                                                if (lg.getRole() == 1 || lg.getRole() == 2) 
+                                                { 
+                                                    String username = lg.getUsername();
+                                                    int eventID = em.get(4).getEventID();
+                                        %>
+                                            <form action="/eGym/EventSignUp/<%=eventID%>" method="POST"><button type="submit" name="UsernameSignUp" value=<%=username%>>Sign Up</button></form>
+                                            <input type="hidden" name="userNameBox" id="userNameBox" value="<%=username%>">
+                                        <%
+                                                }
+                                            }
+                                        %>
                                     </div>
                                 </div>
                             </div>                  
